@@ -1,0 +1,33 @@
+/* DeedFlow — partners page styles */
+.nl{color:var(--mut);text-decoration:none;transition:color .2s;padding:6px 0;border-bottom:2px solid transparent}
+.nl:hover,.nl[data-on="1"]{color:var(--ink)}
+.nl[data-on="1"]{border-bottom-color:var(--acc)}
+.lm{display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:12px;text-decoration:none;color:var(--ink);transition:background .2s}
+.lm:hover{background:var(--bg2);color:var(--ink)}
+.lmi{width:38px;height:38px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center}
+.bp{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#ff5f00;color:#0a1628;font-weight:700;font-size:15px;text-decoration:none;border:0;border-radius:12px;padding:13px 20px;min-height:44px;box-sizing:border-box;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s;font-family:inherit}
+.bs{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--surf);color:var(--ink);font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--line);border-radius:12px;padding:13px 20px;min-height:44px;box-sizing:border-box;cursor:pointer;transition:border-color .2s,transform .2s;font-family:inherit}
+.bs:hover{border-color:var(--ink);color:var(--ink);transform:translateY(-1px)}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #ff5f00;outline-offset:2px}
+.h2{font-size:clamp(30px,3.8vw,48px);line-height:1.05;letter-spacing:-.035em;font-weight:800;margin:0;text-wrap:balance}
+.lead{font-size:17.5px;line-height:1.6;color:var(--mut);margin:0;text-wrap:pretty}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:20px}
+.p-ok{background:var(--oksoft);color:var(--ok)}.p-warn{background:var(--warnsoft);color:var(--warn)}.p-hot{background:var(--accsoft);color:var(--acct)}.p-blue{background:var(--bluesoft);color:var(--blue)}.p-mut{background:var(--bg2);color:var(--sub)}.p-bad{background:var(--badsoft);color:var(--bad)}
+.chip{font-family:inherit;font-size:13.5px;font-weight:600;border:1px solid var(--line);background:var(--surf);color:var(--mut);border-radius:999px;padding:9px 15px;min-height:40px;cursor:pointer;transition:all .2s}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip[data-on="1"]{background:#ff5f00;border-color:#ff5f00;color:#0a1628}
+.step{font-family:inherit;text-align:left;background:var(--surf);border:1px solid var(--line);border-radius:18px;padding:22px;cursor:pointer;display:flex;flex-direction:column;gap:10px;color:var(--ink);transition:all .3s;min-height:44px}
+.step:hover{border-color:color-mix(in oklab,#ff5f00 50%,var(--line))}
+.step[data-on="1"]{border-color:#ff5f00;box-shadow:0 0 0 4px color-mix(in oklab,#ff5f00 18%,transparent);transform:translateY(-4px)}
+.grid-bg{background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 20%,#000 30%,transparent 75%);mask-image:radial-gradient(ellipse 70% 70% at 50% 20%,#000 30%,transparent 75%)}
+input[type=range]{width:100%;accent-color:#ff5f00;height:28px;cursor:pointer}
+.field{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:15px;padding:13px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surf2);color:var(--ink);width:100%;box-sizing:border-box;min-height:44px}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes coin{0%{transform:translateY(0) scale(.6);opacity:0}20%{opacity:1}100%{transform:translateY(-70px) scale(1);opacity:0}}
+.in{animation:up .8s cubic-bezier(.2,.7,.2,1) both}.d1{animation-delay:.08s}.d2{animation-delay:.16s}.d3{animation-delay:.24s}.d4{animation-delay:.4s}
+.swap{animation:up .5s cubic-bezier(.2,.7,.2,1) both}
+.float{animation:float 6s ease-in-out infinite}.float2{animation:float 7s ease-in-out 1.5s infinite}
+.coin{position:absolute;width:22px;height:22px;border-radius:50%;background:#ff5f00;color:#0a1628;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;animation:coin 2.4s ease-out infinite}
+@supports (animation-timeline: view()){.rv{animation:up linear both;animation-timeline:view();animation-range:entry 0% entry 40%}}
+@media (max-width:960px){.hide-m{display:none !important}.stack-m{flex-direction:column !important;align-items:stretch !important}}

@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Start your free trial — DeedFlow</title>
+<meta name="description" content="DeedFlow is the compliant sales CRM for Indian property developers — leads, inventory, pricing, RERA, escrow, TDS and channel partners in one flow.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/signup.css">
+</head>
+<body>
+<div id="app"></div>
+
+<template id="tpl">
+<div class="rx" style="min-height: 1100px; display: flex; flex-wrap: wrap">
+
+<!-- LEFT: value panel -->
+<aside class="on-navy" style="flex: 1 1 460px; min-width: 0; position: relative; overflow: hidden; padding: 40px 56px 56px; display: flex; flex-direction: column; gap: 48px">
+<div class="grid-bg" aria-hidden="true" style="position: absolute; inset: 0; opacity: 0.5"></div>
+<div aria-hidden="true" style="position: absolute; width: 640px; height: 640px; left: -200px; bottom: -360px; border-radius: 50%; background: radial-gradient(circle, rgba(255,95,0,0.32), rgba(255,95,0,0) 65%)"></div>
+<a href="index.html" aria-label="DeedFlow home" style="position: relative; display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); align-self: flex-start">
+<svg class="lm-l" width="38" height="38" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="tssi1s" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff9a3d"></stop><stop offset="1" stop-color="#ff5f00"></stop></linearGradient></defs><path d="M20 44V12l8-6v38z" fill="#0a1628"></path><path d="M8 40c6-10 14-16 34-18-14 6-22 12-27 22z" fill="url(#tssi1s)"></path><path d="M30 44V18l6 4v22z" fill="#0a1628" opacity=".7"></path></svg><svg class="lm-d" width="38" height="38" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="tssi1ds" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff9a3d"></stop><stop offset="1" stop-color="#ff5f00"></stop></linearGradient></defs><path d="M20 44V12l8-6v38z" fill="#ffffff"></path><path d="M8 40c6-10 14-16 34-18-14 6-22 12-27 22z" fill="url(#tssi1ds)"></path><path d="M30 44V18l6 4v22z" fill="#ffffff" opacity=".7"></path></svg><span style="font-weight: 800; font-size: 22px; letter-spacing: -0.04em">Deed<span style="color: var(--acct)">Flow</span></span>
+</a>
+<div style="position: relative; display: flex; flex-direction: column; gap: 22px">
+<span class="eyebrow in">14-day free trial</span>
+<h1 class="in d1" style="margin: 0; font-size: clamp(36px, 4.4vw, 56px); line-height: 1.02; letter-spacing: -0.04em; font-weight: 800; text-wrap: balance">Set up your sales floor in minutes.</h1>
+<p class="in d2" style="margin: 0; font-size: 17.5px; line-height: 1.6; color: var(--mut); max-width: 460px">Create your workspace, invite your team and see your first portal leads land in DeedFlow.</p>
+</div>
+<div class="in d3" style="position: relative; display: flex; flex-direction: column; gap: 16px">
+<sc-for list="{{perks}}" as="p" hint-placeholder-count="4">
+<div style="display: flex; gap: 14px; align-items: flex-start"><span style="width: 30px; height: 30px; flex: none; border-radius: 9px; background: rgba(255,95,0,0.16); display: flex; align-items: center; justify-content: center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff8a3d" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 15.5px">{{p.t}}</span><span style="font-size: 14px; color: var(--sub)">{{p.d}}</span></span></div>
+</sc-for>
+</div>
+<div class="float hide-m" style="position: relative; margin-top: auto; background: var(--surf); border: 1px solid var(--line); border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 12px; max-width: 420px; box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6)">
+<div style="display: flex; justify-content: space-between; align-items: center"><span style="font-weight: 700; font-size: 14px">Your workspace</span><span class="pill p-hot">{{wsName}}</span></div>
+<sc-for list="{{preview}}" as="r" hint-placeholder-count="3">
+<div style="display: flex; align-items: center; gap: 12px; font-size: 13.5px"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{r.c}}; flex: none"></span><span style="flex: 1">{{r.l}}</span><span class="mono" style="font-size: 12px; color: var(--sub)">{{r.v}}</span></div>
+</sc-for>
+</div>
+</aside>
+
+<!-- RIGHT: form -->
+<main style="flex: 1.15 1 560px; min-width: 0; padding: 32px 24px 64px; display: flex; flex-direction: column; align-items: center; background: var(--bg)">
+<div style="width: 100%; max-width: 560px; display: flex; justify-content: flex-end; align-items: center; gap: 14px; font-size: 14px; color: var(--mut)">
+<span class="hide-m">Already have an account?</span><a href="#" style="font-weight: 650">Log in</a>
+</div>
+
+<div style="width: 100%; max-width: 560px; margin-top: 56px; display: flex; flex-direction: column; gap: 28px">
+<sc-if value="{{notDone}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; gap: 8px" aria-hidden="true"><sc-for list="{{bars}}" as="b" hint-placeholder-count="3"><span style="flex: 1; height: 4px; border-radius: 4px; background: {{b}}; transition: background .4s"></span></sc-for></div>
+<span class="mono" style="font-size: 12.5px; color: var(--sub)">STEP {{step}} OF 3 · {{stepName}}</span>
+<h2 style="margin: 0; font-size: 34px; letter-spacing: -0.035em; font-weight: 800; line-height: 1.1">{{stepTitle}}</h2>
+</div>
+</sc-if>
+
+<!-- STEP 1 -->
+<sc-if value="{{s1}}" hint-placeholder-val="{{ true }}">
+<div class="swap" style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px"><label class="lbl" for="nm">Full name</label><input id="nm" class="inp" data-err="{{e.name}}" placeholder="Your name" autocomplete="name" value="{{f.name}}" onInput="{{onName}}" onChange="{{onName}}"></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><label class="lbl" for="ph">Mobile</label><input id="ph" class="inp" data-err="{{e.phone}}" type="tel" placeholder="+91 98XXX XXXXX" autocomplete="tel" value="{{f.phone}}" onInput="{{onPhone}}" onChange="{{onPhone}}"></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px"><label class="lbl" for="em">Work email</label><input id="em" class="inp" data-err="{{e.email}}" type="email" placeholder="you@yourdeveloper.in" autocomplete="email" value="{{f.email}}" onInput="{{onEmail}}" onChange="{{onEmail}}"></div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label class="lbl" for="pw">Password</label>
+<div style="position: relative"><input id="pw" class="inp" data-err="{{e.pw}}" type="{{pwType}}" placeholder="At least 8 characters" autocomplete="new-password" value="{{f.pw}}" onInput="{{onPw}}" onChange="{{onPw}}" style="padding-right: 72px"><button onClick="{{togglePw}}" aria-label="{{pwToggleLabel}}" style="position: absolute; right: 6px; top: 6px; height: 34px; padding: 0 10px; border: 0; background: transparent; color: var(--acct); font-family: inherit; font-weight: 650; font-size: 13px; cursor: pointer">{{pwToggle}}</button></div>
+<div style="display: flex; gap: 6px; align-items: center" aria-hidden="true"><sc-for list="{{pwBars}}" as="b" hint-placeholder-count="4"><span style="flex: 1; height: 4px; border-radius: 4px; background: {{b}}; transition: background .3s"></span></sc-for><span style="font-size: 12px; color: var(--sub); width: 64px; text-align: right">{{pwLabel}}</span></div>
+</div>
+<div style="display: flex; gap: 12px; align-items: flex-start; font-size: 13.5px; color: var(--mut); line-height: 1.5">
+<button class="chk" data-on="{{termsOn}}" onClick="{{toggleTerms}}" aria-label="Accept terms" aria-pressed="{{termsPressed}}"><sc-if value="{{terms}}" hint-placeholder-val="{{ false }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></sc-if></button>
+<span>I agree to the <a href="#">Terms</a> and <a href="#">Privacy policy</a>, and consent to DeedFlow contacting me about my trial.</span>
+</div>
+<sc-if value="{{err}}" hint-placeholder-val="{{ false }}"><div class="swap" style="padding: 12px 14px; border-radius: 12px; background: var(--badsoft); color: var(--bad); font-size: 13.5px; font-weight: 600">{{errText}}</div></sc-if>
+</div>
+</sc-if>
+
+<!-- STEP 2 -->
+<sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
+<div class="swap" style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px"><label class="lbl" for="co">Company name</label><input id="co" class="inp" data-err="{{e.company}}" placeholder="e.g. Skyline Group" value="{{f.company}}" onInput="{{onCompany}}" onChange="{{onCompany}}"></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><label class="lbl" for="ct">City</label><input id="ct" class="inp" placeholder="e.g. Pune" value="{{f.city}}" onInput="{{onCity}}" onChange="{{onCity}}"></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px"><label class="lbl" for="rr">RERA project registration <span style="font-weight: 500; color: var(--sub)">(optional)</span></label><input id="rr" class="inp mono" placeholder="e.g. P52100XXXXXX" value="{{f.rera}}" onInput="{{onRera}}" onChange="{{onRera}}"></div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="lbl">Live projects</span><div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{projOpts}}" as="c" hint-placeholder-count="4"><button class="chip" data-on="{{c.on}}" onClick="{{c.pick}}">{{c.l}}</button></sc-for></div></div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="lbl">Where do your leads come from? <span style="font-weight: 500; color: var(--sub)">Pick any</span></span><div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{srcOpts}}" as="c" hint-placeholder-count="6"><button class="chip" data-on="{{c.on}}" onClick="{{c.pick}}">{{c.l}}</button></sc-for></div></div>
+<sc-if value="{{err}}" hint-placeholder-val="{{ false }}"><div class="swap" style="padding: 12px 14px; border-radius: 12px; background: var(--badsoft); color: var(--bad); font-size: 13.5px; font-weight: 600">{{errText}}</div></sc-if>
+</div>
+</sc-if>
+
+<!-- STEP 3 -->
+<sc-if value="{{s3}}" hint-placeholder-val="{{ false }}">
+<div class="swap" style="display: flex; flex-direction: column; gap: 18px">
+<p style="margin: 0; font-size: 15.5px; color: var(--mut); line-height: 1.6">We sent a 6-digit code to <span class="mono" style="color: var(--ink); font-weight: 600">{{phoneShown}}</span>. Enter it to verify your number.</p>
+<label class="lbl" for="otp">Verification code</label>
+<input id="otp" class="inp otp" data-err="{{e.otp}}" inputmode="numeric" maxlength="6" placeholder="······" autocomplete="one-time-code" value="{{f.otp}}" onInput="{{onOtp}}" onChange="{{onOtp}}">
+<div style="display: flex; justify-content: space-between; font-size: 13.5px; color: var(--sub)"><span>{{resendText}}</span><button onClick="{{resend}}" disabled="{{resendDisabled}}" style="border: 0; background: none; font-family: inherit; font-weight: 650; font-size: 13.5px; color: var(--acct); cursor: pointer; opacity: {{resendOp}}; min-height: 32px">Resend code</button></div>
+<sc-if value="{{err}}" hint-placeholder-val="{{ false }}"><div class="swap" style="padding: 12px 14px; border-radius: 12px; background: var(--badsoft); color: var(--bad); font-size: 13.5px; font-weight: 600">{{errText}}</div></sc-if>
+</div>
+</sc-if>
+
+<!-- DONE -->
+<sc-if value="{{done}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 26px; align-items: flex-start">
+<span class="burst" style="position: relative; width: 76px; height: 76px; border-radius: 50%; background: #ff5f00; display: flex; align-items: center; justify-content: center"><span class="ring" aria-hidden="true"></span><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></span>
+<div class="swap" style="display: flex; flex-direction: column; gap: 10px"><h2 style="margin: 0; font-size: 34px; letter-spacing: -0.035em; font-weight: 800; line-height: 1.1">Welcome, {{firstName}}. Your trial has started.</h2><p style="margin: 0; font-size: 15.5px; color: var(--mut); line-height: 1.6">We are setting up {{wsName}}. Your 14 days start now.</p></div>
+<div style="width: 100%; border: 1px solid var(--line); border-radius: 16px; overflow: hidden">
+<sc-for list="{{setup}}" as="t" hint-placeholder-count="4">
+<div style="display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 14.5px; opacity: {{t.op}}; transition: opacity .3s">
+<span style="width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; flex: none">
+<sc-if value="{{t.done}}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></sc-if>
+<sc-if value="{{t.run}}" hint-placeholder-val="{{ false }}"><span class="spin"></span></sc-if>
+</span>
+<span style="flex: 1">{{t.l}}</span>
+</div>
+</sc-for>
+</div>
+<div class="stack-m" style="display: flex; gap: 12px; flex-wrap: wrap"><a class="bp" href="#">Go to my dashboard</a><a class="bs" href="company.html">Book a guided setup call</a></div>
+</div>
+</sc-if>
+
+<sc-if value="{{notDone}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; border-top: 1px solid var(--line); padding-top: 22px">
+<sc-if value="{{canBack}}" hint-placeholder-val="{{ false }}"><button class="bs" onClick="{{back}}">Back</button></sc-if>
+<sc-if value="{{noBack}}" hint-placeholder-val="{{ true }}"><span style="font-size: 13px; color: var(--sub)">Prefer a walkthrough? <a href="company.html" style="font-weight: 650">Book a demo</a></span></sc-if>
+<button class="bp" onClick="{{next}}" style="min-width: 180px">{{nextLabel}}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+</div>
+</sc-if>
+</div>
+</main>
+
+</div>
+</template>
+
+<script src="js/runtime.js"></script>
+<script src="js/signup.js"></script>
+</body>
+</html>

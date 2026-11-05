@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Company & Book a demo — DeedFlow</title>
+<meta name="description" content="DeedFlow is the compliant sales CRM for Indian property developers — leads, inventory, pricing, RERA, escrow, TDS and channel partners in one flow.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/company.css">
+</head>
+<body>
+<div id="app"></div>
+
+<template id="tpl">
+<div class="rx">
+
+<header style="position: sticky; top: 0; z-index: 50; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); background: color-mix(in oklab, var(--bg) 84%, transparent); border-bottom: 1px solid var(--line)">
+<div style="max-width: 1240px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; gap: 36px">
+<a href="index.html" aria-label="DeedFlow home" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink)">
+<svg class="lm-l" width="38" height="38" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="tsco1s" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff9a3d"></stop><stop offset="1" stop-color="#ff5f00"></stop></linearGradient></defs><path d="M20 44V12l8-6v38z" fill="#0a1628"></path><path d="M8 40c6-10 14-16 34-18-14 6-22 12-27 22z" fill="url(#tsco1s)"></path><path d="M30 44V18l6 4v22z" fill="#0a1628" opacity=".7"></path></svg><svg class="lm-d" width="38" height="38" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="tsco1ds" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff9a3d"></stop><stop offset="1" stop-color="#ff5f00"></stop></linearGradient></defs><path d="M20 44V12l8-6v38z" fill="#ffffff"></path><path d="M8 40c6-10 14-16 34-18-14 6-22 12-27 22z" fill="url(#tsco1ds)"></path><path d="M30 44V18l6 4v22z" fill="#ffffff" opacity=".7"></path></svg><span style="font-weight: 800; font-size: 22px; letter-spacing: -0.04em">Deed<span style="color: var(--acct)">Flow</span></span>
+</a>
+<nav class="hide-m" aria-label="Main" style="display: flex; gap: 28px; font-size: 14.5px; font-weight: 500">
+<a class="nl" href="features.html">Product</a>
+<a class="nl" href="compliance.html">Compliance</a>
+<a class="nl" href="partners.html">Channel partners</a>
+<a class="nl" href="pricing.html">Pricing</a>
+<a class="nl" data-on="1" href="company.html">Company</a>
+</nav>
+<div style="margin-left: auto; display: flex; gap: 10px; align-items: center">
+<div class="hide-m" style="position: relative">
+<button class="nl" onClick="{{toggleLogin}}" aria-haspopup="true" aria-expanded="{{loginExp}}" style="background: none; border: 0; cursor: pointer; font-family: inherit; font-weight: 600; font-size: 14.5px; display: inline-flex; align-items: center; gap: 6px; min-height: 44px">Log in<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{loginRot}}); transition: transform .25s"><path d="M6 9l6 6 6-6"></path></svg></button>
+<sc-if value="{{loginOpen}}" hint-placeholder-val="{{ false }}">
+<div class="swap" role="menu" aria-label="Choose your portal" style="position: absolute; right: 0; top: calc(100% + 10px); width: 320px; background: var(--surf); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow), 0 30px 60px -20px rgba(10,22,40,0.35); padding: 8px; display: flex; flex-direction: column; gap: 2px; z-index: 70; text-align: left">
+<span style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--sub); padding: 10px 12px 6px">LOG IN AS</span>
+<a class="lm" role="menuitem" href="#"><span class="lmi" style="background: var(--accsoft); color: var(--acct)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 10h.01M15 10h.01"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 14.5px">Developer team</span><span style="font-size: 12.5px; color: var(--sub)">Sales, presales, CRM and accounts</span></span></a>
+<a class="lm" role="menuitem" href="#"><span class="lmi" style="background: var(--oksoft); color: var(--ok)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 14.5px">Channel partner</span><span style="font-size: 12.5px; color: var(--sub)">Brokers and their agents</span></span></a>
+<a class="lm" role="menuitem" href="#"><span class="lmi" style="background: var(--bluesoft); color: var(--blue)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 14.5px">Home buyer</span><span style="font-size: 12.5px; color: var(--sub)">Booking, payments and documents</span></span></a>
+<div style="border-top: 1px solid var(--line); margin-top: 6px; padding: 12px 12px 6px; font-size: 13px; color: var(--mut)">New to DeedFlow? <a href="signup.html" style="font-weight: 650">Start free trial →</a></div>
+</div>
+</sc-if>
+</div>
+<a class="bp" href="signup.html" style="padding: 11px 18px; font-size: 14.5px">Start free trial</a>
+</div>
+</div>
+</header>
+
+<!-- DEMO -->
+<section id="demo" style="position: relative; padding: 88px 24px 104px; overflow: hidden">
+<div class="grid-bg" aria-hidden="true" style="position: absolute; inset: 0; opacity: 0.7"></div>
+<div style="position: relative; max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start">
+<div style="flex: 1 1 400px; display: flex; flex-direction: column; gap: 24px; min-width: 0">
+<span class="eyebrow in">Book a demo</span>
+<h1 class="in d1" style="margin: 0; font-size: clamp(40px, 5.4vw, 68px); line-height: 1; letter-spacing: -0.045em; font-weight: 800; text-wrap: balance">30 minutes, on your own inventory.</h1>
+<p class="lead in d2" style="font-size: 19px">Tell us about your projects and pick a slot. We will set up the walkthrough around your towers, payment plan and partner slabs.</p>
+<div class="in d3" style="display: flex; flex-direction: column; gap: 14px; margin-top: 8px">
+<sc-for list="{{agenda}}" as="a" hint-placeholder-count="4">
+<div style="display: flex; gap: 14px; align-items: flex-start"><span class="mono" style="width: 46px; flex: none; font-size: 12.5px; color: var(--acct); font-weight: 600; padding-top: 2px">{{a.t}}</span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 650; font-size: 15.5px">{{a.h}}</span><span style="font-size: 14px; color: var(--mut)">{{a.d}}</span></span></div>
+</sc-for>
+</div>
+</div>
+
+<div class="in d2" style="flex: 1.15 1 520px; min-width: 0">
+<div class="card" style="box-shadow: var(--shadow), 0 40px 90px -40px rgba(10,22,40,0.35); overflow: hidden">
+<sc-if value="{{notDone}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; border-bottom: 1px solid var(--line)">
+<sc-for list="{{stepTabs}}" as="t" hint-placeholder-count="3">
+<div style="flex: 1; padding: 16px 20px; display: flex; flex-direction: column; gap: 8px"><span style="display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 650; color: {{t.c}}"><span class="mono" style="font-size: 11.5px">0{{t.n}}</span>{{t.l}}</span><span style="height: 3px; border-radius: 3px; background: {{t.bar}}; transition: background .4s"></span></div>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{s1}}" hint-placeholder-val="{{ true }}">
+<div class="swap" style="padding: 32px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px"><label class="lbl" for="nm">Full name</label><input id="nm" class="inp" placeholder="Your name" value="{{f.name}}" onInput="{{onName}}" onChange="{{onName}}"></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><label class="lbl" for="em">Work email</label><input id="em" class="inp" type="email" placeholder="you@developer.in" value="{{f.email}}" onInput="{{onEmail}}" onChange="{{onEmail}}"></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><label class="lbl" for="ph">Mobile</label><input id="ph" class="inp" type="tel" placeholder="+91" value="{{f.phone}}" onInput="{{onPhone}}" onChange="{{onPhone}}"></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><label class="lbl" for="co">Company</label><input id="co" class="inp" placeholder="Developer or group name" value="{{f.company}}" onInput="{{onCompany}}" onChange="{{onCompany}}"></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="lbl">Your role</span><div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{roles}}" as="c" hint-placeholder-count="5"><button class="chip" data-on="{{c.on}}" onClick="{{c.pick}}">{{c.l}}</button></sc-for></div></div>
+<sc-if value="{{err1}}" hint-placeholder-val="{{ false }}"><span style="font-size: 13.5px; color: var(--bad); font-weight: 600">Add your name and a valid work email to continue.</span></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
+<div class="swap" style="padding: 32px; display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="lbl">Live projects</span><div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{projOpts}}" as="c" hint-placeholder-count="4"><button class="chip" data-on="{{c.on}}" onClick="{{c.pick}}">{{c.l}}</button></sc-for></div></div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="lbl">Sales team size</span><div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{teamOpts}}" as="c" hint-placeholder-count="4"><button class="chip" data-on="{{c.on}}" onClick="{{c.pick}}">{{c.l}}</button></sc-for></div></div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="lbl">What should we focus on? <span style="font-weight: 500; color: var(--sub)">Pick any</span></span><div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{focusOpts}}" as="c" hint-placeholder-count="6"><button class="chip" data-on="{{c.on}}" onClick="{{c.pick}}">{{c.l}}</button></sc-for></div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><label class="lbl" for="nt">Anything else <span style="font-weight: 500; color: var(--sub)">(optional)</span></label><textarea id="nt" class="inp" rows="3" placeholder="e.g. we run 3 towers with a CLP and 40 channel partners" value="{{f.notes}}" onInput="{{onNotes}}" onChange="{{onNotes}}" style="resize: vertical"></textarea></div>
+</div>
+</sc-if>
+
+<sc-if value="{{s3}}" hint-placeholder-val="{{ false }}">
+<div class="swap" style="padding: 32px; display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="lbl">Pick a day</span>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(92px, 1fr)); gap: 8px">
+<sc-for list="{{days}}" as="d" hint-placeholder-count="5"><button class="chip" data-on="{{d.on}}" onClick="{{d.pick}}" style="display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 8px"><span style="font-size: 12px; font-weight: 600">{{d.w}}</span><span style="font-size: 20px; font-weight: 800">{{d.d}}</span><span style="font-size: 12px">{{d.m}}</span></button></sc-for>
+</div></div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="lbl">Pick a time <span style="font-weight: 500; color: var(--sub)">(IST)</span></span><div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{times}}" as="t" hint-placeholder-count="6"><button class="chip" data-on="{{t.on}}" onClick="{{t.pick}}"><span class="mono">{{t.l}}</span></button></sc-for></div></div>
+<div style="padding: 16px 18px; border-radius: 14px; background: var(--bg2); font-size: 14px; color: var(--mut)">{{summary}}</div>
+</div>
+</sc-if>
+
+<sc-if value="{{done}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 56px 32px; display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center">
+<span class="burst" style="position: relative; width: 84px; height: 84px; border-radius: 50%; background: #ff5f00; display: flex; align-items: center; justify-content: center"><span class="ring" aria-hidden="true"></span><svg class="drawn" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></span>
+<span class="swap" style="font-size: 28px; font-weight: 800; letter-spacing: -0.03em">You're booked, {{firstName}}.</span>
+<span class="swap" style="font-size: 15.5px; color: var(--mut); max-width: 420px; line-height: 1.6">{{doneText}}</span>
+<button class="bs" onClick="{{reset}}">Book another slot</button>
+</div>
+</sc-if>
+
+<sc-if value="{{notDone}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 18px 32px; border-top: 1px solid var(--line); background: var(--surf2)">
+<sc-if value="{{canBack}}" hint-placeholder-val="{{ false }}"><button class="bs" onClick="{{back}}">Back</button></sc-if>
+<sc-if value="{{noBack}}" hint-placeholder-val="{{ true }}"><span style="font-size: 13px; color: var(--sub)">Takes under a minute</span></sc-if>
+<button class="bp" onClick="{{next}}" disabled="{{nextDisabled}}">{{nextLabel}}</button>
+</div>
+</sc-if>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section class="on-navy" style="padding: 112px 24px; position: relative; overflow: hidden">
+<div class="grid-bg" aria-hidden="true" style="position: absolute; inset: 0; opacity: 0.45"></div>
+<div style="position: relative; max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 64px; align-items: flex-start">
+<div class="rv" style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 20px; min-width: 0">
+<span class="eyebrow">About</span>
+<h2 class="h2">Built for the way Indian developers sell.</h2>
+<p class="lead">DeedFlow is an independent, multi-tenant SaaS CRM for property developers. We started from the money flow, because that is where generic CRMs break for Indian real estate: RERA caps, escrow splits, GST, TDS on both sides of a sale, and auditors who want to see every change.</p>
+<p class="lead">So the landing page only shows what ships. If a feature is on this site, it is in the product today.</p>
+</div>
+<div style="flex: 1 1 440px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 14px">
+<sc-for list="{{values}}" as="v" hint-placeholder-count="4">
+<div class="rv" style="background: var(--surf); border: 1px solid var(--line); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 10px"><span class="mono" style="font-size: 12px; color: var(--acct); font-weight: 600">{{v.n}}</span><span style="font-size: 18px; font-weight: 750; letter-spacing: -0.02em">{{v.t}}</span><span style="font-size: 14px; color: var(--mut); line-height: 1.55">{{v.d}}</span></div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section style="padding: 104px 24px">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 36px">
+<div class="rv" style="display: flex; flex-direction: column; gap: 16px"><span class="eyebrow">Contact</span><h2 class="h2">Other ways to reach us.</h2></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 18px">
+<div class="card rv" style="padding: 28px; display: flex; flex-direction: column; gap: 10px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--sub)">SALES</span><span style="font-size: 18px; font-weight: 700">[sales email]</span><span style="font-size: 14px; color: var(--mut)">[sales phone]</span></div>
+<div class="card rv" style="padding: 28px; display: flex; flex-direction: column; gap: 10px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--sub)">SUPPORT</span><span style="font-size: 18px; font-weight: 700">[support email]</span><span style="font-size: 14px; color: var(--mut)">[support hours, IST]</span></div>
+<div class="card rv" style="padding: 28px; display: flex; flex-direction: column; gap: 10px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--sub)">OFFICE</span><span style="font-size: 18px; font-weight: 700">DeedFlow</span><span style="font-size: 14px; color: var(--mut); line-height: 1.55">[City]<br>[full street address, PIN]</span></div>
+</div>
+</div>
+</section>
+
+<footer style="border-top: 1px solid var(--line); padding: 40px 24px">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 13px; color: var(--sub)"><span>© 2026 DeedFlow. All rights reserved.</span><span style="display: flex; gap: 20px"><a class="nl" href="index.html">Home</a><a class="nl" href="features.html">Product</a><a class="nl" href="compliance.html">Compliance</a><a class="nl" href="pricing.html">Pricing</a></span></div>
+</footer>
+
+</div>
+</template>
+
+<script src="js/runtime.js"></script>
+<script src="js/company.js"></script>
+</body>
+</html>

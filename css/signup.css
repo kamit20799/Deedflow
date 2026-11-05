@@ -1,0 +1,29 @@
+/* DeedFlow — signup page styles */
+.bp{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#ff5f00;color:#0a1628;font-weight:700;font-size:15px;text-decoration:none;border:0;border-radius:12px;padding:13px 20px;min-height:46px;box-sizing:border-box;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s;font-family:inherit}
+.bs{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--surf);color:var(--ink);font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--line);border-radius:12px;padding:13px 20px;min-height:46px;box-sizing:border-box;cursor:pointer;transition:border-color .2s;font-family:inherit}
+.bs:hover{border-color:var(--ink);color:var(--ink)}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #ff5f00;outline-offset:2px}
+.lbl{font-size:13.5px;font-weight:600;color:var(--ink)}
+.inp{font-family:inherit;font-size:15px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surf2);color:var(--ink);width:100%;box-sizing:border-box;min-height:46px;transition:border-color .2s,box-shadow .2s}
+.inp:focus{border-color:#ff5f00;box-shadow:0 0 0 3px color-mix(in oklab,#ff5f00 20%,transparent);outline:none}
+.inp::placeholder{color:var(--sub)}
+.inp[data-err="1"]{border-color:var(--bad)}
+.chip{font-family:inherit;font-size:14px;font-weight:600;border:1px solid var(--line);background:var(--surf);color:var(--mut);border-radius:12px;padding:10px 15px;min-height:44px;cursor:pointer;transition:all .2s}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip[data-on="1"]{background:#ff5f00;border-color:#ff5f00;color:#0a1628}
+.p-ok{background:var(--oksoft);color:var(--ok)}.p-hot{background:var(--accsoft);color:var(--acct)}
+.otp{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:26px;font-weight:700;letter-spacing:.6em;text-align:center;padding:14px 0 14px .6em}
+.chk{width:22px;height:22px;border-radius:7px;border:1.5px solid var(--line);background:var(--surf);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex:none;padding:0;transition:all .2s}
+.chk[data-on="1"]{background:#ff5f00;border-color:#ff5f00}
+.grid-bg{background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 80% 70% at 30% 20%,#000 30%,transparent 75%);mask-image:radial-gradient(ellipse 80% 70% at 30% 20%,#000 30%,transparent 75%)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes burst{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.1);opacity:1}100%{transform:scale(1)}}
+@keyframes ring{0%{transform:scale(.8);opacity:.6}100%{transform:scale(1.8);opacity:0}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.in{animation:up .8s cubic-bezier(.2,.7,.2,1) both}.d1{animation-delay:.08s}.d2{animation-delay:.16s}.d3{animation-delay:.24s}
+.swap{animation:up .45s cubic-bezier(.2,.7,.2,1) both}
+.burst{animation:burst .6s cubic-bezier(.2,.7,.2,1) both}
+.ring{position:absolute;inset:0;border-radius:50%;border:2px solid #ff5f00;animation:ring 1.6s ease-out infinite}
+.float{animation:float 6s ease-in-out infinite}
+.spin{width:14px;height:14px;border-radius:50%;border:2px solid #ff5f00;border-top-color:transparent;animation:spin .7s linear infinite}
+@media (max-width:960px){.hide-m{display:none !important}.stack-m{flex-direction:column !important;align-items:stretch !important}}
