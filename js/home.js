@@ -180,7 +180,7 @@ class Component extends DCLogic {
       openLogin: () => { clearTimeout(this._loginCloseT); this.setState({ loginOpen: true }); },
       closeLogin: () => { clearTimeout(this._loginCloseT); this._loginCloseT = setTimeout(() => this.setState({ loginOpen: false }), 200); },
       sideNav, kpis, feedRows, callTime: mmss(s.sec),
-      sourcesLoop: sources.concat(sources),
+      sourcesLoop: sources.concat(sources, sources, sources, sources, sources),
       stagesUI, cur, progW: (s.stage / 7 * 100) + '%',
       autoLabel: s.auto ? 'Auto-playing · click a stage to take over' : 'Manual · ' + (s.stage + 1) + ' of 8',
       prevStage: () => this.setState({ stage: (s.stage + 7) % 8, auto: false }),

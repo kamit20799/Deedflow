@@ -21,7 +21,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .grid-bg{background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 30%,#000 30%,transparent 75%);mask-image:radial-gradient(ellipse 70% 60% at 50% 30%,#000 30%,transparent 75%)}
 @keyframes tilt{from{opacity:0;transform:perspective(1600px) rotateX(18deg) translateY(60px) scale(.96)}to{opacity:1;transform:perspective(1600px) rotateX(0) translateY(0) scale(1)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-16.6667%)}}
 @keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,95,0,.55)}80%,100%{box-shadow:0 0 0 10px rgba(255,95,0,0)}}
 @keyframes pingg{0%{box-shadow:0 0 0 0 rgba(69,214,154,.6)}80%,100%{box-shadow:0 0 0 9px rgba(69,214,154,0)}}
 @keyframes rowin{from{opacity:0;transform:translateX(-14px);background:var(--accsoft)}to{opacity:1;transform:none}}
