@@ -98,9 +98,9 @@ class Component extends DCLogic {
       { quote: "Our last RERA audit took half the time it used to, with zero discrepancies flagged. DeedFlow's compliance checks caught issues months before the regulator would have.", name: 'Rafael Santos', role: 'Director of Compliance, Meridian Realty Partners', ini: 'RS' }
     ];
     const posts = [
-      { tag: 'RERA', mark: '§13', bg: '#0a1628', fg: '#ff8a3d', t: 'RERA Section 13: what the 10% advance cap means for your sales team', d: 'When the cap applies, what counts toward it, and how to stop a receipt before it crosses.', meta: '[Publish date] · [0] min read' },
-      { tag: 'Tax', mark: 'TDS', bg: '#fff1e8', fg: '#c24700', t: 'TDS under 194-IA and 194H: a checklist for developers', d: 'Buyer-side and partner-side TDS, side by side, with what accounts needs to track.', meta: '[Publish date] · [0] min read' },
-      { tag: 'Collections', mark: 'CLP', bg: '#e8f0fd', fg: '#1d5fd1', t: 'Running construction-linked plans without spreadsheets', d: 'Milestones, demand letters, receipts and the ledger, in the order they should happen.', meta: '[Publish date] · [0] min read' }
+      { tag: 'RERA', mark: '§13', bg: '#0a1628', fg: '#ff8a3d', t: 'RERA Section 13: what the 10% advance cap means for your sales team', d: 'When the cap applies, what counts toward it, and how to stop a receipt before it crosses.', meta: 'Oct 12, 2026 · 6 min read' },
+      { tag: 'Tax', mark: 'TDS', bg: '#fff1e8', fg: '#c24700', t: 'TDS under 194-IA and 194H: a checklist for developers', d: 'Buyer-side and partner-side TDS, side by side, with what accounts needs to track.', meta: 'Sep 24, 2026 · 5 min read' },
+      { tag: 'Collections', mark: 'CLP', bg: '#e8f0fd', fg: '#1d5fd1', t: 'Running construction-linked plans without spreadsheets', d: 'Milestones, demand letters, receipts and the ledger, in the order they should happen.', meta: 'Sep 3, 2026 · 4 min read' }
     ];
     const curRaw = stages[s.stage];
     const cur = { ...curRaw, num: String(s.stage + 1).padStart(2, '0'), labelUp: curRaw.label.toUpperCase(),
