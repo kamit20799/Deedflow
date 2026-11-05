@@ -48,8 +48,8 @@ class Component extends DCLogic {
     const faqDefs = [
       ['How does annual billing work?', 'Annual plans are priced at ten times the monthly price, so you get two months free compared with paying monthly.'],
       ['What happens after the 14-day trial?', 'Choose a plan to keep working with your data. The trial includes 3 users.'],
-      ['Can we move between plans?', 'Yes. Move up when you add users, projects or leads beyond your current limits. [Confirm downgrade and proration rules.]'],
-      ['Are channel partners and buyers counted as users?', '[Confirm whether partner-portal and customer-portal logins count toward the user limit.]']
+      ['Can we move between plans?', 'Yes. Move up when you add users, projects or leads beyond your current limits. Downgrade and proration terms: TBD.'],
+      ['Are channel partners and buyers counted as users?', 'TBD.']
     ];
     const faqs = faqDefs.map((f, i) => ({ q: f[0], a: f[1], open: s.faq === i, on: s.faq === i ? '1' : '0', exp: s.faq === i ? 'true' : 'false', toggle: () => this.setState({ faq: s.faq === i ? -1 : i }) }));
     return {
