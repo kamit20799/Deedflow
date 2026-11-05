@@ -1,6 +1,7 @@
 /* DeedFlow — pricing page logic (data + interactions) */
 class Component extends DCLogic {
   state = { loginOpen: false, annual: false, eu: 14, ep: 4, el: 12, faq: 0 };
+  componentWillUnmount() { clearTimeout(this._loginCloseT); }
   renderVals() {
     const s = this.state;
     const inr = (n) => '₹' + n.toLocaleString('en-IN');
@@ -54,6 +55,8 @@ class Component extends DCLogic {
     return {
       loginOpen: s.loginOpen, loginExp: s.loginOpen ? 'true' : 'false', loginRot: s.loginOpen ? '180deg' : '0deg',
       toggleLogin: () => this.setState({ loginOpen: !s.loginOpen }),
+      openLogin: () => { clearTimeout(this._loginCloseT); this.setState({ loginOpen: true }); },
+      closeLogin: () => { clearTimeout(this._loginCloseT); this._loginCloseT = setTimeout(() => this.setState({ loginOpen: false }), 200); },
       monthOn: s.annual ? '0' : '1', yearOn: s.annual ? '1' : '0',
       setMonthly: () => this.setState({ annual: false }), setAnnual: () => this.setState({ annual: true }),
       plans, eu: s.eu, ep: s.ep, elIdx: s.el, elL: el.toLocaleString('en-IN'),

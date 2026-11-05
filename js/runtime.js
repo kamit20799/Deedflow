@@ -156,6 +156,17 @@
           }
         });
       });
+      // onMouseEnter / onMouseLeave: mouseenter/mouseleave don't bubble, so emulate
+      // them on top of the bubbling mouseover/mouseout events (hoverIntent-style).
+      [['mouseover', 'mouseenter'], ['mouseout', 'mouseleave']].forEach(([native, virtual]) => {
+        root.addEventListener(native, (e) => {
+          let el = e.target;
+          while (el && el !== root) {
+            if (el.__h && el.__h[virtual] && !el.contains(e.relatedTarget)) { el.__h[virtual](e); return; }
+            el = el.parentNode;
+          }
+        });
+      });
       // close the Log-in dropdown on outside click / Escape
       document.addEventListener('click', (e) => {
         const open = root.querySelector('[aria-haspopup="true"][aria-expanded="true"]');

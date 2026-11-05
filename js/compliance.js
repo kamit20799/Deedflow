@@ -2,7 +2,7 @@
 class Component extends DCLogic {
   state = { loginOpen: false, cost: 9800000, recv: 300000, agr: false, esc: 1, tds: 'ia', iaAmt: 9800000, hAmt: 450000, tier: 1, af: 0, tick: 0 };
   componentDidMount() { this.t = setInterval(() => this.setState({ tick: this.state.tick + 1 }), 3200); }
-  componentWillUnmount() { clearInterval(this.t); }
+  componentWillUnmount() { clearInterval(this.t); clearTimeout(this._loginCloseT); }
   renderVals() {
     const s = this.state;
     const inr = (n) => '₹' + Math.round(n).toLocaleString('en-IN');
@@ -71,6 +71,8 @@ class Component extends DCLogic {
     return {
       loginOpen: s.loginOpen, loginExp: s.loginOpen ? 'true' : 'false', loginRot: s.loginOpen ? '180deg' : '0deg',
       toggleLogin: () => this.setState({ loginOpen: !s.loginOpen }),
+      openLogin: () => { clearTimeout(this._loginCloseT); this.setState({ loginOpen: true }); },
+      closeLogin: () => { clearTimeout(this._loginCloseT); this._loginCloseT = setTimeout(() => this.setState({ loginOpen: false }), 200); },
       orbitA, orbitB,
       cost, costL: short(cost), recv, recvL: inr(recv), recvMax, priorL: inr(prior),
       setCost: (e) => this.setState({ cost: parseInt(e.target.value, 10) }),

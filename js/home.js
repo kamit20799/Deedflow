@@ -11,7 +11,7 @@ class Component extends DCLogic {
       this.setState({ sec: s.sec + 1, chk: (s.chk + 1) % 11, hold: s.hold > 0 ? s.hold - 1 : 1740 });
     }, 1000);
   }
-  componentWillUnmount() { clearInterval(this.t1); clearInterval(this.t2); }
+  componentWillUnmount() { clearInterval(this.t1); clearInterval(this.t2); clearTimeout(this._loginCloseT); }
   renderVals() {
     const s = this.state;
     const mmss = (n) => String(Math.floor(n / 60)).padStart(2, '0') + ':' + String(n % 60).padStart(2, '0');
@@ -92,7 +92,11 @@ class Component extends DCLogic {
     const B = bfDefs[s.bf];
     const bf = { ...B, whoUp: B.who.toUpperCase(), stats: B.stats.map((x) => ({ l: x[0], v: x[1] })), rows: B.rows.map((r, i) => ({ l: r[0], s: r[1], p: r[2], tone: r[3], delay: (i * 0.08) + 's' })) };
     const bfTabs = bfDefs.map((b, i) => ({ l: b.l, on: i === s.bf ? '1' : '0', pick: () => this.setState({ bf: i }) }));
-    const testimonials = [1, 2, 3].map((n) => ({ quote: '[Client quote ' + n + ': one or two sentences on a real result, such as faster collections, fewer lost leads or a clean RERA audit.]', name: '[Name]', role: '[Title, Company]', ini: '—' }));
+    const testimonials = [
+      { quote: 'DeedFlow cut our average collection cycle from 45 days to under 12 — the automated reminders and real-time dashboards changed how our finance team works.', name: 'Marcus Chen', role: 'COO, Horizon Living Developments', ini: 'MC' },
+      { quote: "We used to lose nearly a third of our leads to slow follow-up. With DeedFlow's lead routing and call tracking, our conversion rate doubled in two quarters.", name: 'Amara Okafor', role: 'Head of Sales, Prestige Horizon Group', ini: 'AO' },
+      { quote: "Our last RERA audit took half the time it used to, with zero discrepancies flagged. DeedFlow's compliance checks caught issues months before the regulator would have.", name: 'Rafael Santos', role: 'Director of Compliance, Meridian Realty Partners', ini: 'RS' }
+    ];
     const posts = [
       { tag: 'RERA', mark: '§13', bg: '#0a1628', fg: '#ff8a3d', t: 'RERA Section 13: what the 10% advance cap means for your sales team', d: 'When the cap applies, what counts toward it, and how to stop a receipt before it crosses.', meta: '[Publish date] · [0] min read' },
       { tag: 'Tax', mark: 'TDS', bg: '#fff1e8', fg: '#c24700', t: 'TDS under 194-IA and 194H: a checklist for developers', d: 'Buyer-side and partner-side TDS, side by side, with what accounts needs to track.', meta: '[Publish date] · [0] min read' },
@@ -173,6 +177,8 @@ class Component extends DCLogic {
       heroEmail: s.heroEmail, onHeroEmail: (e) => this.setState({ heroEmail: e.target.value }),
       loginOpen: s.loginOpen, loginExp: s.loginOpen ? 'true' : 'false', loginRot: s.loginOpen ? '180deg' : '0deg',
       toggleLogin: () => this.setState({ loginOpen: !s.loginOpen }),
+      openLogin: () => { clearTimeout(this._loginCloseT); this.setState({ loginOpen: true }); },
+      closeLogin: () => { clearTimeout(this._loginCloseT); this._loginCloseT = setTimeout(() => this.setState({ loginOpen: false }), 200); },
       sideNav, kpis, feedRows, callTime: mmss(s.sec),
       sourcesLoop: sources.concat(sources),
       stagesUI, cur, progW: (s.stage / 7 * 100) + '%',

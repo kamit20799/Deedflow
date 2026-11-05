@@ -2,7 +2,7 @@
 class Component extends DCLogic {
   state = { loginOpen: false, lead: 0, call: 'idle', sec: 0, disp: -1, liked: [0, 1], obj: [1], tower: 1, unit: 'B-1204', holds: {}, area: 1450, floor: 12, plc: 1, facing: 0, offer: 1, frozen: false, bk: 2, rcp: 1, bounced: false };
   componentDidMount() { this.t = setInterval(() => { if (this.state.call === 'on') this.setState({ sec: this.state.sec + 1 }); }, 1000); }
-  componentWillUnmount() { clearInterval(this.t); }
+  componentWillUnmount() { clearInterval(this.t); clearTimeout(this._loginCloseT); }
   renderVals() {
     const s = this.state;
     const inr = (n) => (n < 0 ? '−₹' : '₹') + Math.abs(Math.round(n)).toLocaleString('en-IN');
@@ -129,6 +129,8 @@ class Component extends DCLogic {
     return {
       loginOpen: s.loginOpen, loginExp: s.loginOpen ? 'true' : 'false', loginRot: s.loginOpen ? '180deg' : '0deg',
       toggleLogin: () => this.setState({ loginOpen: !s.loginOpen }),
+      openLogin: () => { clearTimeout(this._loginCloseT); this.setState({ loginOpen: true }); },
+      closeLogin: () => { clearTimeout(this._loginCloseT); this._loginCloseT = setTimeout(() => this.setState({ loginOpen: false }), 200); },
       jump, leadList, lead,
       onCall, callTime: mmss(s.sec), callState: onCall ? 'On call · recording' : s.call === 'ended' ? 'Call ended' : 'Ready to call',
       callTone: onCall ? 'p-ok' : s.call === 'ended' ? 'p-mut' : 'p-blue',

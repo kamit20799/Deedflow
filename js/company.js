@@ -1,6 +1,7 @@
 /* DeedFlow — company page logic (data + interactions) */
 class Component extends DCLogic {
   state = { loginOpen: false, step: 1, tried: false, name: '', email: '', phone: '', company: '', notes: '', role: 0, proj: 1, team: 1, focus: [0, 3], day: 0, time: 2 };
+  componentWillUnmount() { clearTimeout(this._loginCloseT); }
   renderVals() {
     const s = this.state;
     const pickList = (defs, key) => defs.map((l, i) => ({ l, on: s[key] === i ? '1' : '0', pick: () => this.setState({ [key]: i }) }));
@@ -47,6 +48,8 @@ class Component extends DCLogic {
     return {
       loginOpen: s.loginOpen, loginExp: s.loginOpen ? 'true' : 'false', loginRot: s.loginOpen ? '180deg' : '0deg',
       toggleLogin: () => this.setState({ loginOpen: !s.loginOpen }),
+      openLogin: () => { clearTimeout(this._loginCloseT); this.setState({ loginOpen: true }); },
+      closeLogin: () => { clearTimeout(this._loginCloseT); this._loginCloseT = setTimeout(() => this.setState({ loginOpen: false }), 200); },
       agenda, roles, projOpts, teamOpts, focusOpts, days, times, stepTabs,
       f: { name: s.name, email: s.email, phone: s.phone, company: s.company, notes: s.notes },
       onName: (e) => this.setState({ name: e.target.value }),

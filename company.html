@@ -29,8 +29,8 @@
 <a class="nl" href="pricing.html">Pricing</a>
 <a class="nl" data-on="1" href="company.html">Company</a>
 </nav>
-<div style="margin-left: auto; display: flex; gap: 10px; align-items: center">
-<div class="hide-m" style="position: relative">
+<div style="margin-left: auto; display: flex; gap: 24px; align-items: center">
+<div class="hide-m" style="position: relative" onMouseEnter="{{openLogin}}" onMouseLeave="{{closeLogin}}">
 <button class="nl" onClick="{{toggleLogin}}" aria-haspopup="true" aria-expanded="{{loginExp}}" style="background: none; border: 0; cursor: pointer; font-family: inherit; font-weight: 600; font-size: 14.5px; display: inline-flex; align-items: center; gap: 6px; min-height: 44px">Log in<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{loginRot}}); transition: transform .25s"><path d="M6 9l6 6 6-6"></path></svg></button>
 <sc-if value="{{loginOpen}}" hint-placeholder-val="{{ false }}">
 <div class="swap" role="menu" aria-label="Choose your portal" style="position: absolute; right: 0; top: calc(100% + 10px); width: 320px; background: var(--surf); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow), 0 30px 60px -20px rgba(10,22,40,0.35); padding: 8px; display: flex; flex-direction: column; gap: 2px; z-index: 70; text-align: left">
