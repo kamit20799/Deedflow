@@ -1,0 +1,152 @@
+<!doctype html>
+<html style="animation-delay: -10s;"><head style="animation-delay: -10s;"><meta charset="utf-8" style="animation-delay: -10s;">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" style="animation-delay: -10s;">
+<style style="animation-delay: -10s;">
+body{margin:0}
+.rx{--bg:#ffffff;--bg2:#f5f7fa;--surf:#ffffff;--surf2:#f8fafc;--line:#e4e8ee;--ink:#0a1628;--mut:#475467;--sub:#5b6676;--acc:#ff5f00;--acct:#c24700;--accsoft:#fff1e8;--ok:#0f7a4a;--oksoft:#e6f5ee;--warn:#9a5800;--warnsoft:#fff5dc;--bad:#b42318;--badsoft:#fdecea;--blue:#1d5fd1;--bluesoft:#e8f0fd;--shadow:0 1px 2px rgba(10,22,40,.06),0 18px 40px -16px rgba(10,22,40,.22);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;transition:background .35s,color .35s;overflow-x:hidden}
+.rx[data-theme=dark],.rx .on-navy{--bg:#081221;--bg2:#0c1a2e;--surf:#0f1f36;--surf2:#132743;--line:#1f3352;--ink:#edf1f7;--mut:#b0bccd;--sub:#93a2b8;--acct:#ff8a3d;--accsoft:#2e1a0c;--ok:#45d69a;--oksoft:#0e2a1f;--warn:#f5b54a;--warnsoft:#2b2210;--bad:#ff8a7e;--badsoft:#2d1414;--blue:#86b0ff;--bluesoft:#132544;--shadow:0 1px 2px rgba(0,0,0,.35),0 22px 48px -16px rgba(0,0,0,.65)}
+.on-navy{background:#0a1628;color:var(--ink)}
+.rx[data-theme=dark] .on-navy{background:#040b16}
+.mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+a{color:var(--acct)}a:hover{color:var(--ink)}
+.lm-d{display:none}
+.rx[data-theme=dark] .lm-l{display:none}
+.rx[data-theme=dark] .lm-d{display:inline}
+.on-navy .lm-l{display:none}
+.on-navy .lm-d{display:inline}
+.bp{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#ff5f00;color:#0a1628;font-weight:700;font-size:15px;text-decoration:none;border:0;border-radius:12px;padding:13px 20px;min-height:46px;box-sizing:border-box;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s;font-family:inherit}
+.bp:hover{background:#ff7a29;color:#0a1628;transform:translateY(-1px);box-shadow:0 10px 24px -8px rgba(255,95,0,.6)}
+.bs{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--surf);color:var(--ink);font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--line);border-radius:12px;padding:13px 20px;min-height:46px;box-sizing:border-box;cursor:pointer;transition:border-color .2s;font-family:inherit}
+.bs:hover{border-color:var(--ink);color:var(--ink)}
+.ic{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid var(--line);background:var(--surf);color:var(--ink);cursor:pointer;transition:border-color .2s,transform .3s}
+.ic:hover{border-color:var(--ink);transform:rotate(-12deg)}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #ff5f00;outline-offset:2px}
+.eyebrow{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--acct)}
+.lbl{font-size:13.5px;font-weight:600;color:var(--ink)}
+.inp{font-family:inherit;font-size:15px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surf2);color:var(--ink);width:100%;box-sizing:border-box;min-height:46px;transition:border-color .2s,box-shadow .2s}
+.inp:focus{border-color:#ff5f00;box-shadow:0 0 0 3px color-mix(in oklab,#ff5f00 20%,transparent);outline:none}
+.inp::placeholder{color:var(--sub)}
+.inp[data-err="1"]{border-color:var(--bad)}
+.chip{font-family:inherit;font-size:14px;font-weight:600;border:1px solid var(--line);background:var(--surf);color:var(--mut);border-radius:12px;padding:10px 15px;min-height:44px;cursor:pointer;transition:all .2s}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip[data-on="1"]{background:#ff5f00;border-color:#ff5f00;color:#0a1628}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;font-size:11.5px;font-weight:600;white-space:nowrap;line-height:1.5}
+.p-ok{background:var(--oksoft);color:var(--ok)}.p-hot{background:var(--accsoft);color:var(--acct)}
+.otp{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:26px;font-weight:700;letter-spacing:.6em;text-align:center;padding:14px 0 14px .6em}
+.chk{width:22px;height:22px;border-radius:7px;border:1.5px solid var(--line);background:var(--surf);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex:none;padding:0;transition:all .2s}
+.chk[data-on="1"]{background:#ff5f00;border-color:#ff5f00}
+.grid-bg{background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 80% 70% at 30% 20%,#000 30%,transparent 75%);mask-image:radial-gradient(ellipse 80% 70% at 30% 20%,#000 30%,transparent 75%)}
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes burst{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.1);opacity:1}100%{transform:scale(1)}}
+@keyframes ring{0%{transform:scale(.8);opacity:.6}100%{transform:scale(1.8);opacity:0}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.in{animation:up .8s cubic-bezier(.2,.7,.2,1) both}.d1{animation-delay:.08s}.d2{animation-delay:.16s}.d3{animation-delay:.24s}
+.swap{animation:up .45s cubic-bezier(.2,.7,.2,1) both}
+.burst{animation:burst .6s cubic-bezier(.2,.7,.2,1) both}
+.ring{position:absolute;inset:0;border-radius:50%;border:2px solid #ff5f00;animation:ring 1.6s ease-out infinite}
+.float{animation:float 6s ease-in-out infinite}
+.spin{width:14px;height:14px;border-radius:50%;border:2px solid #ff5f00;border-top-color:transparent;animation:spin .7s linear infinite}
+@media (max-width:960px){.hide-m{display:none !important}.stack-m{flex-direction:column !important;align-items:stretch !important}}
+@media (prefers-reduced-motion:reduce){.rx *{animation:none !important;transition:none !important}}
+</style>
+</head><body style="animation-delay: -10s;"><div style="animation-delay: -10s;">
+
+<div class="rx" data-theme="light" style="min-height: 1100px; display: flex; flex-wrap: wrap; animation-delay: -10s;">
+
+<!-- LEFT: value panel -->
+<aside class="on-navy" style="flex: 1 1 460px; min-width: 0px; position: relative; overflow: hidden; padding: 40px 56px 56px; display: flex; flex-direction: column; gap: 48px; animation-delay: -10s;">
+<div class="grid-bg" aria-hidden="true" style="position: absolute; inset: 0px; opacity: 0.5; animation-delay: -10s;"></div>
+<div aria-hidden="true" style="position: absolute; width: 640px; height: 640px; left: -200px; bottom: -360px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 95, 0, 0.32), rgba(255, 95, 0, 0) 65%); animation-delay: -10s;"></div>
+<a href="Main.dc.html" aria-label="DeedFlow home" style="position: relative; display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); align-self: flex-start; animation-delay: -10s;">
+<svg class="lm-l" width="38" height="38" viewBox="0 0 48 48" aria-hidden="true" style="animation-delay: -10s;"><defs style="animation-delay: -10s;"><linearGradient id="tssi1s" x1="0" y1="0" x2="1" y2="0" style="animation-delay: -10s;"><stop offset="0" stop-color="#ff9a3d" style="animation-delay: -10s;"></stop><stop offset="1" stop-color="#ff5f00" style="animation-delay: -10s;"></stop></linearGradient></defs><path d="M20 44V12l8-6v38z" fill="#0a1628" style="animation-delay: -10s;"></path><path d="M8 40c6-10 14-16 34-18-14 6-22 12-27 22z" fill="url(#tssi1s)" style="animation-delay: -10s;"></path><path d="M30 44V18l6 4v22z" fill="#0a1628" opacity=".7" style="animation-delay: -10s;"></path></svg><svg class="lm-d" width="38" height="38" viewBox="0 0 48 48" aria-hidden="true" style="animation-delay: -10s;"><defs style="animation-delay: -10s;"><linearGradient id="tssi1ds" x1="0" y1="0" x2="1" y2="0" style="animation-delay: -10s;"><stop offset="0" stop-color="#ff9a3d" style="animation-delay: -10s;"></stop><stop offset="1" stop-color="#ff5f00" style="animation-delay: -10s;"></stop></linearGradient></defs><path d="M20 44V12l8-6v38z" fill="#ffffff" style="animation-delay: -10s;"></path><path d="M8 40c6-10 14-16 34-18-14 6-22 12-27 22z" fill="url(#tssi1ds)" style="animation-delay: -10s;"></path><path d="M30 44V18l6 4v22z" fill="#ffffff" opacity=".7" style="animation-delay: -10s;"></path></svg><span style="font-weight: 800; font-size: 22px; letter-spacing: -0.04em; animation-delay: -10s;">Deed<span style="color: var(--acct); animation-delay: -10s;">Flow</span></span>
+</a>
+<div style="position: relative; display: flex; flex-direction: column; gap: 22px; animation-delay: -10s;">
+<span class="eyebrow in" style="animation-delay: -10s;">14-day free trial</span>
+<h1 class="in d1" style="margin: 0px; font-size: clamp(36px, 4.4vw, 56px); line-height: 1.02; letter-spacing: -0.04em; font-weight: 800; text-wrap: balance; animation-delay: -10s;">Set up your sales floor in minutes.</h1>
+<p class="in d2" style="margin: 0px; font-size: 17.5px; line-height: 1.6; color: var(--mut); max-width: 460px; animation-delay: -10s;">Create your workspace, invite your team and see your first portal leads land in DeedFlow.</p>
+</div>
+<div class="in d3" style="position: relative; display: flex; flex-direction: column; gap: 16px; animation-delay: -10s;">
+
+<div style="display: flex; gap: 14px; align-items: flex-start; animation-delay: -10s;"><span style="width: 30px; height: 30px; flex: 0 0 auto; border-radius: 9px; background: rgba(255, 95, 0, 0.16); display: flex; align-items: center; justify-content: center; animation-delay: -10s;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff8a3d" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="animation-delay: -10s;"><path d="M5 12l5 5L20 7" style="animation-delay: -10s;"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 700; font-size: 15.5px; animation-delay: -10s;">Full CRM for 14 days</span><span style="font-size: 14px; color: var(--sub); animation-delay: -10s;">Leads, presales, inventory, cost sheets, bookings and collections.</span></span></div>
+
+<div style="display: flex; gap: 14px; align-items: flex-start; animation-delay: -10s;"><span style="width: 30px; height: 30px; flex: 0 0 auto; border-radius: 9px; background: rgba(255, 95, 0, 0.16); display: flex; align-items: center; justify-content: center; animation-delay: -10s;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff8a3d" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="animation-delay: -10s;"><path d="M5 12l5 5L20 7" style="animation-delay: -10s;"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 700; font-size: 15.5px; animation-delay: -10s;">3 team members included</span><span style="font-size: 14px; color: var(--sub); animation-delay: -10s;">Invite presales, sales and accounts from day one.</span></span></div>
+
+<div style="display: flex; gap: 14px; align-items: flex-start; animation-delay: -10s;"><span style="width: 30px; height: 30px; flex: 0 0 auto; border-radius: 9px; background: rgba(255, 95, 0, 0.16); display: flex; align-items: center; justify-content: center; animation-delay: -10s;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff8a3d" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="animation-delay: -10s;"><path d="M5 12l5 5L20 7" style="animation-delay: -10s;"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 700; font-size: 15.5px; animation-delay: -10s;">Compliance checks built in</span><span style="font-size: 14px; color: var(--sub); animation-delay: -10s;">RERA §13 cap, GST and TDS on every transaction.</span></span></div>
+
+<div style="display: flex; gap: 14px; align-items: flex-start; animation-delay: -10s;"><span style="width: 30px; height: 30px; flex: 0 0 auto; border-radius: 9px; background: rgba(255, 95, 0, 0.16); display: flex; align-items: center; justify-content: center; animation-delay: -10s;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff8a3d" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="animation-delay: -10s;"><path d="M5 12l5 5L20 7" style="animation-delay: -10s;"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 700; font-size: 15.5px; animation-delay: -10s;">Plans from ₹1,000 / month</span><span style="font-size: 14px; color: var(--sub); animation-delay: -10s;">Choose a plan when you are ready.</span></span></div>
+
+</div>
+<div class="float hide-m" style="position: relative; margin-top: auto; background: var(--surf); border: 1px solid var(--line); border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 12px; max-width: 420px; box-shadow: rgba(0, 0, 0, 0.6) 0px 30px 60px -20px; animation-delay: -10s;">
+<div style="display: flex; justify-content: space-between; align-items: center; animation-delay: -10s;"><span style="font-weight: 700; font-size: 14px; animation-delay: -10s;">Your workspace</span><span class="pill p-hot" style="animation-delay: -10s;">your-company</span></div>
+
+<div style="display: flex; align-items: center; gap: 12px; font-size: 13.5px; animation-delay: -10s;"><span style="width: 8px; height: 8px; border-radius: 50%; background: rgb(255, 95, 0); flex: 0 0 auto; animation-delay: -10s;"></span><span style="flex: 1 1 0%; animation-delay: -10s;">Lead sources selected</span><span class="mono" style="font-size: 12px; color: var(--sub); animation-delay: -10s;">2</span></div>
+
+<div style="display: flex; align-items: center; gap: 12px; font-size: 13.5px; animation-delay: -10s;"><span style="width: 8px; height: 8px; border-radius: 50%; background: rgb(69, 214, 154); flex: 0 0 auto; animation-delay: -10s;"></span><span style="flex: 1 1 0%; animation-delay: -10s;">Team seats on trial</span><span class="mono" style="font-size: 12px; color: var(--sub); animation-delay: -10s;">3</span></div>
+
+<div style="display: flex; align-items: center; gap: 12px; font-size: 13.5px; animation-delay: -10s;"><span style="width: 8px; height: 8px; border-radius: 50%; background: rgb(134, 176, 255); flex: 0 0 auto; animation-delay: -10s;"></span><span style="flex: 1 1 0%; animation-delay: -10s;">Trial length</span><span class="mono" style="font-size: 12px; color: var(--sub); animation-delay: -10s;">14 days</span></div>
+
+</div>
+</aside>
+
+<!-- RIGHT: form -->
+<main style="flex: 1.15 1 560px; min-width: 0px; padding: 32px 24px 64px; display: flex; flex-direction: column; align-items: center; background: var(--bg); animation-delay: -10s;">
+<div style="width: 100%; max-width: 560px; display: flex; justify-content: flex-end; align-items: center; gap: 14px; font-size: 14px; color: var(--mut); animation-delay: -10s;">
+<span class="hide-m" style="animation-delay: -10s;">Already have an account?</span><a href="#" style="font-weight: 650; animation-delay: -10s;">Log in</a>
+<button class="ic" aria-label="Switch to dark theme" style="animation-delay: -10s;">
+
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="animation-delay: -10s;"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" style="animation-delay: -10s;"></path></svg>
+</button>
+</div>
+
+<div style="width: 100%; max-width: 560px; margin-top: 56px; display: flex; flex-direction: column; gap: 28px; animation-delay: -10s;">
+
+<div style="display: flex; flex-direction: column; gap: 18px; animation-delay: -10s;">
+<div style="display: flex; gap: 8px; animation-delay: -10s;" aria-hidden="true"><span style="flex: 1 1 0%; height: 4px; border-radius: 4px; background: color-mix(in oklab, #ff5f00 55%, var(--line)); transition: background 0.4s; animation-delay: -10s;"></span><span style="flex: 1 1 0%; height: 4px; border-radius: 4px; background: var(--line); transition: background 0.4s; animation-delay: -10s;"></span><span style="flex: 1 1 0%; height: 4px; border-radius: 4px; background: var(--line); transition: background 0.4s; animation-delay: -10s;"></span></div>
+<span class="mono" style="font-size: 12.5px; color: var(--sub); animation-delay: -10s;">STEP 1 OF 3 · YOUR ACCOUNT</span>
+<h2 style="margin: 0px; font-size: 34px; letter-spacing: -0.035em; font-weight: 800; line-height: 1.1; animation-delay: -10s;">Create your free account</h2>
+</div>
+
+
+<!-- STEP 1 -->
+
+<div class="swap" style="display: flex; flex-direction: column; gap: 18px; animation-delay: -10s;">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 16px; animation-delay: -10s;">
+<div style="display: flex; flex-direction: column; gap: 8px; animation-delay: -10s;"><label class="lbl" for="nm" style="animation-delay: -10s;">Full name</label><input id="nm" class="inp" data-err="0" placeholder="Your name" autocomplete="name" value="" style="animation-delay: -10s;"></div>
+<div style="display: flex; flex-direction: column; gap: 8px; animation-delay: -10s;"><label class="lbl" for="ph" style="animation-delay: -10s;">Mobile</label><input id="ph" class="inp" data-err="0" type="tel" placeholder="+91 98XXX XXXXX" autocomplete="tel" value="" style="animation-delay: -10s;"></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; animation-delay: -10s;"><label class="lbl" for="em" style="animation-delay: -10s;">Work email</label><input id="em" class="inp" data-err="0" type="email" placeholder="you@yourdeveloper.in" autocomplete="email" value="" style="animation-delay: -10s;"></div>
+<div style="display: flex; flex-direction: column; gap: 8px; animation-delay: -10s;">
+<label class="lbl" for="pw" style="animation-delay: -10s;">Password</label>
+<div style="position: relative; animation-delay: -10s;"><input id="pw" class="inp" data-err="0" type="password" placeholder="At least 8 characters" autocomplete="new-password" value="" style="padding-right: 72px; animation-delay: -10s;"><button aria-label="Show password" style="position: absolute; right: 6px; top: 6px; height: 34px; padding: 0px 10px; border: 0px; background: transparent; color: var(--acct); font-family: inherit; font-weight: 650; font-size: 13px; cursor: pointer; animation-delay: -10s;">Show</button></div>
+<div style="display: flex; gap: 6px; align-items: center; animation-delay: -10s;" aria-hidden="true"><span style="flex: 1 1 0%; height: 4px; border-radius: 4px; background: var(--line); transition: background 0.3s; animation-delay: -10s;"></span><span style="flex: 1 1 0%; height: 4px; border-radius: 4px; background: var(--line); transition: background 0.3s; animation-delay: -10s;"></span><span style="flex: 1 1 0%; height: 4px; border-radius: 4px; background: var(--line); transition: background 0.3s; animation-delay: -10s;"></span><span style="flex: 1 1 0%; height: 4px; border-radius: 4px; background: var(--line); transition: background 0.3s; animation-delay: -10s;"></span><span style="font-size: 12px; color: var(--sub); width: 64px; text-align: right; animation-delay: -10s;"></span></div>
+</div>
+<div style="display: flex; gap: 12px; align-items: flex-start; font-size: 13.5px; color: var(--mut); line-height: 1.5; animation-delay: -10s;">
+<button class="chk" data-on="0" aria-label="Accept terms" aria-pressed="false" style="animation-delay: -10s;"></button>
+<span style="animation-delay: -10s;">I agree to the <a href="#" style="animation-delay: -10s;">Terms</a> and <a href="#" style="animation-delay: -10s;">Privacy policy</a>, and consent to DeedFlow contacting me about my trial.</span>
+</div>
+
+</div>
+
+
+<!-- STEP 2 -->
+
+
+<!-- STEP 3 -->
+
+
+<!-- DONE -->
+
+
+
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; border-top: 1px solid var(--line); padding-top: 22px; animation-delay: -10s;">
+
+<span style="font-size: 13px; color: var(--sub); animation-delay: -10s;">Prefer a walkthrough? <a href="Contact.dc.html" style="font-weight: 650; animation-delay: -10s;">Book a demo</a></span>
+<button class="bp" style="min-width: 180px; animation-delay: -10s;">Create account<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="animation-delay: -10s;"><path d="M5 12h14M13 6l6 6-6 6" style="animation-delay: -10s;"></path></svg></button>
+</div>
+
+</div>
+</main>
+
+</div>
+</div></body></html>

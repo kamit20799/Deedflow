@@ -1,0 +1,571 @@
+<!doctype html>
+<html style="animation-delay: -10s;"><head style="animation-delay: -10s;"><meta charset="utf-8" style="animation-delay: -10s;">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" style="animation-delay: -10s;">
+<style style="animation-delay: -10s;">
+body{margin:0}
+.rx{--bg:#ffffff;--bg2:#f5f7fa;--surf:#ffffff;--surf2:#f8fafc;--line:#e4e8ee;--ink:#0a1628;--mut:#475467;--sub:#5b6676;--acc:#ff5f00;--acct:#c24700;--accsoft:#fff1e8;--ok:#0f7a4a;--oksoft:#e6f5ee;--warn:#9a5800;--warnsoft:#fff5dc;--bad:#b42318;--badsoft:#fdecea;--blue:#1d5fd1;--bluesoft:#e8f0fd;--shadow:0 1px 2px rgba(10,22,40,.06),0 18px 40px -16px rgba(10,22,40,.22);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;transition:background .35s,color .35s;overflow-x:hidden}
+.rx[data-theme=dark],.rx .on-navy{--bg:#081221;--bg2:#0c1a2e;--surf:#0f1f36;--surf2:#132743;--line:#1f3352;--ink:#edf1f7;--mut:#b0bccd;--sub:#93a2b8;--acct:#ff8a3d;--accsoft:#2e1a0c;--ok:#45d69a;--oksoft:#0e2a1f;--warn:#f5b54a;--warnsoft:#2b2210;--bad:#ff8a7e;--badsoft:#2d1414;--blue:#86b0ff;--bluesoft:#132544;--shadow:0 1px 2px rgba(0,0,0,.35),0 22px 48px -16px rgba(0,0,0,.65)}
+.on-navy{background:#0a1628;color:var(--ink)}
+.rx[data-theme=dark] .on-navy{background:#040b16}
+.mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+a{color:var(--acct)}a:hover{color:var(--ink)}
+.lm-d{display:none}
+.rx[data-theme=dark] .lm-l{display:none}
+.rx[data-theme=dark] .lm-d{display:inline}
+.on-navy .lm-l{display:none}
+.on-navy .lm-d{display:inline}
+.nl{color:var(--mut);text-decoration:none;transition:color .2s;padding:6px 0;border-bottom:2px solid transparent}
+.nl:hover,.nl[data-on="1"]{color:var(--ink)}
+.nl[data-on="1"]{border-bottom-color:var(--acc)}
+.lm{display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:12px;text-decoration:none;color:var(--ink);transition:background .2s}
+.lm:hover{background:var(--bg2);color:var(--ink)}
+.lmi{width:38px;height:38px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center}
+.bp{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#ff5f00;color:#0a1628;font-weight:700;font-size:15px;text-decoration:none;border:0;border-radius:12px;padding:13px 20px;min-height:44px;box-sizing:border-box;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s;font-family:inherit}
+.bp:hover{background:#ff7a29;color:#0a1628;transform:translateY(-1px);box-shadow:0 10px 24px -8px rgba(255,95,0,.6)}
+.bs{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--surf);color:var(--ink);font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--line);border-radius:12px;padding:13px 20px;min-height:44px;box-sizing:border-box;cursor:pointer;transition:border-color .2s,transform .2s;font-family:inherit}
+.bs:hover{border-color:var(--ink);color:var(--ink);transform:translateY(-1px)}
+.ic{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid var(--line);background:var(--surf);color:var(--ink);cursor:pointer;transition:border-color .2s,transform .3s}
+.ic:hover{border-color:var(--ink);transform:rotate(-12deg)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #ff5f00;outline-offset:2px}
+.eyebrow{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--acct)}
+.h2{font-size:clamp(30px,3.8vw,48px);line-height:1.05;letter-spacing:-.035em;font-weight:800;margin:0;text-wrap:balance}
+.lead{font-size:17.5px;line-height:1.6;color:var(--mut);margin:0;text-wrap:pretty}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:20px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;font-size:11.5px;font-weight:600;white-space:nowrap;line-height:1.5}
+.p-ok{background:var(--oksoft);color:var(--ok)}.p-warn{background:var(--warnsoft);color:var(--warn)}.p-hot{background:var(--accsoft);color:var(--acct)}.p-blue{background:var(--bluesoft);color:var(--blue)}.p-mut{background:var(--bg2);color:var(--sub)}.p-bad{background:var(--badsoft);color:var(--bad)}
+.tab{font-family:inherit;font-size:14px;font-weight:600;color:var(--mut);background:transparent;border:1px solid transparent;border-radius:12px;padding:10px 16px;min-height:44px;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;gap:8px}
+.tab:hover{color:var(--ink)}
+.tab[data-on="1"]{background:var(--surf);color:var(--ink);border-color:var(--line);box-shadow:var(--shadow)}
+.chip{font-family:inherit;font-size:13.5px;font-weight:600;border:1px solid var(--line);background:var(--surf);color:var(--mut);border-radius:999px;padding:9px 15px;min-height:40px;cursor:pointer;transition:all .2s}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip[data-on="1"]{background:#ff5f00;border-color:#ff5f00;color:#0a1628}
+.sel{font-family:inherit;text-align:left;width:100%;border:1px solid var(--line);background:var(--surf);color:var(--ink);border-radius:14px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;min-height:44px}
+.sel:hover{border-color:color-mix(in oklab,#ff5f00 50%,var(--line))}
+.sel[data-on="1"]{border-color:#ff5f00;box-shadow:0 0 0 3px color-mix(in oklab,#ff5f00 22%,transparent)}
+.unit{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;font-weight:600;border:0;border-radius:8px;height:34px;cursor:pointer;transition:transform .15s,box-shadow .2s;color:var(--ink)}
+.unit:hover{transform:scale(1.08)}
+.unit[data-on="1"]{box-shadow:0 0 0 2px var(--ink)}
+.u-av{background:var(--oksoft);color:var(--ok)}.u-hold{background:var(--warnsoft);color:var(--warn)}.u-bk{background:#ff5f00;color:#0a1628}.u-bl{background:var(--bg2);color:var(--sub)}
+.grid-bg{background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 20%,#000 30%,transparent 75%);mask-image:radial-gradient(ellipse 70% 70% at 50% 20%,#000 30%,transparent 75%)}
+input[type=range]{width:100%;accent-color:#ff5f00;height:28px;cursor:pointer}
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes wave{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,95,0,.55)}80%,100%{box-shadow:0 0 0 12px rgba(255,95,0,0)}}
+@keyframes pingg{0%{box-shadow:0 0 0 0 rgba(69,214,154,.6)}80%,100%{box-shadow:0 0 0 9px rgba(69,214,154,0)}}
+@keyframes slide{0%{left:-30%}100%{left:100%}}
+@keyframes pop{0%{transform:scale(.85);opacity:0}100%{transform:scale(1);opacity:1}}
+.in{animation:up .8s cubic-bezier(.2,.7,.2,1) both}.d1{animation-delay:.08s}.d2{animation-delay:.16s}.d3{animation-delay:.24s}
+.swap{animation:up .5s cubic-bezier(.2,.7,.2,1) both}
+.pop{animation:pop .35s cubic-bezier(.2,.7,.2,1) both}
+.bar span{display:block;width:3px;border-radius:3px;background:#ff5f00;transform-origin:bottom;animation:wave 1s ease-in-out infinite}
+.dotg{width:8px;height:8px;border-radius:50%;background:#45d69a;animation:pingg 1.8s infinite;flex:none}
+.callbtn{width:64px;height:64px;border-radius:50%;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s}
+.callbtn:hover{transform:scale(1.06)}
+.cb-go{background:#1aa86b;color:#fff;animation:ping 1.8s infinite}
+.cb-end{background:#d92d20;color:#fff}
+.key{font-family:inherit;height:48px;border-radius:12px;border:1px solid var(--line);background:var(--surf2);color:var(--ink);font-size:17px;font-weight:600;cursor:pointer}
+.key:hover{border-color:var(--ink)}
+.flow{position:relative;height:3px;background:var(--line);border-radius:3px;overflow:hidden}
+.flow::after{content:"";position:absolute;top:0;bottom:0;width:30%;background:linear-gradient(90deg,transparent,#ff5f00,transparent);animation:slide 1.8s linear infinite}
+@supports (animation-timeline: view()){.rv{animation:up linear both;animation-timeline:view();animation-range:entry 0% entry 40%}}
+@media (max-width:960px){.hide-m{display:none !important}.stack-m{flex-direction:column !important;align-items:stretch !important}}
+@media (prefers-reduced-motion:reduce){.rx *{animation:none !important;transition:none !important}}
+</style>
+</head><body style="animation-delay: -10s;"><div style="animation-delay: -10s;">
+
+<div class="rx" data-theme="light" style="animation-delay: -10s;">
+
+<header style="position: sticky; top: 0px; z-index: 50; backdrop-filter: blur(14px); background: color-mix(in oklab, var(--bg) 84%, transparent); border-bottom: 1px solid var(--line); animation-delay: -10s;">
+<div style="max-width: 1240px; margin: 0px auto; padding: 12px 24px; display: flex; align-items: center; gap: 36px; animation-delay: -10s;">
+<a href="Main.dc.html" aria-label="DeedFlow home" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); animation-delay: -10s;">
+<svg class="lm-l" width="38" height="38" viewBox="0 0 48 48" aria-hidden="true" style="animation-delay: -10s;"><defs style="animation-delay: -10s;"><linearGradient id="tsfe1s" x1="0" y1="0" x2="1" y2="0" style="animation-delay: -10s;"><stop offset="0" stop-color="#ff9a3d" style="animation-delay: -10s;"></stop><stop offset="1" stop-color="#ff5f00" style="animation-delay: -10s;"></stop></linearGradient></defs><path d="M20 44V12l8-6v38z" fill="#0a1628" style="animation-delay: -10s;"></path><path d="M8 40c6-10 14-16 34-18-14 6-22 12-27 22z" fill="url(#tsfe1s)" style="animation-delay: -10s;"></path><path d="M30 44V18l6 4v22z" fill="#0a1628" opacity=".7" style="animation-delay: -10s;"></path></svg><svg class="lm-d" width="38" height="38" viewBox="0 0 48 48" aria-hidden="true" style="animation-delay: -10s;"><defs style="animation-delay: -10s;"><linearGradient id="tsfe1ds" x1="0" y1="0" x2="1" y2="0" style="animation-delay: -10s;"><stop offset="0" stop-color="#ff9a3d" style="animation-delay: -10s;"></stop><stop offset="1" stop-color="#ff5f00" style="animation-delay: -10s;"></stop></linearGradient></defs><path d="M20 44V12l8-6v38z" fill="#ffffff" style="animation-delay: -10s;"></path><path d="M8 40c6-10 14-16 34-18-14 6-22 12-27 22z" fill="url(#tsfe1ds)" style="animation-delay: -10s;"></path><path d="M30 44V18l6 4v22z" fill="#ffffff" opacity=".7" style="animation-delay: -10s;"></path></svg><span style="font-weight: 800; font-size: 22px; letter-spacing: -0.04em; animation-delay: -10s;">Deed<span style="color: var(--acct); animation-delay: -10s;">Flow</span></span>
+</a>
+<nav class="hide-m" aria-label="Main" style="display: flex; gap: 28px; font-size: 14.5px; font-weight: 500; animation-delay: -10s;">
+<a class="nl" data-on="1" href="Features.dc.html" style="animation-delay: -10s;">Product</a>
+<a class="nl" href="Compliance.dc.html" style="animation-delay: -10s;">Compliance</a>
+<a class="nl" href="Partners.dc.html" style="animation-delay: -10s;">Channel partners</a>
+<a class="nl" href="Pricing.dc.html" style="animation-delay: -10s;">Pricing</a>
+<a class="nl" href="Contact.dc.html" style="animation-delay: -10s;">Company</a>
+</nav>
+<div style="margin-left: auto; display: flex; gap: 10px; align-items: center; animation-delay: -10s;">
+<button class="ic" aria-label="Switch to dark theme" style="animation-delay: -10s;">
+
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="animation-delay: -10s;"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" style="animation-delay: -10s;"></path></svg>
+</button>
+<div class="hide-m" style="position: relative; animation-delay: -10s;">
+<button class="nl" aria-haspopup="true" aria-expanded="false" style="background: none; border: 0px; cursor: pointer; font-family: inherit; font-weight: 600; font-size: 14.5px; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; animation-delay: -10s;">Log in<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate(0deg); transition: transform 0.25s; animation-delay: -10s;"><path d="M6 9l6 6 6-6" style="animation-delay: -10s;"></path></svg></button>
+
+</div>
+<a class="nl hide-m" href="Contact.dc.html" style="font-weight: 600; font-size: 14.5px; animation-delay: -10s;">Book a demo</a>
+<a class="bp" href="Signup.dc.html" style="padding: 11px 18px; font-size: 14.5px; animation-delay: -10s;">Start free trial</a>
+</div>
+</div>
+</header>
+
+<!-- HERO -->
+<section style="position: relative; padding: 96px 24px 56px; overflow: hidden; animation-delay: -10s;">
+<div class="grid-bg" aria-hidden="true" style="position: absolute; inset: 0px; opacity: 0.7; animation-delay: -10s;"></div>
+<div style="position: relative; max-width: 1240px; margin: 0px auto; display: flex; flex-direction: column; gap: 24px; animation-delay: -10s;">
+<span class="eyebrow in" style="animation-delay: -10s;">Product</span>
+<h1 class="in d1" style="margin: 0px; font-size: clamp(40px, 6vw, 76px); line-height: 1; letter-spacing: -0.045em; font-weight: 800; max-width: 980px; text-wrap: balance; animation-delay: -10s;">Every module a developer's sales floor needs. Try them right here.</h1>
+<p class="lead in d2" style="max-width: 680px; font-size: 19px; animation-delay: -10s;">Each section below is a working slice of the product. Pick a lead, place a call, hold a unit, build a cost sheet.</p>
+<nav class="in d3" aria-label="Modules" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; animation-delay: -10s;">
+
+<a href="#leads" class="chip" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; animation-delay: -10s;"><span class="mono" style="font-size: 11px; color: var(--acct); animation-delay: -10s;">01</span>Leads &amp; scoring</a>
+
+<a href="#presales" class="chip" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; animation-delay: -10s;"><span class="mono" style="font-size: 11px; color: var(--acct); animation-delay: -10s;">02</span>Presales</a>
+
+<a href="#visits" class="chip" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; animation-delay: -10s;"><span class="mono" style="font-size: 11px; color: var(--acct); animation-delay: -10s;">03</span>Site visits</a>
+
+<a href="#inventory" class="chip" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; animation-delay: -10s;"><span class="mono" style="font-size: 11px; color: var(--acct); animation-delay: -10s;">04</span>Inventory</a>
+
+<a href="#pricing" class="chip" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; animation-delay: -10s;"><span class="mono" style="font-size: 11px; color: var(--acct); animation-delay: -10s;">05</span>Pricing engine</a>
+
+<a href="#bookings" class="chip" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; animation-delay: -10s;"><span class="mono" style="font-size: 11px; color: var(--acct); animation-delay: -10s;">06</span>Bookings</a>
+
+<a href="#payments" class="chip" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; animation-delay: -10s;"><span class="mono" style="font-size: 11px; color: var(--acct); animation-delay: -10s;">07</span>Payments</a>
+
+</nav>
+</div>
+</section>
+
+<!-- 01 LEADS -->
+<section id="leads" style="padding: 72px 24px; animation-delay: -10s;">
+<div style="max-width: 1240px; margin: 0px auto; display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start; animation-delay: -10s;">
+<div class="rv" style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 18px; min-width: 0px; animation-delay: -10s;">
+<span class="eyebrow" style="animation-delay: -10s;">01 · Lead capture &amp; scoring</span>
+<h2 class="h2" style="animation-delay: -10s;">Rule score and AI score, side by side. You decide who to trust.</h2>
+<p class="lead" style="animation-delay: -10s;">Leads from 99acres, MagicBricks, Housing, IndiaMART, Meta and Google lead ads are deduplicated at capture, then scored twice. Your rules stay in charge; the AI score gives a second opinion.</p>
+<div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px; animation-delay: -10s;">
+
+<button class="sel" data-on="1" style="animation-delay: -10s;">
+<span style="width: 36px; height: 36px; flex: 0 0 auto; border-radius: 50%; background: var(--bg2); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--mut); animation-delay: -10s;">PS</span>
+<span style="flex: 1 1 0%; display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 650; font-size: 14.5px; animation-delay: -10s;">Priya Sharma</span><span style="font-size: 12.5px; color: var(--sub); animation-delay: -10s;">99acres · 3 BHK, ₹1 Cr</span></span>
+<span class="pill p-hot" style="animation-delay: -10s;">HOT</span>
+</button>
+
+<button class="sel" data-on="0" style="animation-delay: -10s;">
+<span style="width: 36px; height: 36px; flex: 0 0 auto; border-radius: 50%; background: var(--bg2); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--mut); animation-delay: -10s;">KR</span>
+<span style="flex: 1 1 0%; display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 650; font-size: 14.5px; animation-delay: -10s;">Kavya Reddy</span><span style="font-size: 12.5px; color: var(--sub); animation-delay: -10s;">Housing · 2 BHK, ₹70 L</span></span>
+<span class="pill p-warn" style="animation-delay: -10s;">WARM</span>
+</button>
+
+<button class="sel" data-on="0" style="animation-delay: -10s;">
+<span style="width: 36px; height: 36px; flex: 0 0 auto; border-radius: 50%; background: var(--bg2); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--mut); animation-delay: -10s;">NK</span>
+<span style="flex: 1 1 0%; display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 650; font-size: 14.5px; animation-delay: -10s;">Neha Kulkarni</span><span style="font-size: 12.5px; color: var(--sub); animation-delay: -10s;">MagicBricks · 3 BHK, ₹1.1 Cr</span></span>
+<span class="pill p-hot" style="animation-delay: -10s;">HOT</span>
+</button>
+
+<button class="sel" data-on="0" style="animation-delay: -10s;">
+<span style="width: 36px; height: 36px; flex: 0 0 auto; border-radius: 50%; background: var(--bg2); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--mut); animation-delay: -10s;">RI</span>
+<span style="flex: 1 1 0%; display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 650; font-size: 14.5px; animation-delay: -10s;">Rohan Iyer</span><span style="font-size: 12.5px; color: var(--sub); animation-delay: -10s;">Google ads · 1 BHK, ₹45 L</span></span>
+<span class="pill p-mut" style="animation-delay: -10s;">COLD</span>
+</button>
+
+</div>
+</div>
+<div class="rv" style="flex: 1.3 1 520px; min-width: 0px; animation-delay: -10s;">
+<div class="card swap" style="padding: 28px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 24px; animation-delay: -10s;">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; animation-delay: -10s;"><span style="font-weight: 750; font-size: 18px; animation-delay: -10s;">Priya Sharma</span><span style="font-size: 13px; color: var(--sub); animation-delay: -10s;">99acres · captured 2 min ago</span></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px; animation-delay: -10s;">
+<div style="border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: flex; align-items: center; gap: 18px; animation-delay: -10s;">
+<svg width="84" height="84" viewBox="0 0 84 84" role="img" aria-label="Rule score 72" style="animation-delay: -10s;"><circle cx="42" cy="42" r="34" fill="none" stroke="var(--line)" stroke-width="8" style="animation-delay: -10s;"></circle><circle cx="42" cy="42" r="34" fill="none" stroke="var(--sub)" stroke-width="8" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="59.80800000000001" transform="rotate(-90 42 42)" style="transition: stroke-dashoffset 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); animation-delay: -10s;"></circle><text x="42" y="48" text-anchor="middle" font-size="20" font-weight="800" fill="var(--ink)" font-family="Inter" style="animation-delay: -10s;">72</text></svg>
+<div style="display: flex; flex-direction: column; gap: 4px; animation-delay: -10s;"><span style="font-weight: 700; animation-delay: -10s;">Rule score</span><span style="font-size: 13px; color: var(--sub); line-height: 1.45; animation-delay: -10s;">From the weights your sales head configured</span></div>
+</div>
+<div style="border: 1px solid color-mix(in oklab, #ff5f00 45%, var(--line)); border-radius: 16px; padding: 20px; display: flex; align-items: center; gap: 18px; background: color-mix(in oklab, #ff5f00 4%, var(--surf)); animation-delay: -10s;">
+<svg width="84" height="84" viewBox="0 0 84 84" role="img" aria-label="AI score 88" style="animation-delay: -10s;"><circle cx="42" cy="42" r="34" fill="none" stroke="var(--line)" stroke-width="8" style="animation-delay: -10s;"></circle><circle cx="42" cy="42" r="34" fill="none" stroke="#ff5f00" stroke-width="8" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="25.631999999999998" transform="rotate(-90 42 42)" style="transition: stroke-dashoffset 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); animation-delay: -10s;"></circle><text x="42" y="48" text-anchor="middle" font-size="20" font-weight="800" fill="var(--ink)" font-family="Inter" style="animation-delay: -10s;">88</text></svg>
+<div style="display: flex; flex-direction: column; gap: 4px; animation-delay: -10s;"><span style="font-weight: 700; animation-delay: -10s;">AI score</span><span style="font-size: 13px; color: var(--sub); line-height: 1.45; animation-delay: -10s;">Independent read of behaviour and intent</span></div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; animation-delay: -10s;">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--sub); animation-delay: -10s;">WHY THIS SCORE</span>
+
+<div style="display: flex; align-items: center; gap: 12px; font-size: 14px; animation-delay: -10s;">
+<span class="pill p-mut" style="width: 38px; justify-content: center; animation-delay: -10s;">R</span>
+<span style="flex: 1 1 0%; animation-delay: -10s;">Budget fits available inventory</span>
+<span style="width: 120px; height: 6px; border-radius: 6px; background: var(--bg2); overflow: hidden; animation-delay: -10s;" class="hide-m"><span style="display: block; height: 100%; width: 85%; background: var(--sub); border-radius: 6px; transition: width 0.6s; animation-delay: -10s;"></span></span>
+<span class="mono" style="width: 34px; text-align: right; font-weight: 600; animation-delay: -10s;">+25</span>
+</div>
+
+<div style="display: flex; align-items: center; gap: 12px; font-size: 14px; animation-delay: -10s;">
+<span class="pill p-mut" style="width: 38px; justify-content: center; animation-delay: -10s;">R</span>
+<span style="flex: 1 1 0%; animation-delay: -10s;">Premium listing source</span>
+<span style="width: 120px; height: 6px; border-radius: 6px; background: var(--bg2); overflow: hidden; animation-delay: -10s;" class="hide-m"><span style="display: block; height: 100%; width: 51%; background: var(--sub); border-radius: 6px; transition: width 0.6s; animation-delay: -10s;"></span></span>
+<span class="mono" style="width: 34px; text-align: right; font-weight: 600; animation-delay: -10s;">+15</span>
+</div>
+
+<div style="display: flex; align-items: center; gap: 12px; font-size: 14px; animation-delay: -10s;">
+<span class="pill p-hot" style="width: 38px; justify-content: center; animation-delay: -10s;">AI</span>
+<span style="flex: 1 1 0%; animation-delay: -10s;">Viewed floor plans 4 times in 48h</span>
+<span style="width: 120px; height: 6px; border-radius: 6px; background: var(--bg2); overflow: hidden; animation-delay: -10s;" class="hide-m"><span style="display: block; height: 100%; width: 61.2%; background: rgb(255, 95, 0); border-radius: 6px; transition: width 0.6s; animation-delay: -10s;"></span></span>
+<span class="mono" style="width: 34px; text-align: right; font-weight: 600; animation-delay: -10s;">+18</span>
+</div>
+
+<div style="display: flex; align-items: center; gap: 12px; font-size: 14px; animation-delay: -10s;">
+<span class="pill p-hot" style="width: 38px; justify-content: center; animation-delay: -10s;">AI</span>
+<span style="flex: 1 1 0%; animation-delay: -10s;">Responds in evenings</span>
+<span style="width: 120px; height: 6px; border-radius: 6px; background: var(--bg2); overflow: hidden; animation-delay: -10s;" class="hide-m"><span style="display: block; height: 100%; width: 40.8%; background: rgb(255, 95, 0); border-radius: 6px; transition: width 0.6s; animation-delay: -10s;"></span></span>
+<span class="mono" style="width: 34px; text-align: right; font-weight: 600; animation-delay: -10s;">+12</span>
+</div>
+
+</div>
+<div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 14px; background: var(--bg2); font-size: 14px; animation-delay: -10s;"><span class="pill p-hot" style="animation-delay: -10s;">HOT</span><span style="color: var(--mut); animation-delay: -10s;">Call within 15 minutes. Suggest a weekend visit to Tower B.</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 02 PRESALES -->
+<section id="presales" style="padding: 72px 24px; background: var(--bg2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); animation-delay: -10s;">
+<div style="max-width: 1240px; margin: 0px auto; display: flex; flex-wrap: wrap-reverse; gap: 56px; align-items: center; animation-delay: -10s;">
+<div class="rv" style="flex: 1.2 1 520px; min-width: 0px; display: flex; flex-wrap: wrap; gap: 18px; animation-delay: -10s;">
+<div class="card" style="flex: 1 1 260px; padding: 24px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 18px; align-items: center; text-align: center; animation-delay: -10s;">
+<span class="pill p-blue" style="animation-delay: -10s;">Ready to call</span>
+<span style="width: 64px; height: 64px; border-radius: 50%; background: var(--accsoft); color: var(--acct); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; animation-delay: -10s;">VS</span>
+<span style="display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 750; font-size: 18px; animation-delay: -10s;">Vikram Singh</span><span class="mono" style="font-size: 13px; color: var(--sub); animation-delay: -10s;">+91 98XXX XX214 · HOT</span></span>
+<span class="mono" style="font-size: 30px; font-weight: 600; letter-spacing: 0.02em; animation-delay: -10s;">00:00</span>
+<div class="bar" aria-hidden="true" style="display: flex; align-items: flex-end; gap: 3px; height: 26px; opacity: 0.2; animation-delay: -10s;">
+<span style="height: 60%; animation-delay: -10s;"></span><span style="height: 100%; animation-delay: -10s;"></span><span style="height: 70%; animation-delay: -10s;"></span><span style="height: 90%; animation-delay: -10s;"></span><span style="height: 50%; animation-delay: -10s;"></span><span style="height: 80%; animation-delay: -10s;"></span><span style="height: 100%; animation-delay: -10s;"></span><span style="height: 60%; animation-delay: -10s;"></span><span style="height: 85%; animation-delay: -10s;"></span><span style="height: 70%; animation-delay: -10s;"></span><span style="height: 95%; animation-delay: -10s;"></span><span style="height: 55%; animation-delay: -10s;"></span>
+</div>
+<button class="callbtn cb-go" aria-label="Start call" style="animation-delay: -10s;"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="transform: rotate(0deg); transition: transform 0.3s; animation-delay: -10s;"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z" style="animation-delay: -10s;"></path></svg></button>
+<span style="font-size: 12px; color: var(--sub); animation-delay: -10s;">Recording starts only after consent is captured</span>
+</div>
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 18px; min-width: 0px; animation-delay: -10s;">
+<div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 14px; animation-delay: -10s;">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--sub); animation-delay: -10s;">DISPOSITION</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; animation-delay: -10s;">
+
+<button class="chip" data-on="0" style="animation-delay: -10s;">Site visit booked</button>
+
+<button class="chip" data-on="0" style="animation-delay: -10s;">Call back</button>
+
+<button class="chip" data-on="0" style="animation-delay: -10s;">Send cost sheet</button>
+
+<button class="chip" data-on="0" style="animation-delay: -10s;">Not interested</button>
+
+<button class="chip" data-on="0" style="animation-delay: -10s;">Wrong number</button>
+
+<button class="chip" data-on="0" style="animation-delay: -10s;">Already bought</button>
+
+</div>
+<span style="font-size: 13px; color: var(--mut); animation-delay: -10s;">One tap logs the outcome and creates the follow-up.</span>
+</div>
+<div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 12px; animation-delay: -10s;">
+<div style="display: flex; justify-content: space-between; align-items: center; animation-delay: -10s;"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--sub); animation-delay: -10s;">AI CALL ANALYSIS</span><span class="pill p-mut" style="animation-delay: -10s;">Idle</span></div>
+
+<div style="font-size: 13.5px; color: var(--sub); animation-delay: -10s;">End the call to see the analysis land on the lead.</div>
+</div>
+</div>
+</div>
+<div class="rv" style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 18px; min-width: 0px; animation-delay: -10s;">
+<span class="eyebrow" style="animation-delay: -10s;">02 · Presales &amp; call centre</span>
+<h2 class="h2" style="animation-delay: -10s;">A call centre in a browser tab.</h2>
+<p class="lead" style="animation-delay: -10s;">Browser softphone, click-to-call from any lead, consented recording, dispositions and a live queue. When the call ends, AI analysis is written straight onto the lead.</p>
+<p style="margin: 0px; font-size: 14.5px; color: var(--sub); animation-delay: -10s;">Try it: press the call button, then end the call and pick a disposition.</p>
+</div>
+</div>
+</section>
+
+<!-- 03 SITE VISITS -->
+<section id="visits" style="padding: 96px 24px 72px; animation-delay: -10s;">
+<div style="max-width: 1240px; margin: 0px auto; display: flex; flex-direction: column; gap: 44px; animation-delay: -10s;">
+<div class="rv" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px; animation-delay: -10s;">
+<div style="display: flex; flex-direction: column; gap: 16px; max-width: 680px; animation-delay: -10s;"><span class="eyebrow" style="animation-delay: -10s;">03 · Site visits</span><h2 class="h2" style="animation-delay: -10s;">Reminders at T-1 day and T-2 hours. Feedback before the car leaves.</h2></div>
+<p class="lead" style="max-width: 420px; animation-delay: -10s;">No-shows drop when buyers are reminded at the right time. Structured feedback makes the next call specific.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 18px; animation-delay: -10s;">
+<div class="card rv" style="flex: 1 1 520px; min-width: 0px; padding: 32px; display: flex; flex-direction: column; gap: 0px; animation-delay: -10s;">
+
+<div style="display: flex; gap: 18px; animation-delay: -10s;">
+<div style="display: flex; flex-direction: column; align-items: center; animation-delay: -10s;"><span style="width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgb(255, 95, 0); color: rgb(10, 22, 40); font-size: 12px; font-weight: 700; flex: 0 0 auto; animation-delay: -10s;">1</span><span style="width: 2px; flex: 1 1 0%; min-height: 26px; background: rgb(255, 95, 0); animation-delay: -10s;"></span></div>
+<div style="padding-bottom: 22px; display: flex; flex-direction: column; gap: 4px; flex: 1 1 0%; animation-delay: -10s;"><span style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; animation-delay: -10s;"><span style="font-weight: 700; font-size: 15.5px; animation-delay: -10s;">Visit booked by presales</span><span class="mono" style="font-size: 12.5px; color: var(--sub); animation-delay: -10s;">Thu 4:12 PM</span></span><span style="font-size: 14px; color: var(--mut); animation-delay: -10s;">Linked to lead, project and executive</span></div>
+</div>
+
+<div style="display: flex; gap: 18px; animation-delay: -10s;">
+<div style="display: flex; flex-direction: column; align-items: center; animation-delay: -10s;"><span style="width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgb(255, 95, 0); color: rgb(10, 22, 40); font-size: 12px; font-weight: 700; flex: 0 0 auto; animation-delay: -10s;">2</span><span style="width: 2px; flex: 1 1 0%; min-height: 26px; background: rgb(255, 95, 0); animation-delay: -10s;"></span></div>
+<div style="padding-bottom: 22px; display: flex; flex-direction: column; gap: 4px; flex: 1 1 0%; animation-delay: -10s;"><span style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; animation-delay: -10s;"><span style="font-weight: 700; font-size: 15.5px; animation-delay: -10s;">T-1 day reminder</span><span class="mono" style="font-size: 12.5px; color: var(--sub); animation-delay: -10s;">Fri 11:00 AM</span></span><span style="font-size: 14px; color: var(--mut); animation-delay: -10s;">WhatsApp and SMS with location pin</span></div>
+</div>
+
+<div style="display: flex; gap: 18px; animation-delay: -10s;">
+<div style="display: flex; flex-direction: column; align-items: center; animation-delay: -10s;"><span style="width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--accsoft); color: var(--acct); font-size: 12px; font-weight: 700; flex: 0 0 auto; animation-delay: -10s;">3</span><span style="width: 2px; flex: 1 1 0%; min-height: 26px; background: var(--line); animation-delay: -10s;"></span></div>
+<div style="padding-bottom: 22px; display: flex; flex-direction: column; gap: 4px; flex: 1 1 0%; animation-delay: -10s;"><span style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; animation-delay: -10s;"><span style="font-weight: 700; font-size: 15.5px; animation-delay: -10s;">T-2 hour reminder</span><span class="mono" style="font-size: 12.5px; color: var(--sub); animation-delay: -10s;">Sat 9:00 AM</span></span><span style="font-size: 14px; color: var(--mut); animation-delay: -10s;">Confirms the buyer is on the way</span></div>
+</div>
+
+<div style="display: flex; gap: 18px; animation-delay: -10s;">
+<div style="display: flex; flex-direction: column; align-items: center; animation-delay: -10s;"><span style="width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--bg2); color: var(--sub); font-size: 12px; font-weight: 700; flex: 0 0 auto; animation-delay: -10s;">4</span><span style="width: 2px; flex: 1 1 0%; min-height: 26px; background: var(--line); animation-delay: -10s;"></span></div>
+<div style="padding-bottom: 22px; display: flex; flex-direction: column; gap: 4px; flex: 1 1 0%; animation-delay: -10s;"><span style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; animation-delay: -10s;"><span style="font-weight: 700; font-size: 15.5px; animation-delay: -10s;">Visit at site office</span><span class="mono" style="font-size: 12.5px; color: var(--sub); animation-delay: -10s;">Sat 11:00 AM</span></span><span style="font-size: 14px; color: var(--mut); animation-delay: -10s;">Executive checks in at the site</span></div>
+</div>
+
+<div style="display: flex; gap: 18px; animation-delay: -10s;">
+<div style="display: flex; flex-direction: column; align-items: center; animation-delay: -10s;"><span style="width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--bg2); color: var(--sub); font-size: 12px; font-weight: 700; flex: 0 0 auto; animation-delay: -10s;">5</span><span style="width: 2px; flex: 1 1 0%; min-height: 26px; background: transparent; animation-delay: -10s;"></span></div>
+<div style="padding-bottom: 22px; display: flex; flex-direction: column; gap: 4px; flex: 1 1 0%; animation-delay: -10s;"><span style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; animation-delay: -10s;"><span style="font-weight: 700; font-size: 15.5px; animation-delay: -10s;">Structured feedback</span><span class="mono" style="font-size: 12.5px; color: var(--sub); animation-delay: -10s;">Before leaving site</span></span><span style="font-size: 14px; color: var(--mut); animation-delay: -10s;">Liked, objections, next step</span></div>
+</div>
+
+</div>
+<div class="card rv" style="flex: 1 1 420px; min-width: 0px; padding: 32px; display: flex; flex-direction: column; gap: 20px; animation-delay: -10s;">
+<div style="display: flex; justify-content: space-between; align-items: center; animation-delay: -10s;"><span style="font-weight: 750; font-size: 17px; animation-delay: -10s;">Visit feedback · Priya Sharma</span><span class="pill p-blue" style="animation-delay: -10s;">Tower B</span></div>
+<div style="display: flex; flex-direction: column; gap: 10px; animation-delay: -10s;"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--sub); animation-delay: -10s;">LIKED</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; animation-delay: -10s;"><button class="chip" data-on="1" style="animation-delay: -10s;">Layout</button><button class="chip" data-on="1" style="animation-delay: -10s;">View</button><button class="chip" data-on="0" style="animation-delay: -10s;">Amenities</button><button class="chip" data-on="0" style="animation-delay: -10s;">Location</button></div></div>
+<div style="display: flex; flex-direction: column; gap: 10px; animation-delay: -10s;"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--sub); animation-delay: -10s;">OBJECTIONS</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; animation-delay: -10s;"><button class="chip" data-on="0" style="animation-delay: -10s;">Price</button><button class="chip" data-on="1" style="animation-delay: -10s;">Possession date</button><button class="chip" data-on="0" style="animation-delay: -10s;">Floor</button><button class="chip" data-on="0" style="animation-delay: -10s;">Parking</button></div></div>
+<div style="margin-top: auto; padding: 16px; border-radius: 14px; background: var(--bg2); display: flex; flex-direction: column; gap: 6px; animation-delay: -10s;"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--sub); animation-delay: -10s;">AUTO NEXT STEP</span><span style="font-size: 14.5px; font-weight: 600; animation-delay: -10s;">Share RERA possession timeline and construction updates.</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 04 INVENTORY -->
+<section id="inventory" style="padding: 72px 24px; animation-delay: -10s;">
+<div style="max-width: 1240px; margin: 0px auto; display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start; animation-delay: -10s;">
+<div class="rv" style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 18px; min-width: 0px; animation-delay: -10s;">
+<span class="eyebrow" style="animation-delay: -10s;">04 · Inventory</span>
+<h2 class="h2" style="animation-delay: -10s;">Project › Tower › Floor › Unit. Live, for everyone.</h2>
+<p class="lead" style="animation-delay: -10s;">Generate a whole tower in bulk, then watch availability change as holds are placed and bookings land. Holds expire on their own, so stale blocks never freeze stock.</p>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0px, 1fr)); gap: 10px; font-size: 13.5px; margin-top: 6px; animation-delay: -10s;">
+<span style="display: flex; align-items: center; gap: 8px; animation-delay: -10s;"><span class="u-av" style="width: 16px; height: 16px; border-radius: 5px; animation-delay: -10s;"></span>Available</span>
+<span style="display: flex; align-items: center; gap: 8px; animation-delay: -10s;"><span class="u-hold" style="width: 16px; height: 16px; border-radius: 5px; animation-delay: -10s;"></span>On hold</span>
+<span style="display: flex; align-items: center; gap: 8px; animation-delay: -10s;"><span class="u-bk" style="width: 16px; height: 16px; border-radius: 5px; animation-delay: -10s;"></span>Booked</span>
+<span style="display: flex; align-items: center; gap: 8px; animation-delay: -10s;"><span class="u-bl" style="width: 16px; height: 16px; border-radius: 5px; border: 1px solid var(--line); animation-delay: -10s;"></span>Blocked by management</span>
+</div>
+</div>
+<div class="rv" style="flex: 1.5 1 600px; min-width: 0px; animation-delay: -10s;">
+<div class="card" style="box-shadow: var(--shadow); overflow: hidden; animation-delay: -10s;">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--line); animation-delay: -10s;">
+<span style="font-weight: 750; animation-delay: -10s;">Skyline Residences</span>
+<div role="tablist" aria-label="Towers" style="display: flex; gap: 4px; background: var(--bg2); padding: 4px; border-radius: 12px; animation-delay: -10s;">
+<button class="tab" role="tab" data-on="0" style="padding: 6px 14px; min-height: 36px; animation-delay: -10s;">Tower A</button><button class="tab" role="tab" data-on="1" style="padding: 6px 14px; min-height: 36px; animation-delay: -10s;">Tower B</button><button class="tab" role="tab" data-on="0" style="padding: 6px 14px; min-height: 36px; animation-delay: -10s;">Tower C</button>
+</div>
+<span style="margin-left: auto; font-size: 13px; color: var(--sub); animation-delay: -10s;">28 available · 7 on hold · 22 booked</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; animation-delay: -10s;">
+<div style="flex: 1.4 1 340px; padding: 20px; display: flex; flex-direction: column; gap: 6px; min-width: 0px; animation-delay: -10s;">
+
+<div style="display: grid; grid-template-columns: 34px repeat(6, minmax(0px, 1fr)); gap: 6px; align-items: center; animation-delay: -10s;">
+<span class="mono" style="font-size: 11px; color: var(--sub); animation-delay: -10s;">F12</span>
+<button class="unit u-bk" data-on="0" aria-label="Unit B-1201, Booked" style="animation-delay: -10s;">1201</button><button class="unit u-av" data-on="0" aria-label="Unit B-1202, Available" style="animation-delay: -10s;">1202</button><button class="unit u-av" data-on="0" aria-label="Unit B-1203, Available" style="animation-delay: -10s;">1203</button><button class="unit u-bk" data-on="1" aria-label="Unit B-1204, Booked" style="animation-delay: -10s;">1204</button><button class="unit u-bk" data-on="0" aria-label="Unit B-1205, Booked" style="animation-delay: -10s;">1205</button><button class="unit u-av" data-on="0" aria-label="Unit B-1206, Available" style="animation-delay: -10s;">1206</button>
+</div>
+
+<div style="display: grid; grid-template-columns: 34px repeat(6, minmax(0px, 1fr)); gap: 6px; align-items: center; animation-delay: -10s;">
+<span class="mono" style="font-size: 11px; color: var(--sub); animation-delay: -10s;">F11</span>
+<button class="unit u-av" data-on="0" aria-label="Unit B-1101, Available" style="animation-delay: -10s;">1101</button><button class="unit u-hold" data-on="0" aria-label="Unit B-1102, On hold" style="animation-delay: -10s;">1102</button><button class="unit u-bk" data-on="0" aria-label="Unit B-1103, Booked" style="animation-delay: -10s;">1103</button><button class="unit u-av" data-on="0" aria-label="Unit B-1104, Available" style="animation-delay: -10s;">1104</button><button class="unit u-av" data-on="0" aria-label="Unit B-1105, Available" style="animation-delay: -10s;">1105</button><button class="unit u-hold" data-on="0" aria-label="Unit B-1106, On hold" style="animation-delay: -10s;">1106</button>
+</div>
+
+<div style="display: grid; grid-template-columns: 34px repeat(6, minmax(0px, 1fr)); gap: 6px; align-items: center; animation-delay: -10s;">
+<span class="mono" style="font-size: 11px; color: var(--sub); animation-delay: -10s;">F10</span>
+<button class="unit u-bk" data-on="0" aria-label="Unit B-1001, Booked" style="animation-delay: -10s;">1001</button><button class="unit u-bl" data-on="0" aria-label="Unit B-1002, Blocked" style="animation-delay: -10s;">1002</button><button class="unit u-av" data-on="0" aria-label="Unit B-1003, Available" style="animation-delay: -10s;">1003</button><button class="unit u-av" data-on="0" aria-label="Unit B-1004, Available" style="animation-delay: -10s;">1004</button><button class="unit u-bk" data-on="0" aria-label="Unit B-1005, Booked" style="animation-delay: -10s;">1005</button><button class="unit u-bk" data-on="0" aria-label="Unit B-1006, Booked" style="animation-delay: -10s;">1006</button>
+</div>
+
+<div style="display: grid; grid-template-columns: 34px repeat(6, minmax(0px, 1fr)); gap: 6px; align-items: center; animation-delay: -10s;">
+<span class="mono" style="font-size: 11px; color: var(--sub); animation-delay: -10s;">F9</span>
+<button class="unit u-av" data-on="0" aria-label="Unit B-0901, Available" style="animation-delay: -10s;">0901</button><button class="unit u-av" data-on="0" aria-label="Unit B-0902, Available" style="animation-delay: -10s;">0902</button><button class="unit u-bk" data-on="0" aria-label="Unit B-0903, Booked" style="animation-delay: -10s;">0903</button><button class="unit u-bk" data-on="0" aria-label="Unit B-0904, Booked" style="animation-delay: -10s;">0904</button><button class="unit u-av" data-on="0" aria-label="Unit B-0905, Available" style="animation-delay: -10s;">0905</button><button class="unit u-av" data-on="0" aria-label="Unit B-0906, Available" style="animation-delay: -10s;">0906</button>
+</div>
+
+<div style="display: grid; grid-template-columns: 34px repeat(6, minmax(0px, 1fr)); gap: 6px; align-items: center; animation-delay: -10s;">
+<span class="mono" style="font-size: 11px; color: var(--sub); animation-delay: -10s;">F8</span>
+<button class="unit u-hold" data-on="0" aria-label="Unit B-0801, On hold" style="animation-delay: -10s;">0801</button><button class="unit u-bk" data-on="0" aria-label="Unit B-0802, Booked" style="animation-delay: -10s;">0802</button><button class="unit u-av" data-on="0" aria-label="Unit B-0803, Available" style="animation-delay: -10s;">0803</button><button class="unit u-av" data-on="0" aria-label="Unit B-0804, Available" style="animation-delay: -10s;">0804</button><button class="unit u-hold" data-on="0" aria-label="Unit B-0805, On hold" style="animation-delay: -10s;">0805</button><button class="unit u-bk" data-on="0" aria-label="Unit B-0806, Booked" style="animation-delay: -10s;">0806</button>
+</div>
+
+<div style="display: grid; grid-template-columns: 34px repeat(6, minmax(0px, 1fr)); gap: 6px; align-items: center; animation-delay: -10s;">
+<span class="mono" style="font-size: 11px; color: var(--sub); animation-delay: -10s;">F7</span>
+<button class="unit u-bl" data-on="0" aria-label="Unit B-0701, Blocked" style="animation-delay: -10s;">0701</button><button class="unit u-av" data-on="0" aria-label="Unit B-0702, Available" style="animation-delay: -10s;">0702</button><button class="unit u-av" data-on="0" aria-label="Unit B-0703, Available" style="animation-delay: -10s;">0703</button><button class="unit u-bk" data-on="0" aria-label="Unit B-0704, Booked" style="animation-delay: -10s;">0704</button><button class="unit u-bk" data-on="0" aria-label="Unit B-0705, Booked" style="animation-delay: -10s;">0705</button><button class="unit u-av" data-on="0" aria-label="Unit B-0706, Available" style="animation-delay: -10s;">0706</button>
+</div>
+
+<div style="display: grid; grid-template-columns: 34px repeat(6, minmax(0px, 1fr)); gap: 6px; align-items: center; animation-delay: -10s;">
+<span class="mono" style="font-size: 11px; color: var(--sub); animation-delay: -10s;">F6</span>
+<button class="unit u-av" data-on="0" aria-label="Unit B-0601, Available" style="animation-delay: -10s;">0601</button><button class="unit u-bk" data-on="0" aria-label="Unit B-0602, Booked" style="animation-delay: -10s;">0602</button><button class="unit u-bk" data-on="0" aria-label="Unit B-0603, Booked" style="animation-delay: -10s;">0603</button><button class="unit u-av" data-on="0" aria-label="Unit B-0604, Available" style="animation-delay: -10s;">0604</button><button class="unit u-av" data-on="0" aria-label="Unit B-0605, Available" style="animation-delay: -10s;">0605</button><button class="unit u-hold" data-on="0" aria-label="Unit B-0606, On hold" style="animation-delay: -10s;">0606</button>
+</div>
+
+<div style="display: grid; grid-template-columns: 34px repeat(6, minmax(0px, 1fr)); gap: 6px; align-items: center; animation-delay: -10s;">
+<span class="mono" style="font-size: 11px; color: var(--sub); animation-delay: -10s;">F5</span>
+<button class="unit u-bk" data-on="0" aria-label="Unit B-0501, Booked" style="animation-delay: -10s;">0501</button><button class="unit u-av" data-on="0" aria-label="Unit B-0502, Available" style="animation-delay: -10s;">0502</button><button class="unit u-av" data-on="0" aria-label="Unit B-0503, Available" style="animation-delay: -10s;">0503</button><button class="unit u-hold" data-on="0" aria-label="Unit B-0504, On hold" style="animation-delay: -10s;">0504</button><button class="unit u-bk" data-on="0" aria-label="Unit B-0505, Booked" style="animation-delay: -10s;">0505</button><button class="unit u-bl" data-on="0" aria-label="Unit B-0506, Blocked" style="animation-delay: -10s;">0506</button>
+</div>
+
+<div style="display: grid; grid-template-columns: 34px repeat(6, minmax(0px, 1fr)); gap: 6px; align-items: center; animation-delay: -10s;">
+<span class="mono" style="font-size: 11px; color: var(--sub); animation-delay: -10s;">F4</span>
+<button class="unit u-av" data-on="0" aria-label="Unit B-0401, Available" style="animation-delay: -10s;">0401</button><button class="unit u-av" data-on="0" aria-label="Unit B-0402, Available" style="animation-delay: -10s;">0402</button><button class="unit u-bk" data-on="0" aria-label="Unit B-0403, Booked" style="animation-delay: -10s;">0403</button><button class="unit u-bk" data-on="0" aria-label="Unit B-0404, Booked" style="animation-delay: -10s;">0404</button><button class="unit u-av" data-on="0" aria-label="Unit B-0405, Available" style="animation-delay: -10s;">0405</button><button class="unit u-av" data-on="0" aria-label="Unit B-0406, Available" style="animation-delay: -10s;">0406</button>
+</div>
+
+<div style="display: grid; grid-template-columns: 34px repeat(6, minmax(0px, 1fr)); gap: 6px; align-items: center; animation-delay: -10s;">
+<span class="mono" style="font-size: 11px; color: var(--sub); animation-delay: -10s;">F3</span>
+<button class="unit u-bk" data-on="0" aria-label="Unit B-0301, Booked" style="animation-delay: -10s;">0301</button><button class="unit u-bk" data-on="0" aria-label="Unit B-0302, Booked" style="animation-delay: -10s;">0302</button><button class="unit u-av" data-on="0" aria-label="Unit B-0303, Available" style="animation-delay: -10s;">0303</button><button class="unit u-av" data-on="0" aria-label="Unit B-0304, Available" style="animation-delay: -10s;">0304</button><button class="unit u-hold" data-on="0" aria-label="Unit B-0305, On hold" style="animation-delay: -10s;">0305</button><button class="unit u-bk" data-on="0" aria-label="Unit B-0306, Booked" style="animation-delay: -10s;">0306</button>
+</div>
+
+</div>
+<div class="swap" style="flex: 1 1 240px; min-width: 0px; padding: 22px; border-left: 1px solid var(--line); background: var(--surf2); display: flex; flex-direction: column; gap: 14px; animation-delay: -10s;">
+<span class="mono" style="font-size: 12px; color: var(--sub); animation-delay: -10s;">UNIT</span>
+<span style="font-size: 30px; font-weight: 800; letter-spacing: -0.03em; animation-delay: -10s;">B-1204</span>
+<span class="pill p-hot" style="align-self: flex-start; animation-delay: -10s;">Booked</span>
+<div style="display: flex; flex-direction: column; gap: 9px; font-size: 13.5px; border-top: 1px solid var(--line); padding-top: 14px; animation-delay: -10s;">
+<span style="display: flex; justify-content: space-between; animation-delay: -10s;"><span style="color: var(--mut); animation-delay: -10s;">Type</span><span style="font-weight: 600; animation-delay: -10s;">3 BHK</span></span>
+<span style="display: flex; justify-content: space-between; animation-delay: -10s;"><span style="color: var(--mut); animation-delay: -10s;">Carpet area</span><span class="mono" style="font-weight: 600; animation-delay: -10s;">1,480 sq ft</span></span>
+<span style="display: flex; justify-content: space-between; animation-delay: -10s;"><span style="color: var(--mut); animation-delay: -10s;">Facing</span><span style="font-weight: 600; animation-delay: -10s;">West</span></span>
+<span style="display: flex; justify-content: space-between; animation-delay: -10s;"><span style="color: var(--mut); animation-delay: -10s;">Floor</span><span style="font-weight: 600; animation-delay: -10s;">12</span></span>
+</div>
+<span style="font-size: 13px; color: var(--mut); animation-delay: -10s;">Booked. Linked to booking, cost sheet and payment plan.</span>
+<button class="bs" style="margin-top: auto; animation-delay: -10s;">View booking</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 05 PRICING ENGINE -->
+<section id="pricing" class="on-navy" style="padding: 104px 24px; position: relative; overflow: hidden; animation-delay: -10s;">
+<div class="grid-bg" aria-hidden="true" style="position: absolute; inset: 0px; opacity: 0.45; animation-delay: -10s;"></div>
+<div style="position: relative; max-width: 1240px; margin: 0px auto; display: flex; flex-direction: column; gap: 44px; animation-delay: -10s;">
+<div class="rv" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px; animation-delay: -10s;">
+<div style="display: flex; flex-direction: column; gap: 16px; max-width: 720px; animation-delay: -10s;"><span class="eyebrow" style="animation-delay: -10s;">05 · Pricing engine &amp; cost sheets</span><h2 class="h2" style="animation-delay: -10s;">The same price, every time. Then frozen.</h2></div>
+<p class="lead" style="max-width: 440px; animation-delay: -10s;">PLC, floor rise, facing premiums, offers and GST computed by one engine. Change the inputs below, then freeze the sheet.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 18px; animation-delay: -10s;">
+<div class="rv" style="flex: 1 1 400px; min-width: 0px; background: var(--surf); border: 1px solid var(--line); border-radius: 22px; padding: 28px; display: flex; flex-direction: column; gap: 24px; animation-delay: -10s;">
+<div style="display: flex; flex-direction: column; gap: 8px; animation-delay: -10s;"><label for="area" style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 600; animation-delay: -10s;"><span style="animation-delay: -10s;">Saleable area</span><span class="mono" style="animation-delay: -10s;">1450 sq ft</span></label><input id="area" type="range" min="850" max="2200" step="50" value="1450" style="animation-delay: -10s;"></div>
+<div style="display: flex; flex-direction: column; gap: 8px; animation-delay: -10s;"><label for="floor" style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 600; animation-delay: -10s;"><span style="animation-delay: -10s;">Floor</span><span class="mono" style="animation-delay: -10s;">12</span></label><input id="floor" type="range" min="1" max="24" step="1" value="12" style="animation-delay: -10s;"></div>
+<div style="display: flex; flex-direction: column; gap: 10px; animation-delay: -10s;"><span style="font-size: 14px; font-weight: 600; animation-delay: -10s;">Preferential location (PLC)</span><div style="display: flex; flex-wrap: wrap; gap: 8px; animation-delay: -10s;"><button class="chip" data-on="0" style="animation-delay: -10s;">None</button><button class="chip" data-on="1" style="animation-delay: -10s;">Park facing</button><button class="chip" data-on="0" style="animation-delay: -10s;">Corner</button></div></div>
+<div style="display: flex; flex-direction: column; gap: 10px; animation-delay: -10s;"><span style="font-size: 14px; font-weight: 600; animation-delay: -10s;">Facing</span><div style="display: flex; flex-wrap: wrap; gap: 8px; animation-delay: -10s;"><button class="chip" data-on="1" style="animation-delay: -10s;">Any</button><button class="chip" data-on="0" style="animation-delay: -10s;">East</button><button class="chip" data-on="0" style="animation-delay: -10s;">North</button><button class="chip" data-on="0" style="animation-delay: -10s;">Road</button></div></div>
+<div style="display: flex; flex-direction: column; gap: 10px; animation-delay: -10s;"><span style="font-size: 14px; font-weight: 600; animation-delay: -10s;">Offer</span><div style="display: flex; flex-wrap: wrap; gap: 8px; animation-delay: -10s;"><button class="chip" data-on="0" style="animation-delay: -10s;">None</button><button class="chip" data-on="1" style="animation-delay: -10s;">Festive −₹75/sq ft</button><button class="chip" data-on="0" style="animation-delay: -10s;">Early bird −₹120/sq ft</button></div></div>
+<span style="font-size: 12.5px; color: var(--sub); animation-delay: -10s;">Sample project rates for illustration. Your rates, PLC tables and GST rules are set per project.</span>
+</div>
+<div class="rv" style="flex: 1 1 440px; min-width: 0px; background: var(--surf); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; display: flex; flex-direction: column; box-shadow: rgba(0, 0, 0, 0.7) 0px 40px 80px -30px; animation-delay: -10s;">
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--line); animation-delay: -10s;"><span style="display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 750; font-size: 16px; animation-delay: -10s;">Cost sheet · B-1204</span><span class="mono" style="font-size: 12px; color: var(--sub); animation-delay: -10s;">CS-2026-0412 · editable</span></span><span class="pill p-warn" style="animation-delay: -10s;">Draft</span></div>
+
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 24px; border-bottom: 1px solid var(--line); font-size: 14px; animation-delay: -10s;"><span style="display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 600; animation-delay: -10s;">Base price</span><span style="font-size: 12px; color: var(--sub); animation-delay: -10s;">1,450 sq ft × ₹6,000</span></span><span class="mono" style="font-weight: 600; color: var(--ink); animation-delay: -10s;">₹87,00,000</span></div>
+
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 24px; border-bottom: 1px solid var(--line); font-size: 14px; animation-delay: -10s;"><span style="display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 600; animation-delay: -10s;">Floor rise</span><span style="font-size: 12px; color: var(--sub); animation-delay: -10s;">₹50/sq ft × 8 floors above 4</span></span><span class="mono" style="font-weight: 600; color: var(--ink); animation-delay: -10s;">₹5,80,000</span></div>
+
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 24px; border-bottom: 1px solid var(--line); font-size: 14px; animation-delay: -10s;"><span style="display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 600; animation-delay: -10s;">PLC</span><span style="font-size: 12px; color: var(--sub); animation-delay: -10s;">Park facing</span></span><span class="mono" style="font-weight: 600; color: var(--ink); animation-delay: -10s;">₹2,90,000</span></div>
+
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 24px; border-bottom: 1px solid var(--line); font-size: 14px; animation-delay: -10s;"><span style="display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 600; animation-delay: -10s;">Facing premium</span><span style="font-size: 12px; color: var(--sub); animation-delay: -10s;">Any</span></span><span class="mono" style="font-weight: 600; color: var(--ink); animation-delay: -10s;">₹0</span></div>
+
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 24px; border-bottom: 1px solid var(--line); font-size: 14px; animation-delay: -10s;"><span style="display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 600; animation-delay: -10s;">Offer</span><span style="font-size: 12px; color: var(--sub); animation-delay: -10s;">Festive −₹75/sq ft</span></span><span class="mono" style="font-weight: 600; color: var(--acct); animation-delay: -10s;">−₹1,08,750</span></div>
+
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 24px; border-bottom: 1px solid var(--line); font-size: 14px; animation-delay: -10s;"><span style="display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 600; animation-delay: -10s;">Agreement value</span><span style="font-size: 12px; color: var(--sub); animation-delay: -10s;">Before tax</span></span><span class="mono" style="font-weight: 600; color: var(--ink); animation-delay: -10s;">₹94,61,250</span></div>
+
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 24px; border-bottom: 1px solid var(--line); font-size: 14px; animation-delay: -10s;"><span style="display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 600; animation-delay: -10s;">GST</span><span style="font-size: 12px; color: var(--sub); animation-delay: -10s;">5% sample rate, set per project</span></span><span class="mono" style="font-weight: 600; color: var(--blue); animation-delay: -10s;">₹4,73,063</span></div>
+
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; background: var(--surf2); animation-delay: -10s;"><span style="font-weight: 700; animation-delay: -10s;">Total consideration</span><span style="font-size: 26px; font-weight: 800; letter-spacing: -0.02em; animation-delay: -10s;" class="mono">₹99,34,313</span></div>
+<div style="padding: 18px 24px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; animation-delay: -10s;"><button class="bp" style="animation-delay: -10s;">Freeze &amp; share with buyer</button><span style="font-size: 13px; color: var(--sub); animation-delay: -10s;">Freezing locks every line the buyer sees.</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 06 BOOKINGS -->
+<section id="bookings" style="padding: 104px 24px 72px; animation-delay: -10s;">
+<div style="max-width: 1240px; margin: 0px auto; display: flex; flex-direction: column; gap: 40px; animation-delay: -10s;">
+<div class="rv" style="display: flex; flex-direction: column; gap: 16px; max-width: 760px; animation-delay: -10s;"><span class="eyebrow" style="animation-delay: -10s;">06 · Bookings &amp; agreements</span><h2 class="h2" style="animation-delay: -10s;">EOI to possession, as real states with real documents.</h2></div>
+<div class="rv" role="tablist" aria-label="Booking states" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 10px; animation-delay: -10s;">
+
+<button class="sel" role="tab" data-on="0" style="flex-direction: column; align-items: flex-start; gap: 8px; padding: 18px; animation-delay: -10s;"><span class="mono" style="font-size: 11.5px; color: var(--acct); animation-delay: -10s;">01</span><span style="font-weight: 700; font-size: 16px; animation-delay: -10s;">EOI</span><span style="height: 4px; width: 100%; border-radius: 4px; background: rgb(255, 95, 0); animation-delay: -10s;"></span></button>
+
+<button class="sel" role="tab" data-on="0" style="flex-direction: column; align-items: flex-start; gap: 8px; padding: 18px; animation-delay: -10s;"><span class="mono" style="font-size: 11.5px; color: var(--acct); animation-delay: -10s;">02</span><span style="font-weight: 700; font-size: 16px; animation-delay: -10s;">Booking</span><span style="height: 4px; width: 100%; border-radius: 4px; background: rgb(255, 95, 0); animation-delay: -10s;"></span></button>
+
+<button class="sel" role="tab" data-on="1" style="flex-direction: column; align-items: flex-start; gap: 8px; padding: 18px; animation-delay: -10s;"><span class="mono" style="font-size: 11.5px; color: var(--acct); animation-delay: -10s;">03</span><span style="font-weight: 700; font-size: 16px; animation-delay: -10s;">Agreement</span><span style="height: 4px; width: 100%; border-radius: 4px; background: rgb(255, 95, 0); animation-delay: -10s;"></span></button>
+
+<button class="sel" role="tab" data-on="0" style="flex-direction: column; align-items: flex-start; gap: 8px; padding: 18px; animation-delay: -10s;"><span class="mono" style="font-size: 11.5px; color: var(--acct); animation-delay: -10s;">04</span><span style="font-weight: 700; font-size: 16px; animation-delay: -10s;">Registered</span><span style="height: 4px; width: 100%; border-radius: 4px; background: var(--line); animation-delay: -10s;"></span></button>
+
+<button class="sel" role="tab" data-on="0" style="flex-direction: column; align-items: flex-start; gap: 8px; padding: 18px; animation-delay: -10s;"><span class="mono" style="font-size: 11.5px; color: var(--acct); animation-delay: -10s;">05</span><span style="font-weight: 700; font-size: 16px; animation-delay: -10s;">Possession</span><span style="height: 4px; width: 100%; border-radius: 4px; background: var(--line); animation-delay: -10s;"></span></button>
+
+</div>
+<div class="card swap" style="padding: 32px; display: flex; flex-wrap: wrap; gap: 32px; animation-delay: -10s;">
+<div style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 12px; min-width: 0px; animation-delay: -10s;"><span style="font-size: 24px; font-weight: 800; letter-spacing: -0.02em; animation-delay: -10s;">Agreement</span><p class="lead" style="font-size: 16px; animation-delay: -10s;">Agreement for sale prepared. The buyer gets a proposal email with a tokenised public page to review before signing.</p></div>
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 10px; min-width: 0px; animation-delay: -10s;">
+
+<div style="display: flex; align-items: center; gap: 14px; border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; animation-delay: -10s;"><span style="width: 36px; height: 44px; border-radius: 6px; background: var(--accsoft); color: var(--acct); display: flex; align-items: flex-end; justify-content: center; font-size: 9px; font-weight: 800; padding-bottom: 6px; box-sizing: border-box; animation-delay: -10s;">DOC</span><span style="flex: 1 1 0%; display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 650; font-size: 14.5px; animation-delay: -10s;">Agreement for sale</span><span style="font-size: 12.5px; color: var(--sub); animation-delay: -10s;">Draft v3</span></span><span class="pill p-warn" style="animation-delay: -10s;">In review</span></div>
+
+<div style="display: flex; align-items: center; gap: 14px; border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; animation-delay: -10s;"><span style="width: 36px; height: 44px; border-radius: 6px; background: var(--accsoft); color: var(--acct); display: flex; align-items: flex-end; justify-content: center; font-size: 9px; font-weight: 800; padding-bottom: 6px; box-sizing: border-box; animation-delay: -10s;">URL</span><span style="flex: 1 1 0%; display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 650; font-size: 14.5px; animation-delay: -10s;">Buyer proposal page</span><span style="font-size: 12.5px; color: var(--sub); animation-delay: -10s;">Tokenised link · viewed twice</span></span><span class="pill p-blue" style="animation-delay: -10s;">Viewed</span></div>
+
+<div style="display: flex; align-items: center; gap: 14px; border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; animation-delay: -10s;"><span style="width: 36px; height: 44px; border-radius: 6px; background: var(--accsoft); color: var(--acct); display: flex; align-items: flex-end; justify-content: center; font-size: 9px; font-weight: 800; padding-bottom: 6px; box-sizing: border-box; animation-delay: -10s;">ZIP</span><span style="flex: 1 1 0%; display: flex; flex-direction: column; gap: 2px; animation-delay: -10s;"><span style="font-weight: 650; font-size: 14.5px; animation-delay: -10s;">KYC pack</span><span style="font-size: 12.5px; color: var(--sub); animation-delay: -10s;">PAN, Aadhaar, photos</span></span><span class="pill p-ok" style="animation-delay: -10s;">Complete</span></div>
+
+</div>
+</div>
+</div>
+</section>
+
+<!-- 07 PAYMENTS -->
+<section id="payments" style="padding: 72px 24px 104px; animation-delay: -10s;">
+<div style="max-width: 1240px; margin: 0px auto; display: flex; flex-direction: column; gap: 40px; animation-delay: -10s;">
+<div class="rv" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px; animation-delay: -10s;">
+<div style="display: flex; flex-direction: column; gap: 16px; max-width: 720px; animation-delay: -10s;"><span class="eyebrow" style="animation-delay: -10s;">07 · Payments &amp; collections</span><h2 class="h2" style="animation-delay: -10s;">Demand, receipt, clearing, ledger. In that order, every time.</h2></div>
+<p class="lead" style="max-width: 420px; animation-delay: -10s;">CLP milestone plans raise demand letters. Receipts clear or reverse. Every movement posts double-entry, with Razorpay for online payments and automatic overdue reminders.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 18px; animation-delay: -10s;">
+<div class="card rv" style="flex: 1.3 1 520px; min-width: 0px; overflow: hidden; animation-delay: -10s;">
+<div style="padding: 18px 22px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; animation-delay: -10s;"><span style="font-weight: 750; animation-delay: -10s;">Construction-linked plan · B-1204</span><span class="mono" style="font-size: 13px; color: var(--sub); animation-delay: -10s;">₹98,00,000</span></div>
+<div style="overflow-x: auto; animation-delay: -10s;">
+<div style="min-width: 520px; animation-delay: -10s;">
+<div style="display: grid; grid-template-columns: 1.6fr 0.6fr 1.1fr 1fr; gap: 12px; padding: 10px 22px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: var(--sub); background: var(--surf2); animation-delay: -10s;"><span style="animation-delay: -10s;">MILESTONE</span><span style="animation-delay: -10s;">%</span><span style="animation-delay: -10s;">AMOUNT</span><span style="animation-delay: -10s;">STATUS</span></div>
+
+<div style="display: grid; grid-template-columns: 1.6fr 0.6fr 1.1fr 1fr; gap: 12px; padding: 13px 22px; border-top: 1px solid var(--line); font-size: 14px; align-items: center; animation-delay: -10s;"><span style="font-weight: 600; animation-delay: -10s;">On booking</span><span class="mono" style="animation-delay: -10s;">10%</span><span class="mono" style="animation-delay: -10s;">₹9,80,000</span><span style="animation-delay: -10s;"><span class="pill p-ok" style="animation-delay: -10s;">Cleared</span></span></div>
+
+<div style="display: grid; grid-template-columns: 1.6fr 0.6fr 1.1fr 1fr; gap: 12px; padding: 13px 22px; border-top: 1px solid var(--line); font-size: 14px; align-items: center; animation-delay: -10s;"><span style="font-weight: 600; animation-delay: -10s;">On agreement</span><span class="mono" style="animation-delay: -10s;">20%</span><span class="mono" style="animation-delay: -10s;">₹19,60,000</span><span style="animation-delay: -10s;"><span class="pill p-ok" style="animation-delay: -10s;">Cleared</span></span></div>
+
+<div style="display: grid; grid-template-columns: 1.6fr 0.6fr 1.1fr 1fr; gap: 12px; padding: 13px 22px; border-top: 1px solid var(--line); font-size: 14px; align-items: center; animation-delay: -10s;"><span style="font-weight: 600; animation-delay: -10s;">Plinth</span><span class="mono" style="animation-delay: -10s;">15%</span><span class="mono" style="animation-delay: -10s;">₹14,70,000</span><span style="animation-delay: -10s;"><span class="pill p-warn" style="animation-delay: -10s;">Receipt in clearing</span></span></div>
+
+<div style="display: grid; grid-template-columns: 1.6fr 0.6fr 1.1fr 1fr; gap: 12px; padding: 13px 22px; border-top: 1px solid var(--line); font-size: 14px; align-items: center; animation-delay: -10s;"><span style="font-weight: 600; animation-delay: -10s;">Slab 5</span><span class="mono" style="animation-delay: -10s;">10%</span><span class="mono" style="animation-delay: -10s;">₹9,80,000</span><span style="animation-delay: -10s;"><span class="pill p-blue" style="animation-delay: -10s;">Demand sent</span></span></div>
+
+<div style="display: grid; grid-template-columns: 1.6fr 0.6fr 1.1fr 1fr; gap: 12px; padding: 13px 22px; border-top: 1px solid var(--line); font-size: 14px; align-items: center; animation-delay: -10s;"><span style="font-weight: 600; animation-delay: -10s;">Slab 10</span><span class="mono" style="animation-delay: -10s;">10%</span><span class="mono" style="animation-delay: -10s;">₹9,80,000</span><span style="animation-delay: -10s;"><span class="pill p-mut" style="animation-delay: -10s;">Scheduled</span></span></div>
+
+<div style="display: grid; grid-template-columns: 1.6fr 0.6fr 1.1fr 1fr; gap: 12px; padding: 13px 22px; border-top: 1px solid var(--line); font-size: 14px; align-items: center; animation-delay: -10s;"><span style="font-weight: 600; animation-delay: -10s;">Possession</span><span class="mono" style="animation-delay: -10s;">35%</span><span class="mono" style="animation-delay: -10s;">₹34,30,000</span><span style="animation-delay: -10s;"><span class="pill p-mut" style="animation-delay: -10s;">Scheduled</span></span></div>
+
+</div>
+</div>
+</div>
+<div style="flex: 1 1 380px; min-width: 0px; display: flex; flex-direction: column; gap: 18px; animation-delay: -10s;">
+<div class="card rv" style="padding: 24px; display: flex; flex-direction: column; gap: 18px; animation-delay: -10s;">
+<div style="display: flex; justify-content: space-between; align-items: center; animation-delay: -10s;"><span style="font-weight: 750; animation-delay: -10s;">Receipt RCP-04431</span><span class="mono" style="font-size: 13px; animation-delay: -10s;">₹14,70,000</span></div>
+<div style="display: flex; align-items: center; gap: 8px; animation-delay: -10s;">
+
+<div style="flex: 1 1 0%; display: flex; flex-direction: column; gap: 8px; animation-delay: -10s;"><span style="height: 6px; border-radius: 6px; background: rgb(255, 95, 0); transition: background 0.4s; animation-delay: -10s;"></span><span style="font-size: 12.5px; font-weight: 600; color: var(--ink); animation-delay: -10s;">Received</span></div>
+
+<div style="flex: 1 1 0%; display: flex; flex-direction: column; gap: 8px; animation-delay: -10s;"><span style="height: 6px; border-radius: 6px; background: var(--line); transition: background 0.4s; animation-delay: -10s;"></span><span style="font-size: 12.5px; font-weight: 600; color: var(--sub); animation-delay: -10s;">Clearing</span></div>
+
+<div style="flex: 1 1 0%; display: flex; flex-direction: column; gap: 8px; animation-delay: -10s;"><span style="height: 6px; border-radius: 6px; background: var(--line); transition: background 0.4s; animation-delay: -10s;"></span><span style="font-size: 12.5px; font-weight: 600; color: var(--sub); animation-delay: -10s;">Cleared</span></div>
+
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap; animation-delay: -10s;"><button class="bs" style="padding: 10px 14px; font-size: 14px; animation-delay: -10s;">Advance to Clearing</button><button class="bs" style="padding: 10px 14px; font-size: 14px; animation-delay: -10s;">Mark bounced</button></div>
+</div>
+<div class="card rv" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; animation-delay: -10s;">
+<div style="display: flex; justify-content: space-between; align-items: center; animation-delay: -10s;"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--sub); animation-delay: -10s;">LEDGER</span><span class="pill p-mut" style="animation-delay: -10s;">Double-entry</span></div>
+
+<span style="font-size: 13.5px; color: var(--sub); animation-delay: -10s;">Nothing posts until the receipt clears.</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 08 MORE -->
+<section style="padding: 0px 24px 104px; animation-delay: -10s;">
+<div style="max-width: 1240px; margin: 0px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr)); gap: 18px; animation-delay: -10s;">
+
+<div class="card rv" style="padding: 26px; display: flex; flex-direction: column; gap: 10px; animation-delay: -10s;"><span class="mono" style="font-size: 11.5px; color: var(--acct); font-weight: 600; animation-delay: -10s;">APPROVALS</span><span style="font-size: 18px; font-weight: 750; letter-spacing: -0.02em; animation-delay: -10s;">Discount and price-deviation chains</span><span style="font-size: 14.5px; color: var(--mut); line-height: 1.55; animation-delay: -10s;">Requests route up the chain you define. Approved values freeze into the cost sheet.</span></div>
+
+<div class="card rv" style="padding: 26px; display: flex; flex-direction: column; gap: 10px; animation-delay: -10s;"><span class="mono" style="font-size: 11.5px; color: var(--acct); font-weight: 600; animation-delay: -10s;">CANCELLATIONS</span><span style="font-size: 18px; font-weight: 750; letter-spacing: -0.02em; animation-delay: -10s;">Refunds by MahaRERA forfeiture tiers</span><span style="font-size: 14.5px; color: var(--mut); line-height: 1.55; animation-delay: -10s;">Cancellation computes forfeiture and refund, then reverses the ledger line by line.</span></div>
+
+<div class="card rv" style="padding: 26px; display: flex; flex-direction: column; gap: 10px; animation-delay: -10s;"><span class="mono" style="font-size: 11.5px; color: var(--acct); font-weight: 600; animation-delay: -10s;">CUSTOMER PORTAL</span><span style="font-size: 18px; font-weight: 750; letter-spacing: -0.02em; animation-delay: -10s;">Buyers see what they own</span><span style="font-size: 14.5px; color: var(--mut); line-height: 1.55; animation-delay: -10s;">Bookings, schedule, documents and construction updates, without calling your CRM team.</span></div>
+
+<div class="card rv" style="padding: 26px; display: flex; flex-direction: column; gap: 10px; animation-delay: -10s;"><span class="mono" style="font-size: 11.5px; color: var(--acct); font-weight: 600; animation-delay: -10s;">WHATSAPP &amp; TELEPHONY</span><span style="font-size: 18px; font-weight: 750; letter-spacing: -0.02em; animation-delay: -10s;">Talk where buyers are</span><span style="font-size: 14.5px; color: var(--mut); line-height: 1.55; animation-delay: -10s;">WhatsApp messaging and telephony connected to the same lead record.</span></div>
+
+<div class="card rv" style="padding: 26px; display: flex; flex-direction: column; gap: 10px; animation-delay: -10s;"><span class="mono" style="font-size: 11.5px; color: var(--acct); font-weight: 600; animation-delay: -10s;">SLA &amp; GAMIFICATION</span><span style="font-size: 18px; font-weight: 750; letter-spacing: -0.02em; animation-delay: -10s;">Speed you can measure</span><span style="font-size: 14.5px; color: var(--mut); line-height: 1.55; animation-delay: -10s;">SLA timers on untouched leads and leaderboards on calls, visits and bookings.</span></div>
+
+<div class="card rv" style="padding: 26px; display: flex; flex-direction: column; gap: 10px; animation-delay: -10s;"><span class="mono" style="font-size: 11.5px; color: var(--acct); font-weight: 600; animation-delay: -10s;">REPORTS &amp; MICROSITES</span><span style="font-size: 18px; font-weight: 750; letter-spacing: -0.02em; animation-delay: -10s;">Out to the world, back to your inbox</span><span style="font-size: 14.5px; color: var(--mut); line-height: 1.55; animation-delay: -10s;">Scheduled reports by email, public listings and per-project microsites feeding lead capture.</span></div>
+
+</div>
+</section>
+
+<section style="padding: 0px 24px 96px; animation-delay: -10s;">
+<div class="on-navy rv" style="max-width: 1240px; margin: 0px auto; border-radius: 32px; padding: 72px 48px; display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between; position: relative; overflow: hidden; animation-delay: -10s;">
+<div aria-hidden="true" style="position: absolute; width: 520px; height: 520px; right: -120px; top: -260px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 95, 0, 0.35), rgba(255, 95, 0, 0) 65%); animation-delay: -10s;"></div>
+<div style="position: relative; display: flex; flex-direction: column; gap: 12px; max-width: 640px; animation-delay: -10s;"><h2 class="h2" style="animation-delay: -10s;">See these modules on your own inventory.</h2><p class="lead" style="animation-delay: -10s;">Share a tower plan and a payment plan; we will set up the demo around them.</p></div>
+<div class="stack-m" style="position: relative; display: flex; gap: 12px; animation-delay: -10s;"><a class="bp" href="Signup.dc.html" style="padding: 15px 26px; font-size: 16px; animation-delay: -10s;">Start free trial</a><a class="bs" href="Contact.dc.html" style="padding: 15px 26px; font-size: 16px; animation-delay: -10s;">Book a demo</a></div>
+</div>
+</section>
+
+<footer style="border-top: 1px solid var(--line); padding: 40px 24px; animation-delay: -10s;">
+<div style="max-width: 1240px; margin: 0px auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 13px; color: var(--sub); animation-delay: -10s;"><span style="animation-delay: -10s;">© 2026 DeedFlow. All rights reserved.</span><span style="display: flex; gap: 20px; animation-delay: -10s;"><a class="nl" href="Main.dc.html" style="animation-delay: -10s;">Home</a><a class="nl" href="Compliance.dc.html" style="animation-delay: -10s;">Compliance</a><a class="nl" href="Pricing.dc.html" style="animation-delay: -10s;">Pricing</a><a class="nl" href="Contact.dc.html" style="animation-delay: -10s;">Contact</a></span></div>
+</footer>
+
+</div>
+</div></body></html>
