@@ -24,12 +24,14 @@
       const root = document.getElementById(rootId);
       const inst = new Component({});
       inst._tpl = tpl; inst._root = root;
+      window.__dc = inst;
       DC._render(inst, true);
       DC._delegate(root);
       if (inst.componentDidMount) inst.componentDidMount();
       window.addEventListener('beforeunload', () => inst.componentWillUnmount && inst.componentWillUnmount());
       DC._reveal(root);
       DC._header();
+      if (location.hash.length > 1) { const t = document.getElementById(location.hash.slice(1)); if (t) requestAnimationFrame(() => t.scrollIntoView()); }
       return inst;
     },
 
@@ -147,25 +149,16 @@
 
     /* ---------- events (delegated) ---------- */
     _delegate(root) {
-      ['click', 'input', 'change', 'keydown', 'submit'].forEach((type) => {
+      ['click', 'input', 'change', 'keydown', 'submit', 'mouseenter', 'mouseleave'].forEach((type) => {
+        const capture = type === 'mouseenter' || type === 'mouseleave';
         root.addEventListener(type, (e) => {
           let el = e.target;
+          if (capture) { if (el.__h && el.__h[type]) el.__h[type](e); return; }
           while (el && el !== root) {
             if (el.__h && el.__h[type]) { el.__h[type](e); if (type === 'submit') e.preventDefault(); return; }
             el = el.parentNode;
           }
-        });
-      });
-      // onMouseEnter / onMouseLeave: mouseenter/mouseleave don't bubble, so emulate
-      // them on top of the bubbling mouseover/mouseout events (hoverIntent-style).
-      [['mouseover', 'mouseenter'], ['mouseout', 'mouseleave']].forEach(([native, virtual]) => {
-        root.addEventListener(native, (e) => {
-          let el = e.target;
-          while (el && el !== root) {
-            if (el.__h && el.__h[virtual] && !el.contains(e.relatedTarget)) { el.__h[virtual](e); return; }
-            el = el.parentNode;
-          }
-        });
+        }, capture);
       });
       // close the Log-in dropdown on outside click / Escape
       document.addEventListener('click', (e) => {
@@ -182,7 +175,6 @@
     /* ---------- scroll reveal fallback for browsers without scroll-driven animations ---------- */
     _io: null,
     _reveal(root) {
-      if (CSS.supports('animation-timeline: view()')) return;
       if (!DC._io) {
         DC._io = new IntersectionObserver((entries) => {
           entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); DC._io.unobserve(en.target); } });

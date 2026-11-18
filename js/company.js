@@ -1,17 +1,16 @@
 /* DeedFlow — company page logic (data + interactions) */
 class Component extends DCLogic {
-  state = { loginOpen: false, step: 1, tried: false, name: '', email: '', phone: '', company: '', notes: '', role: 0, proj: 1, team: 1, focus: [0, 3], day: 0, time: 2 };
-  componentWillUnmount() { clearTimeout(this._loginCloseT); }
+  state = { menuOpen: false, loginOpen: false, step: 1, tried: false, name: '', email: '', phone: '', company: '', notes: '', role: 0, proj: 1, team: 1, focus: [0, 3], mo: 0, sel: '', time: '11:00' };
   renderVals() {
     const s = this.state;
     const pickList = (defs, key) => defs.map((l, i) => ({ l, on: s[key] === i ? '1' : '0', pick: () => this.setState({ [key]: i }) }));
     const toggle = (arr, i) => arr.indexOf(i) >= 0 ? arr.filter((x) => x !== i) : arr.concat([i]);
 
     const agenda = [
-      { t: '00:00', h: 'Your project, set up', d: 'Towers, floors and units from your inventory structure.' },
-      { t: '08:00', h: 'Lead to site visit', d: 'Portal capture, scoring, calling and reminders.' },
-      { t: '16:00', h: 'Cost sheet to collections', d: 'Pricing engine, booking, CLP demands and receipts.' },
-      { t: '24:00', h: 'Compliance and partners', d: 'RERA cap, escrow, TDS and the partner portal.' }
+      { h: 'Your project, set up', d: 'Towers, floors and units from your inventory structure.', m: '8 min', icon: 'M3 21h18M5 21V7l8-4v18M19 21V11l-6-4M9 9v.01M9 12v.01M9 15v.01' },
+      { h: 'Lead to site visit', d: 'Portal capture, scoring, calling and reminders.', m: '8 min', icon: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z' },
+      { h: 'Cost sheet to collections', d: 'Pricing engine, booking, CLP demands and receipts.', m: '8 min', icon: 'M6 4h12M6 8h12M8 8c6 0 6 8 0 8H6l6 7' },
+      { h: 'Compliance and partners', d: 'RERA cap, escrow, TDS and the partner portal.', m: '6 min', icon: 'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM9 12l2 2 4-4' }
     ];
     const roles = pickList(['Founder / Director', 'Sales head', 'CRM / Post-sales', 'Finance', 'IT'], 'role');
     const projOpts = pickList(['1', '2–5', '6–15', '15+'], 'proj');
@@ -19,15 +18,33 @@ class Component extends DCLogic {
     const focusDefs = ['Lead capture & scoring', 'Presales calling', 'Inventory & pricing', 'Collections & ledger', 'RERA & TDS compliance', 'Channel partners'];
     const focusOpts = focusDefs.map((l, i) => ({ l, on: s.focus.indexOf(i) >= 0 ? '1' : '0', pick: () => this.setState({ focus: toggle(s.focus, i) }) }));
 
-    const base = new Date(2026, 10, 4);
     const wd = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], mn = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const dayList = [];
-    for (let k = 0; dayList.length < 5; k++) { const d = new Date(base.getTime() + k * 86400000); if (d.getDay() !== 0 && d.getDay() !== 6) dayList.push(d); }
-    const days = dayList.map((d, i) => ({ w: wd[d.getDay()], d: String(d.getDate()), m: mn[d.getMonth()], on: s.day === i ? '1' : '0', pick: () => this.setState({ day: i }) }));
-    const timeDefs = ['10:00', '11:30', '13:00', '15:00', '16:30', '18:00'];
-    const times = pickList(timeDefs, 'time');
-    const D = dayList[s.day];
-    const when = wd[D.getDay()] + ', ' + D.getDate() + ' ' + mn[D.getMonth()] + ' at ' + timeDefs[s.time] + ' IST';
+    const mFull = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const first = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+    if (first.getDay() === 0) first.setDate(first.getDate() + 1);
+    const last = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 60);
+    const key = (d) => d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+    const selKey = s.sel || key(first);
+    const sp = selKey.split('-');
+    const D = new Date(+sp[0], +sp[1], +sp[2]);
+    const maxMo = (last.getFullYear() - today.getFullYear()) * 12 + last.getMonth() - today.getMonth();
+    const vm = new Date(today.getFullYear(), today.getMonth() + s.mo, 1);
+    const cal = [];
+    for (let i = 0; i < (vm.getDay() + 6) % 7; i++) cal.push({ l: '', st: 'x', pick: () => {} });
+    const dim = new Date(vm.getFullYear(), vm.getMonth() + 1, 0).getDate();
+    for (let n = 1; n <= dim; n++) {
+      const d = new Date(vm.getFullYear(), vm.getMonth(), n);
+      const ok = d >= first && d <= last && d.getDay() !== 0;
+      const k = key(d);
+      cal.push({ l: String(n), st: k === selKey ? 'on' : ok ? 'ok' : 'off', pick: () => { if (ok) this.setState({ sel: k }); } });
+    }
+    const tl = (arr) => arr.map((l) => ({ l, on: s.time === l ? '1' : '0', pick: () => this.setState({ time: l }) }));
+    const tMorn = tl(['10:00', '10:30', '11:00', '11:30']);
+    const tAft = tl(['12:00', '12:30', '14:00', '14:30', '15:00', '15:30']);
+    const tEve = tl(['16:00', '16:30', '17:00', '17:30', '18:00', '18:30']);
+    const when = wd[D.getDay()] + ', ' + D.getDate() + ' ' + mn[D.getMonth()] + ' ' + D.getFullYear() + ' at ' + s.time + ' IST';
 
     const valid1 = s.name.trim().length > 1 && /.+@.+\..+/.test(s.email);
     const labels = ['About you', 'Your portfolio', 'Pick a slot'];
@@ -46,11 +63,14 @@ class Component extends DCLogic {
     ];
 
     return {
+      menuOpen: s.menuOpen, menuClosed: !s.menuOpen, navOpen: s.menuOpen ? '1' : '0', menuExp: s.menuOpen ? 'true' : 'false', toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
       loginOpen: s.loginOpen, loginExp: s.loginOpen ? 'true' : 'false', loginRot: s.loginOpen ? '180deg' : '0deg',
-      toggleLogin: () => this.setState({ loginOpen: !s.loginOpen }),
-      openLogin: () => { clearTimeout(this._loginCloseT); this.setState({ loginOpen: true }); },
-      closeLogin: () => { clearTimeout(this._loginCloseT); this._loginCloseT = setTimeout(() => this.setState({ loginOpen: false }), 200); },
-      agenda, roles, projOpts, teamOpts, focusOpts, days, times, stepTabs,
+      toggleLogin: () => { if (Date.now() - (this._lh || 0) < 500) return; this.setState({ loginOpen: !s.loginOpen }); },
+      loginIn: () => { clearTimeout(this._lt); if (!this.state.loginOpen) { this._lh = Date.now(); this.setState({ loginOpen: true }); } },
+      loginOut: () => { clearTimeout(this._lt); this._lt = setTimeout(() => this.setState({ loginOpen: false }), 180); },
+      agenda, roles, projOpts, teamOpts, focusOpts, cal, tAll: tMorn.concat(tAft, tEve), stepTabs,
+      calTitle: mFull[vm.getMonth()] + ' ' + vm.getFullYear(), prevOff: s.mo <= 0 ? '1' : '0', nextOff: s.mo >= maxMo ? '1' : '0',
+      calPrev: () => { if (s.mo > 0) this.setState({ mo: s.mo - 1 }); }, calNext: () => { if (s.mo < maxMo) this.setState({ mo: s.mo + 1 }); },
       f: { name: s.name, email: s.email, phone: s.phone, company: s.company, notes: s.notes },
       onName: (e) => this.setState({ name: e.target.value }),
       onEmail: (e) => this.setState({ email: e.target.value }),

@@ -1,7 +1,6 @@
 /* DeedFlow — pricing page logic (data + interactions) */
 class Component extends DCLogic {
-  state = { loginOpen: false, annual: false, eu: 14, ep: 4, el: 12, faq: 0 };
-  componentWillUnmount() { clearTimeout(this._loginCloseT); }
+  state = { menuOpen: false, loginOpen: false, annual: false, eu: 14, ep: 4, el: 12, faq: 0 };
   renderVals() {
     const s = this.state;
     const inr = (n) => '₹' + n.toLocaleString('en-IN');
@@ -53,10 +52,11 @@ class Component extends DCLogic {
     ];
     const faqs = faqDefs.map((f, i) => ({ q: f[0], a: f[1], open: s.faq === i, on: s.faq === i ? '1' : '0', exp: s.faq === i ? 'true' : 'false', toggle: () => this.setState({ faq: s.faq === i ? -1 : i }) }));
     return {
+      menuOpen: s.menuOpen, menuClosed: !s.menuOpen, navOpen: s.menuOpen ? '1' : '0', menuExp: s.menuOpen ? 'true' : 'false', toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
       loginOpen: s.loginOpen, loginExp: s.loginOpen ? 'true' : 'false', loginRot: s.loginOpen ? '180deg' : '0deg',
-      toggleLogin: () => this.setState({ loginOpen: !s.loginOpen }),
-      openLogin: () => { clearTimeout(this._loginCloseT); this.setState({ loginOpen: true }); },
-      closeLogin: () => { clearTimeout(this._loginCloseT); this._loginCloseT = setTimeout(() => this.setState({ loginOpen: false }), 200); },
+      toggleLogin: () => { if (Date.now() - (this._lh || 0) < 500) return; this.setState({ loginOpen: !s.loginOpen }); },
+      loginIn: () => { clearTimeout(this._lt); if (!this.state.loginOpen) { this._lh = Date.now(); this.setState({ loginOpen: true }); } },
+      loginOut: () => { clearTimeout(this._lt); this._lt = setTimeout(() => this.setState({ loginOpen: false }), 180); },
       monthOn: s.annual ? '0' : '1', yearOn: s.annual ? '1' : '0',
       setMonthly: () => this.setState({ annual: false }), setAnnual: () => this.setState({ annual: true }),
       plans, eu: s.eu, ep: s.ep, elIdx: s.el, elL: el.toLocaleString('en-IN'),

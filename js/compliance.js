@@ -1,8 +1,8 @@
 /* DeedFlow — compliance page logic (data + interactions) */
 class Component extends DCLogic {
-  state = { loginOpen: false, cost: 9800000, recv: 300000, agr: false, esc: 1, tds: 'ia', iaAmt: 9800000, hAmt: 450000, tier: 1, af: 0, tick: 0 };
+  state = { menuOpen: false, loginOpen: false, cost: 9800000, recv: 300000, agr: false, esc: 1, tds: 'ia', iaAmt: 9800000, hAmt: 450000, tier: 1, af: 0, tick: 0 };
   componentDidMount() { this.t = setInterval(() => this.setState({ tick: this.state.tick + 1 }), 3200); }
-  componentWillUnmount() { clearInterval(this.t); clearTimeout(this._loginCloseT); }
+  componentWillUnmount() { clearInterval(this.t); }
   renderVals() {
     const s = this.state;
     const inr = (n) => '₹' + Math.round(n).toLocaleString('en-IN');
@@ -68,11 +68,22 @@ class Component extends DCLogic {
     const mins = [0, 2, 5, 9, 14, 22];
     const audit = filtered.map((a, i) => ({ e: a[0], who: a[1], m: a[2], tone: a[3], t: i === 0 ? 'now' : mins[i] + 'm ago', h: '#' + ((rot * 97 + i * 131 + a[0].length * 17) % 65536).toString(16).padStart(4, '0') + 'e' + (i + 3), cls: i === 0 ? 'pop' : '' }));
 
+    const compValue = [
+      { t: 'RERA §13 cap', d: 'Blocks receipts above 10% before agreement', v: 'No penalty notices, no refunds under pressure' },
+      { t: 'RERA escrow & filings', d: 'Escrow split and quarterly filings', v: 'Filings ready without a month-end scramble' },
+      { t: 'GST & e-invoicing', d: 'Tax on every demand, IRN on invoices', v: 'Zero manual invoices, zero mismatch notices' },
+      { t: 'TDS 194-IA & 194H', d: 'On property sale and partner commission', v: 'Buyers and CPs get the right certificates, on time' },
+      { t: 'Audit trail', d: 'Every change, who made it, and when', v: 'Auditors sign off in days, not weeks' },
+      { t: 'DPDP', d: 'Consent, purpose and retention', v: 'Buyer data handled the way the law now expects' }
+    ];
+
     return {
+      compValue,
+      menuOpen: s.menuOpen, menuClosed: !s.menuOpen, navOpen: s.menuOpen ? '1' : '0', menuExp: s.menuOpen ? 'true' : 'false', toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
       loginOpen: s.loginOpen, loginExp: s.loginOpen ? 'true' : 'false', loginRot: s.loginOpen ? '180deg' : '0deg',
-      toggleLogin: () => this.setState({ loginOpen: !s.loginOpen }),
-      openLogin: () => { clearTimeout(this._loginCloseT); this.setState({ loginOpen: true }); },
-      closeLogin: () => { clearTimeout(this._loginCloseT); this._loginCloseT = setTimeout(() => this.setState({ loginOpen: false }), 200); },
+      toggleLogin: () => { if (Date.now() - (this._lh || 0) < 500) return; this.setState({ loginOpen: !s.loginOpen }); },
+      loginIn: () => { clearTimeout(this._lt); if (!this.state.loginOpen) { this._lh = Date.now(); this.setState({ loginOpen: true }); } },
+      loginOut: () => { clearTimeout(this._lt); this._lt = setTimeout(() => this.setState({ loginOpen: false }), 180); },
       orbitA, orbitB,
       cost, costL: short(cost), recv, recvL: inr(recv), recvMax, priorL: inr(prior),
       setCost: (e) => this.setState({ cost: parseInt(e.target.value, 10) }),

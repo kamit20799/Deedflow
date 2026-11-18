@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log in — DeedFlow</title>
+<meta name="description" content="DeedFlow is the compliant sales CRM for Indian property developers — leads, inventory, pricing, RERA, escrow, TDS and channel partners in one flow.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+<div id="app"></div>
+
+<template id="tpl">
+<div class="rx" style="min-height: 100vh; display: flex; flex-wrap: wrap">
+
+<!-- LEFT: value panel -->
+
+
+<!-- RIGHT: form -->
+<aside class="on-navy" style="flex: 1 1 460px; min-width: 0; position: relative; overflow: hidden; padding: 40px 56px 56px; display: flex; flex-direction: column; gap: 48px">
+<div class="grid-bg" aria-hidden="true" style="position: absolute; inset: 0; opacity: 0.5"></div>
+<div aria-hidden="true" style="position: absolute; width: 640px; height: 640px; left: -200px; bottom: -360px; border-radius: 50%; background: radial-gradient(circle, rgba(255,95,0,0.32), rgba(255,95,0,0) 65%)"></div>
+<a href="index.html" aria-label="DeedFlow home" style="position: relative; display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); align-self: flex-start">
+<svg class="lm-l" width="38" height="38" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="tssi1s" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff9a3d"></stop><stop offset="1" stop-color="#ff5f00"></stop></linearGradient></defs><path d="M20 44V12l8-6v38z" fill="#0a1628"></path><path d="M8 40c6-10 14-16 34-18-14 6-22 12-27 22z" fill="url(#tssi1s)"></path><path d="M30 44V18l6 4v22z" fill="#0a1628" opacity=".7"></path></svg><svg class="lm-d" width="38" height="38" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="tssi1ds" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff9a3d"></stop><stop offset="1" stop-color="#ff5f00"></stop></linearGradient></defs><path d="M20 44V12l8-6v38z" fill="#ffffff"></path><path d="M8 40c6-10 14-16 34-18-14 6-22 12-27 22z" fill="url(#tssi1ds)"></path><path d="M30 44V18l6 4v22z" fill="#ffffff" opacity=".7"></path></svg><span style="font-weight: 800; font-size: 22px; letter-spacing: -0.04em">Deed<span style="color: var(--acct)">Flow</span></span>
+</a>
+<div style="position: relative; display: flex; flex-direction: column; gap: 22px">
+<span class="eyebrow in">Log in</span>
+<h1 class="in d1" style="margin: 0; font-size: clamp(36px, 4.4vw, 56px); line-height: 1.02; letter-spacing: -0.04em; font-weight: 800; text-wrap: balance">Pick up where your sales floor left off.</h1>
+<p class="in d2" style="margin: 0; font-size: 17.5px; line-height: 1.6; color: var(--mut); max-width: 460px">One login for everyone. Developer teams, channel partners and home buyers all sign in here.</p>
+</div>
+<div class="in d3" style="position: relative; display: flex; flex-direction: column; gap: 16px">
+<sc-for list="{{perks}}" as="p" hint-placeholder-count="4">
+<div style="display: flex; gap: 14px; align-items: flex-start"><span style="width: 30px; height: 30px; flex: none; border-radius: 9px; background: rgba(255,95,0,0.16); display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff8a3d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{p.icon}}"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 15.5px">{{p.t}}</span><span style="font-size: 14px; color: var(--sub)">{{p.d}}</span></span></div>
+</sc-for>
+</div>
+</aside><main style="flex: 1.15 1 560px; min-width: 0; padding: 32px 24px 64px; display: flex; flex-direction: column; align-items: center; background: var(--bg)">
+<div style="width: 100%; max-width: 520px; display: flex; justify-content: flex-end; align-items: center; gap: 14px; font-size: 14px; color: var(--mut)">
+<span class="hide-m">New to DeedFlow?</span><a href="signup.html" style="font-weight: 650">Start free trial</a>
+</div>
+<div style="width: 100%; max-width: 520px; margin-top: 56px; display: flex; flex-direction: column; gap: 26px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span class="mono" style="font-size: 12.5px; color: var(--sub)">LOG IN</span>
+<h2 style="margin: 0; font-size: 34px; letter-spacing: -0.035em; font-weight: 800; line-height: 1.1">Welcome back.</h2>
+<p style="margin: 0; font-size: 15.5px; color: var(--mut); line-height: 1.6">For developer teams, channel partners and home buyers.</p>
+</div>
+<sc-if value="{{notDone}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 8px"><label class="lbl" for="lid">{{idLabel}}</label><input id="lid" class="inp" data-err="{{eId}}" placeholder="{{idPh}}" autocomplete="username" value="{{idVal}}" onInput="{{onId}}" onChange="{{onId}}"></div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label class="lbl" for="lpw">Password</label>
+<div style="position: relative"><input id="lpw" class="inp" data-err="{{ePw}}" type="{{pwType}}" placeholder="Your password" autocomplete="current-password" value="{{pwVal}}" onInput="{{onPw}}" onChange="{{onPw}}" style="padding-right: 72px"><button onClick="{{togglePw}}" aria-label="{{pwToggleLabel}}" style="position: absolute; right: 6px; top: 6px; height: 34px; padding: 0 10px; border: 0; background: transparent; color: var(--acct); font-family: inherit; font-weight: 650; font-size: 13px; cursor: pointer">{{pwToggle}}</button></div>
+</div>
+<sc-if value="{{err}}" hint-placeholder-val="{{ false }}"><div class="swap" style="padding: 12px 14px; border-radius: 12px; background: var(--badsoft); color: var(--bad); font-size: 13.5px; font-weight: 600">{{errText}}</div></sc-if>
+<button class="bp" onClick="{{submit}}" style="width: 100%; padding: 15px 20px; font-size: 16px">{{btn}}</button>
+<span style="font-size: 13.5px; color: var(--sub)">Trouble signing in? <a href="company.html" style="font-weight: 650">Contact support</a></span>
+</div>
+</sc-if>
+<sc-if value="{{done}}" hint-placeholder-val="{{ false }}">
+<div class="swap" style="border: 1px solid var(--line); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 14px; background: var(--surf)">
+<span style="font-weight: 750; font-size: 18px">Portal sign-in opens at launch.</span>
+<span style="font-size: 14.5px; color: var(--mut); line-height: 1.6">Sign-in is not connected to this preview site yet. Book a demo and we will show it to you live.</span>
+<div class="stack-m" style="display: flex; gap: 12px; flex-wrap: wrap"><a class="bp" href="company.html">Book a demo</a><a class="bs" href="index.html">Back to home</a></div>
+</div>
+</sc-if>
+</div>
+</main>
+
+</div>
+</template>
+
+<script src="js/runtime.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>

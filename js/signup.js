@@ -66,10 +66,10 @@ class Component extends DCLogic {
       { l: 'Trial length', v: '14 days', c: '#86b0ff' }
     ];
     const perks = [
-      { t: 'Full CRM for 14 days', d: 'Leads, presales, inventory, cost sheets, bookings and collections.' },
-      { t: '3 team members included', d: 'Invite presales, sales and accounts from day one.' },
-      { t: 'Compliance checks built in', d: 'RERA §13 cap, GST and TDS on every transaction.' },
-      { t: 'Plans from ₹1,000 / month', d: 'Choose a plan when you are ready.' }
+      { t: 'Full CRM for 14 days', icon: 'M3 5h18v14H3zM3 9h18M8 3v4M16 3v4', d: 'Leads, presales, inventory, cost sheets, bookings and collections.' },
+      { t: '3 team members included', icon: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75', d: 'Invite presales, sales and accounts from day one.' },
+      { t: 'Compliance checks built in', icon: 'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM9 12l2 2 4-4', d: 'RERA §13 cap, GST and TDS on every transaction.' },
+      { t: 'Plans from ₹1,000 / month', icon: 'M6 4h12M6 8h12M8 8c6 0 6 8 0 8H6l6 7', d: 'Choose a plan when you are ready.' }
     ];
     const setupDefs = ['Creating your workspace', 'Setting up roles for sales, presales and accounts', 'Connecting your lead sources', 'Loading a sample project to explore'];
     const setup = setupDefs.map((l, i) => ({ l, done: i < s.setupAt, run: i === s.setupAt, op: i <= s.setupAt ? 1 : 0.4 }));

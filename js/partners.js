@@ -1,7 +1,7 @@
 /* DeedFlow — partners page logic (data + interactions) */
 class Component extends DCLogic {
-  state = { loginOpen: false, step: 1, ph: 0, result: null, checking: false, bookings: 6, avg: 9500000 };
-  componentWillUnmount() { clearTimeout(this.t); clearTimeout(this._loginCloseT); }
+  state = { menuOpen: false, loginOpen: false, step: 1, ph: 0, result: null, checking: false, bookings: 6, avg: 9500000 };
+  componentWillUnmount() { clearTimeout(this.t); }
   renderVals() {
     const s = this.state;
     const inr = (n) => '₹' + Math.round(n).toLocaleString('en-IN');
@@ -62,10 +62,11 @@ class Component extends DCLogic {
 
     const R = s.result === null ? null : results[s.result];
     return {
+      menuOpen: s.menuOpen, menuClosed: !s.menuOpen, navOpen: s.menuOpen ? '1' : '0', menuExp: s.menuOpen ? 'true' : 'false', toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
       loginOpen: s.loginOpen, loginExp: s.loginOpen ? 'true' : 'false', loginRot: s.loginOpen ? '180deg' : '0deg',
-      toggleLogin: () => this.setState({ loginOpen: !s.loginOpen }),
-      openLogin: () => { clearTimeout(this._loginCloseT); this.setState({ loginOpen: true }); },
-      closeLogin: () => { clearTimeout(this._loginCloseT); this._loginCloseT = setTimeout(() => this.setState({ loginOpen: false }), 200); },
+      toggleLogin: () => { if (Date.now() - (this._lh || 0) < 500) return; this.setState({ loginOpen: !s.loginOpen }); },
+      loginIn: () => { clearTimeout(this._lt); if (!this.state.loginOpen) { this._lh = Date.now(); this.setState({ loginOpen: true }); } },
+      loginOut: () => { clearTimeout(this._lt); this._lt = setTimeout(() => this.setState({ loginOpen: false }), 180); },
       heroRows, steps, step,
       phones, phone: '+91 ' + phoneDefs[s.ph], check, checking: s.checking, checkBtn: s.checking ? 'Checking…' : 'Register lead',
       hasResult: !!R, res: R || results[0],

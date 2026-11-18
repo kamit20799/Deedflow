@@ -18,6 +18,9 @@
 <div class="rx" style="min-height: 1100px; display: flex; flex-wrap: wrap">
 
 <!-- LEFT: value panel -->
+
+
+<!-- RIGHT: form -->
 <aside class="on-navy" style="flex: 1 1 460px; min-width: 0; position: relative; overflow: hidden; padding: 40px 56px 56px; display: flex; flex-direction: column; gap: 48px">
 <div class="grid-bg" aria-hidden="true" style="position: absolute; inset: 0; opacity: 0.5"></div>
 <div aria-hidden="true" style="position: absolute; width: 640px; height: 640px; left: -200px; bottom: -360px; border-radius: 50%; background: radial-gradient(circle, rgba(255,95,0,0.32), rgba(255,95,0,0) 65%)"></div>
@@ -31,7 +34,7 @@
 </div>
 <div class="in d3" style="position: relative; display: flex; flex-direction: column; gap: 16px">
 <sc-for list="{{perks}}" as="p" hint-placeholder-count="4">
-<div style="display: flex; gap: 14px; align-items: flex-start"><span style="width: 30px; height: 30px; flex: none; border-radius: 9px; background: rgba(255,95,0,0.16); display: flex; align-items: center; justify-content: center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff8a3d" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 15.5px">{{p.t}}</span><span style="font-size: 14px; color: var(--sub)">{{p.d}}</span></span></div>
+<div style="display: flex; gap: 14px; align-items: flex-start"><span style="width: 30px; height: 30px; flex: none; border-radius: 9px; background: rgba(255,95,0,0.16); display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff8a3d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{p.icon}}"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 15.5px">{{p.t}}</span><span style="font-size: 14px; color: var(--sub)">{{p.d}}</span></span></div>
 </sc-for>
 </div>
 <div class="float hide-m" style="position: relative; margin-top: auto; background: var(--surf); border: 1px solid var(--line); border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 12px; max-width: 420px; box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6)">
@@ -40,12 +43,9 @@
 <div style="display: flex; align-items: center; gap: 12px; font-size: 13.5px"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{r.c}}; flex: none"></span><span style="flex: 1">{{r.l}}</span><span class="mono" style="font-size: 12px; color: var(--sub)">{{r.v}}</span></div>
 </sc-for>
 </div>
-</aside>
-
-<!-- RIGHT: form -->
-<main style="flex: 1.15 1 560px; min-width: 0; padding: 32px 24px 64px; display: flex; flex-direction: column; align-items: center; background: var(--bg)">
+</aside><main style="flex: 1.15 1 560px; min-width: 0; padding: 32px 24px 64px; display: flex; flex-direction: column; align-items: center; background: var(--bg)">
 <div style="width: 100%; max-width: 560px; display: flex; justify-content: flex-end; align-items: center; gap: 14px; font-size: 14px; color: var(--mut)">
-<span class="hide-m">Already have an account?</span><a href="#" style="font-weight: 650">Log in</a>
+<span class="hide-m">Already have an account?</span><a href="login.html" style="font-weight: 650">Log in</a>
 </div>
 
 <div style="width: 100%; max-width: 560px; margin-top: 56px; display: flex; flex-direction: column; gap: 28px">
@@ -72,7 +72,7 @@
 </div>
 <div style="display: flex; gap: 12px; align-items: flex-start; font-size: 13.5px; color: var(--mut); line-height: 1.5">
 <button class="chk" data-on="{{termsOn}}" onClick="{{toggleTerms}}" aria-label="Accept terms" aria-pressed="{{termsPressed}}"><sc-if value="{{terms}}" hint-placeholder-val="{{ false }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></sc-if></button>
-<span>I agree to the <a href="#">Terms</a> and <a href="#">Privacy policy</a>, and consent to DeedFlow contacting me about my trial.</span>
+<span>I agree to the <a href="legal.html#terms">Terms</a> and <a href="legal.html#privacy">Privacy policy</a>, and consent to DeedFlow contacting me about my trial.</span>
 </div>
 <sc-if value="{{err}}" hint-placeholder-val="{{ false }}"><div class="swap" style="padding: 12px 14px; border-radius: 12px; background: var(--badsoft); color: var(--bad); font-size: 13.5px; font-weight: 600">{{errText}}</div></sc-if>
 </div>
@@ -119,7 +119,7 @@
 </div>
 </sc-for>
 </div>
-<div class="stack-m" style="display: flex; gap: 12px; flex-wrap: wrap"><a class="bp" href="#">Go to my dashboard</a><a class="bs" href="company.html">Book a guided setup call</a></div>
+<div class="stack-m" style="display: flex; gap: 12px; flex-wrap: wrap"><a class="bp" href="login.html">Go to my dashboard</a><a class="bs" href="company.html">Book a guided setup call</a></div>
 </div>
 </sc-if>
 

@@ -13,6 +13,8 @@ Static site (no build step), ready to deploy on [Vercel](https://vercel.com) wit
 | Partners (Channel partners) | `partners.html` |
 | Company (Company & Book a demo) | `company.html` |
 | Signup (Free trial) | `signup.html` |
+| Log in | `login.html` |
+| Legal (Privacy, Terms, DPDP notice) | `legal.html` |
 
 Each page's markup lives in a `<template id="tpl">` using `{{placeholders}}`, `<sc-for>` loops
 and `<sc-if>` conditions. `js/<page>.js` holds that page's data and state; `js/runtime.js` is a
@@ -35,10 +37,10 @@ No environment variables or build commands are required.
 
 ## Repository contents
 
-- **`index.html`, `features.html`, `compliance.html`, `pricing.html`, `partners.html`, `company.html`, `signup.html`** — the live, interactive site, served from the repo root.
+- **`index.html`, `features.html`, `compliance.html`, `pricing.html`, `partners.html`, `company.html`, `signup.html`, `login.html`, `legal.html`** — the live, interactive site, served from the repo root.
 - **`css/`** — shared and per-page styles.
 - **`js/`** — the template runtime (`runtime.js`) plus each page's data/state/interaction logic.
-- **`assets/`** — favicon and partner-integration logos used on the Home page.
+- **`assets/`** — favicon, partner-integration logos, and home-page photography (`project-tower.jpg`, `walk-*.jpg`).
 - **`html-light/`, `html-dark/`** — an earlier non-interactive static HTML export (both themes), kept for reference/backup only. Not routed as part of the live Vercel deployment.
 - **`png-light/`, `png-dark/`** — full-page screenshots of each page from that earlier export, per theme.
 - **`DeedFlow-website-light.pdf`, `DeedFlow-website-dark.pdf`** — that earlier export's pages as full-length PDFs, per theme.
@@ -48,3 +50,4 @@ No environment variables or build commands are required.
 
 - Demo content (emails, phone numbers, pricing figures) shown on the pages is placeholder/mock data only.
 - The `html-*`, `png-*`, PDF, and `logo/` assets predate this interactive build and are kept only as design reference — the live site is driven entirely by the root `.html` + `css/` + `js/` files above.
+- A few real business decisions are still marked **TBD** pending answers from the product/billing team: Company page contact details (sales/support email & phone, office address), and three items on the Pricing page (modules included per plan, downgrade/proration terms, whether partner/buyer portal logins count toward the user limit).
