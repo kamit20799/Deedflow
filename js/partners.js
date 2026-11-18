@@ -11,7 +11,7 @@ class Component extends DCLogic {
       { l: 'Arjun Mehta registered', s: 'Greenfield Enclave · ownership 60 days', p: 'Accepted', tone: 'p-ok' },
       { l: 'Site visit · Kavya Reddy', s: 'Sat 4:00 PM · agent Ravi', p: 'Confirmed', tone: 'p-blue' },
       { l: 'Booking BK-0977', s: 'Commission eligible at agreement', p: 'Eligible', tone: 'p-hot' },
-      { l: 'Payout run · October', s: 'TDS 194H deducted', p: 'Processing', tone: 'p-warn' }
+      { l: 'Payout run · October', s: 'Gross, TDS and net shown', p: 'Processing', tone: 'p-warn' }
     ];
 
     const stepDefs = [
@@ -43,7 +43,7 @@ class Component extends DCLogic {
       { l: 'Agreement value', s: s.bookings + ' × ' + short(s.avg), v: inr(value), c: 'var(--ink)' },
       { l: 'Slab applied', s: cur[2], v: (cur[3] * 100).toFixed(1) + '%', c: 'var(--acct)' },
       { l: 'Gross commission', s: 'Before tax', v: inr(gross), c: 'var(--ink)' },
-      { l: 'TDS · 194H', s: '2% sample rate, configurable', v: '−' + inr(tds), c: 'var(--bad)' },
+      { l: 'TDS on commission', s: '2% sample rate, configurable', v: '−' + inr(tds), c: 'var(--bad)' },
       { l: 'Ledger', s: 'Dr Commission expense · Cr Partner · Cr TDS payable', v: 'Posts on approval', c: 'var(--sub)' }
     ];
 

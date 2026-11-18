@@ -9,8 +9,8 @@ class Component extends DCLogic {
     const short = (n) => n >= 10000000 ? '₹' + (n / 10000000).toFixed(2) + ' Cr' : '₹' + (n / 100000).toFixed(1) + ' L';
 
     const ring = (items, r, off) => items.map((t, i) => { const a = (i / items.length) * Math.PI * 2 - Math.PI / 2 + (off || 0); return { t, x: (50 + r * Math.cos(a)) + '%', y: (50 + r * Math.sin(a)) + '%' }; });
-    const orbitA = ring(['RERA §13', 'GST e-invoice', 'TDS 194-IA', 'PMLA'], 50);
-    const orbitB = ring(['Escrow 70%', 'DPDP', 'Audit trail', 'TDS 194H'], 50, Math.PI / 4);
+    const orbitA = ring(['RERA §13', 'GST e-invoice', 'TDS on sale', 'PMLA'], 50);
+    const orbitB = ring(['Escrow 70%', 'DPDP', 'Audit trail', 'TDS on payout'], 50, Math.PI / 4);
 
     const cost = s.cost, cap = cost * 0.1, prior = Math.min(cost * 0.07, 690000 * cost / 9800000);
     const recvMax = Math.round(cost * 0.12 / 50000) * 50000;
@@ -36,7 +36,7 @@ class Component extends DCLogic {
     if (isIA) {
       const a = s.iaAmt, applies = a >= 5000000, t = applies ? a * 0.01 : 0;
       tdsOut = [{ l: 'Consideration', v: short(a), c: 'var(--ink)' }, { l: 'TDS at 1%', v: applies ? inr(t) : 'Not applicable', c: applies ? 'var(--acct)' : 'var(--sub)' }, { l: 'Paid to developer', v: inr(a - t), c: 'var(--ink)' }];
-      tdsNote = applies ? 'Buyer deducts 1% on each instalment and files Form 26QB. DeedFlow tracks TDS credit against each receipt so the buyer ledger closes at full value.' : 'Below ₹50 lakh, 194-IA does not apply. Receipts post at full value.';
+      tdsNote = applies ? 'Buyer deducts 1% on each instalment and files the TDS challan-cum-statement. DeedFlow tracks TDS credit against each receipt so the buyer ledger closes at full value.' : 'Below ₹50 lakh, this TDS does not apply. Receipts post at full value.';
     } else {
       const a = s.hAmt, applies = a > 20000, t = applies ? a * 0.02 : 0;
       tdsOut = [{ l: 'Commission this FY', v: inr(a), c: 'var(--ink)' }, { l: 'TDS at 2%', v: applies ? inr(t) : 'Below threshold', c: applies ? 'var(--acct)' : 'var(--sub)' }, { l: 'Net payout', v: inr(a - t), c: 'var(--ink)' }];
@@ -69,12 +69,12 @@ class Component extends DCLogic {
     const audit = filtered.map((a, i) => ({ e: a[0], who: a[1], m: a[2], tone: a[3], t: i === 0 ? 'now' : mins[i] + 'm ago', h: '#' + ((rot * 97 + i * 131 + a[0].length * 17) % 65536).toString(16).padStart(4, '0') + 'e' + (i + 3), cls: i === 0 ? 'pop' : '' }));
 
     const compValue = [
-      { t: 'RERA §13 cap', d: 'Blocks receipts above 10% before agreement', v: 'No penalty notices, no refunds under pressure' },
-      { t: 'RERA escrow & filings', d: 'Escrow split and quarterly filings', v: 'Filings ready without a month-end scramble' },
-      { t: 'GST & e-invoicing', d: 'Tax on every demand, IRN on invoices', v: 'Zero manual invoices, zero mismatch notices' },
-      { t: 'TDS 194-IA & 194H', d: 'On property sale and partner commission', v: 'Buyers and CPs get the right certificates, on time' },
-      { t: 'Audit trail', d: 'Every change, who made it, and when', v: 'Auditors sign off in days, not weeks' },
-      { t: 'DPDP', d: 'Consent, purpose and retention', v: 'Buyer data handled the way the law now expects' }
+      { t: 'RERA §13 cap', d: 'Blocks receipts above 10% before agreement', v: 'Catches an over-collection before the receipt is saved' },
+      { t: 'RERA escrow & filings', d: 'Escrow split and quarterly filings', v: 'Filing data kept ready through the quarter' },
+      { t: 'GST & e-invoicing', d: 'Tax on every demand, IRN on invoices', v: 'Fewer manual invoices and fewer mismatches to chase' },
+      { t: 'TDS on sale & commission', d: 'On property sale and partner commission', v: 'TDS tracked on every receipt and every payout' },
+      { t: 'Audit trail', d: 'Every change, who made it, and when', v: 'A complete trail ready for your auditors' },
+      { t: 'DPDP', d: 'Consent, purpose and retention', v: 'Consent and purpose recorded for every buyer contact' }
     ];
 
     return {

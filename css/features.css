@@ -217,3 +217,11 @@ input[type=range]{width:100%;accent-color:#ff5f00;height:28px;cursor:pointer}
 p .cta-l{display:flex;margin-top:14px;width:max-content}
 .cta-row{max-width:1240px;margin:44px auto 0;display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;justify-content:center;text-align:center}
 .cta-row>span{font-size:16.5px;font-weight:650;color:var(--ink);margin-right:6px}
+.np-s{flex:none;font-size:11px;font-weight:700;color:var(--sub);background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:3px 9px;white-space:nowrap}
+.np-ctl{margin-left:auto;display:flex;gap:6px;flex:none}
+.np-b{width:30px;height:30px;border-radius:9px;border:1px solid var(--line);background:var(--surf);color:var(--ink);display:grid;place-items:center;cursor:pointer;padding:0}
+.np-b:hover{border-color:var(--ink)}
+.np .np-c{margin-left:4px}
+.chap-o{font-size:12px;line-height:1.4;color:var(--ink);font-weight:550;display:flex;gap:6px;align-items:flex-start;margin-top:2px}
+.chap-o::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:#0f7a4a;margin-top:5px}
+@media (max-width:640px){.np-l,.np-s{display:none}}

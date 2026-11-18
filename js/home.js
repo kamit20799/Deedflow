@@ -58,10 +58,10 @@ class Component extends DCLogic {
     ];
 
     const stages = [
-      { label: 'Capture', title: 'Every portal lands in one inbox.', desc: 'Leads from listing portals and ad platforms arrive in seconds and are deduplicated at capture, so two portals never create two buyers.', points: ['99acres, MagicBricks, Housing, IndiaMART, Meta and Google lead ads', 'Dedupe on phone and email before the lead is saved', 'Auto-assignment by project, source and round-robin rules'],
+      { label: 'Capture', title: 'Every portal lands in one inbox.', desc: 'Leads arrive in seconds and are deduplicated at capture. Each one is assigned to a sales user by your rules, and leads not called within the SLA are flagged.', points: ['99acres, MagicBricks, Housing, IndiaMART, Meta and Google lead ads', 'Dedupe on phone and email before the lead is saved', 'Assignment by project, source or round-robin, with a named owner on every lead'],
         mockTitle: 'Capture stream', mockTag: 'Live', mockTone: 'p-ok', foot: 'Last 60 minutes', footR: '41 captured',
         rows: [['99acres', 'Skyline Residences · 3 BHK', '14', 'New', 'p-blue'], ['Meta lead ads', 'Greenfield Enclave form', '11', 'New', 'p-blue'], ['MagicBricks', 'Matched existing buyer', '1', 'Merged', 'p-warn'], ['Housing.com', 'Riverside Towers · 2 BHK', '9', 'New', 'p-blue'], ['IndiaMART', 'Commercial enquiry', '6', 'Assigned', 'p-ok']] },
-      { label: 'Score', title: 'Two scores, side by side.', desc: 'Your own rules score every lead the way your best sales head would. An AI score reads the same lead independently. Priority lands as HOT, WARM or COLD.', points: ['Rule-based score you configure: budget, source, location, intent', 'AI score shown next to it, never replacing it', 'HOT / WARM / COLD priority drives the calling queue'],
+      { label: 'Score', title: 'Two scores, side by side.', desc: 'The rule score comes from weights you configure. The AI score is a second opinion based on buyer behaviour, such as repeat project views and response times. Priority lands as HOT, WARM or COLD.', points: ['Rule-based score you configure: budget, source, location, intent', 'AI score shown next to it as a second opinion', 'HOT / WARM / COLD priority drives the calling queue'],
         mockTitle: 'Priya Sharma · scoring', mockTag: 'HOT', mockTone: 'p-hot', foot: 'Rule 72 · AI 88', footR: 'Priority: HOT',
         rows: [['Budget matches inventory', '₹90L – ₹1.1Cr', '+25', 'Rule', 'p-mut'], ['Source quality', '99acres premium', '+15', 'Rule', 'p-mut'], ['Repeat project views', '4 visits in 48h', '+18', 'AI', 'p-hot'], ['Callback window', 'Evenings, weekdays', '+12', 'AI', 'p-hot'], ['Location fit', 'Within 6 km', '+14', 'Rule', 'p-mut']] },
       { label: 'Call', title: 'Presales that never leaves the browser.', desc: 'A browser softphone with click-to-call, consented recording and a live queue. Dispositions are one tap, and AI call analysis lands on the lead when the call ends.', points: ['Click-to-call from any lead, no desk phone', 'Recording only with consent, stored against the lead', 'AI call analysis and dispositions feed the score'],
@@ -85,11 +85,18 @@ class Component extends DCLogic {
     ];
 
     const proofStats = [{ v: '120+', l: 'Developers live' }, { v: '450+', l: 'Projects managed' }, { v: '₹2,400 Cr', l: 'Collections tracked' }, { v: '38', l: 'Cities' }];
+    const journey = [
+      { n: '01', team: 'Pre-sales', t: 'Enquiry', a: 'Source, budget and lead score', u: 'Nothing yet. The record starts here' },
+      { n: '02', team: 'Sales', t: 'Site visit', a: 'Visit feedback and unit preference', u: 'Call notes and lead history' },
+      { n: '03', team: 'Sales', t: 'Booking', a: 'Unit B-1204, frozen cost sheet and EOI', u: 'Preference and approved discount' },
+      { n: '04', team: 'Accounts', t: 'Payment', a: 'Demands, receipts and ledger entries', u: 'Cost sheet and payment plan' },
+      { n: '05', team: 'CRM', t: 'Possession', a: 'Handover checklist and documents', u: 'Agreement and payment history' }
+    ];
     const bfDefs = [
       { l: 'Owners & directors', who: 'owners and directors', t: 'Every launch and every rupee on one screen.', d: 'See bookings, collections and overdue across projects without waiting for the month-end MIS.', pts: ['Bookings and collections across every project', 'Approval chains on every discount and deviation', 'A strict audit trail of who changed what'], href: 'features.html', cta: 'See the product', mock: 'Group overview', stats: [['Bookings MTD', '42'], ['Collected', '₹18.4 Cr'], ['Overdue', '₹2.1 Cr']], rows: [['Skyline Residences', '24 of 180 units booked this quarter', 'On track', 'p-ok'], ['Discount request · A-0803', '2% · waiting on you', 'Approve', 'p-warn'], ['Riverside Towers', 'Plinth demand overdue on 6 units', 'Overdue', 'p-bad']] },
       { l: 'Sales heads', who: 'sales heads', t: 'Faster first calls. Fewer leads that go cold.', d: 'Every portal lead is scored, queued and timed, and every site visit is reminded and followed up.', pts: ['HOT / WARM / COLD queue with SLA timers', 'T-1 day and T-2 hour site visit reminders', 'Leaderboards on calls, visits and bookings'], href: 'features.html', cta: 'See leads and presales', mock: 'Sales floor today', stats: [['First-call time', '4m 12s'], ['Visits this week', '38'], ['HOT uncalled', '6']], rows: [['Vikram Singh · HOT', 'SLA breach in 4 minutes', 'Call now', 'p-hot'], ['Saturday visits', '9 confirmed, 2 pending', 'Reminded', 'p-blue'], ['Neha K.', 'Top closer this month · 7 bookings', 'Leader', 'p-ok']] },
-      { l: 'Finance & accounts', who: 'finance and accounts', t: 'Collections that reconcile themselves.', d: 'Demands, receipts and refunds post to a double-entry ledger with GST, TDS and escrow already applied.', pts: ['CLP demand letters raised on each milestone', 'Receipts cleared or reversed, never edited', 'GST, TDS 194-IA and RERA escrow split built in'], href: 'compliance.html', cta: 'See compliance', mock: 'Collections desk', stats: [['Demands raised', '124'], ['In clearing', '9'], ['Escrow routed', '₹12.9 Cr']], rows: [['RCP-04431 · ₹14,70,000', 'Cheque in clearing', 'Clearing', 'p-warn'], ['Slab 5 demands', '62 letters sent with GST', 'Sent', 'p-blue'], ['Receipt blocked · §13 cap', 'Agreement not registered', 'Blocked', 'p-bad']] },
-      { l: 'Channel partner networks', who: 'channel partner networks', t: 'Scale your broker network without disputes.', d: 'Partners complete KYC, register leads with ownership, and see payouts with TDS in their own portal.', pts: ['KYC through SurePass and DigiLocker', 'Lead registration with ownership tracking', 'Commission slabs and payout runs with TDS'], href: 'partners.html', cta: 'See channel partners', mock: 'Partner network', stats: [['Active partners', '86'], ['Leads registered', '1,240'], ['Payout due', '₹14.2 L']], rows: [['Sai Realty', 'Slab 2 · 5 bookings this quarter', 'Eligible', 'p-ok'], ['Duplicate registration', 'Same buyer, two partners', 'Review', 'p-warn'], ['October payout run', 'TDS 194H deducted', 'Processing', 'p-blue']] }
+      { l: 'Finance & accounts', who: 'finance and accounts', t: 'Collections and reconciliation on one desk.', d: 'Demands, receipts and refunds post to a double-entry ledger, so the buyer balance and your books stay in step.', pts: ['Demand letters raised on each CLP milestone', 'Receipts tracked through clearing; bounced ones reversed in the ledger', 'GST, buyer TDS and the RERA escrow split applied on posting'], href: 'compliance.html', cta: 'See compliance', mock: 'Collections desk', stats: [['Demands raised', '124'], ['In clearing', '9'], ['Escrow routed', '₹12.9 Cr']], rows: [['RCP-04431 · ₹14,70,000', 'Cheque in clearing', 'Clearing', 'p-warn'], ['Slab 5 demands', '62 letters sent with GST', 'Sent', 'p-blue'], ['Receipt blocked · §13 cap', 'Agreement not registered', 'Blocked', 'p-bad']] },
+      { l: 'Channel partner networks', who: 'channel partner networks', t: 'Clear attribution, commission and payouts.', d: 'Partners complete KYC, register buyers with time-stamped ownership, and see what they earned and when it is paid.', pts: ['Attribution: each registration is time-stamped and checked for duplicates', 'Commission: slabs worked out from bookings', 'Payouts: runs show gross, TDS and net in the partner portal'], href: 'partners.html', cta: 'See channel partners', mock: 'Partner network', stats: [['Active partners', '86'], ['Leads registered', '1,240'], ['Payout due', '₹14.2 L']], rows: [['Sai Realty', 'Slab 2 · 5 bookings this quarter', 'Eligible', 'p-ok'], ['Duplicate registration', 'Same buyer, two partners', 'Review', 'p-warn'], ['October payout run', 'Gross, TDS and net shown', 'Processing', 'p-blue']] }
     ];
     const B = bfDefs[s.bf];
     const bf = { ...B, whoUp: B.who.toUpperCase(), stats: B.stats.map((x) => ({ l: x[0], v: x[1] })), rows: B.rows.map((r, i) => ({ l: r[0], s: r[1], p: r[2], tone: r[3], delay: (i * 0.08) + 's' })) };
@@ -122,7 +129,7 @@ class Component extends DCLogic {
       ['Booking cap · RERA §13', 'Advance within 10% before agreement', '₹9,80,000 / ₹9,80,000'],
       ['RERA escrow split', '70% routed to designated account', '₹6,86,000'],
       ['GST & e-invoice', 'Invoice generated with IRN', 'IRN ✓'],
-      ['TDS 194-IA', 'Buyer deducts 1% on ₹50L+ property', '₹9,800'],
+      ['TDS on purchase', 'Buyer deducts 1% on ₹50L+ property', '₹9,800'],
       ['PMLA', 'KYC verified, payment mode checked', 'Clear'],
       ['DPDP consent', 'Purpose-bound consent on file', 'On file'],
       ['Ledger & audit trail', 'Dr Bank · Cr Customer · entry sealed', '#A-20931']
@@ -133,12 +140,12 @@ class Component extends DCLogic {
     });
     const allDone = s.chk - 1 >= checkDefs.length;
     const compChips = [
-      { t: 'RERA §13 cap', d: 'Blocks receipts above 10% before agreement', v: 'No penalty notices, no refunds under pressure' },
-      { t: 'RERA escrow & filings', d: 'Escrow split and quarterly filings', v: 'Filings ready without a month-end scramble' },
-      { t: 'GST & e-invoicing', d: 'Tax on every demand, IRN on invoices', v: 'Zero manual invoices, zero mismatch notices' },
-      { t: 'TDS 194-IA & 194H', d: 'On property sale and partner commission', v: 'Buyers and CPs get the right certificates, on time' },
-      { t: 'Audit trail', d: 'Every change, who made it, and when', v: 'Auditors sign off in days, not weeks' },
-      { t: 'DPDP', d: 'Consent, purpose and retention', v: 'Buyer data handled the way the law now expects' }
+      { t: 'RERA §13 cap', d: 'Blocks receipts above 10% before agreement', v: 'Catches an over-collection before the receipt is saved' },
+      { t: 'RERA escrow & filings', d: 'Escrow split and quarterly filings', v: 'Filing data kept ready through the quarter' },
+      { t: 'GST & e-invoicing', d: 'Tax on every demand, IRN on invoices', v: 'Fewer manual invoices and fewer mismatches to chase' },
+      { t: 'TDS on sale & commission', d: 'On property sale and partner commission', v: 'TDS tracked on every receipt and every payout' },
+      { t: 'Audit trail', d: 'Every change, who made it, and when', v: 'A complete trail ready for your auditors' },
+      { t: 'DPDP', d: 'Consent, purpose and retention', v: 'Consent and purpose recorded for every buyer contact' }
     ];
 
     const portals = [
@@ -147,7 +154,7 @@ class Component extends DCLogic {
       { name: 'Internal CRM', who: 'sales, presales and accounts', title: 'One workspace for the whole sales floor.', desc: 'Presales calls, sales closes and accounts collects, all on the same lead, booking and ledger. Role permissions keep each team in its lane.', points: ['Leads, calls, visits, cost sheets and bookings', 'Demands, receipts and ledger for accounts', 'Approvals, SLA and scheduled reports for managers'], app: 'DeedFlow CRM', user: 'Neha · Sales', ini: 'DF', chip: '#ff5f00',
         stats: [['My HOT leads', '11'], ['Visits today', '3'], ['Bookings MTD', '7']], rows: [['Call Vikram Singh', 'HOT · SLA in 6 min', 'Due', 'p-hot'], ['Site visit · Priya Sharma', 'Sat 11:00 · Tower B', 'Confirmed', 'p-ok'], ['Discount approval · A-0803', 'Waiting on Sales head', 'Pending', 'p-warn'], ['Cost sheet · B-1204', 'Frozen v2 shared', 'Sent', 'p-blue']] },
       { name: 'Channel Partner', who: 'brokers and their agents', title: 'Partners register leads, track payouts.', desc: 'Partners complete KYC, register leads, and see commission and payouts with TDS already worked out. Their agents work inside the same partner account.', points: ['KYC via SurePass and DigiLocker', 'Lead registration with ownership tracking', 'Commission slabs, payout runs with TDS'], app: 'Partner Portal', user: 'Sai Realty', ini: 'CP', chip: '#45d69a',
-        stats: [['Registered leads', '64'], ['Bookings', '5'], ['Payout due', '₹3.1L']], rows: [['Lead registered · Arjun Mehta', 'Greenfield Enclave', 'Accepted', 'p-ok'], ['Booking BK-0977', 'Slab 2 · 2.0% commission', 'Eligible', 'p-blue'], ['Payout run · October', 'TDS 194H deducted', 'Processing', 'p-warn'], ['KYC', 'PAN + Aadhaar verified', 'Verified', 'p-ok']] },
+        stats: [['Registered leads', '64'], ['Bookings', '5'], ['Payout due', '₹3.1L']], rows: [['Lead registered · Arjun Mehta', 'Greenfield Enclave', 'Accepted', 'p-ok'], ['Booking BK-0977', 'Slab 2 · 2.0% commission', 'Eligible', 'p-blue'], ['Payout run · October', 'Gross, TDS and net shown', 'Processing', 'p-warn'], ['KYC', 'PAN + Aadhaar verified', 'Verified', 'p-ok']] },
       { name: 'Customer', who: 'home buyers', title: 'Buyers stop calling to ask for status.', desc: 'Buyers see their booking, payment schedule, documents and construction updates in one place, and pay online when a demand is raised.', points: ['Bookings and payment schedule', 'Documents: allotment, agreement, receipts', 'Construction updates per tower'], app: 'My Home', user: 'Priya Sharma', ini: 'MH', chip: '#f5b54a',
         stats: [['Paid', '30%'], ['Next due', 'Slab 5'], ['Documents', '6']], rows: [['Demand · Slab 5', '₹9,80,000 · due in 12 days', 'Pay now', 'p-hot'], ['Receipt · On agreement', '₹19,60,000', 'Cleared', 'p-ok'], ['Construction · Tower B', 'Slab 9 cast', 'New', 'p-blue'], ['Agreement for sale', 'Registered copy', 'PDF', 'p-mut']] }
     ];
@@ -167,7 +174,12 @@ class Component extends DCLogic {
       ['How does the RERA §13 booking cap work?', 'When a receipt is entered before the agreement for sale is registered, DeedFlow checks it against 10% of the unit cost and stops anything that would cross it, so the team knows an agreement is needed first.'],
       ['Can our channel partners and buyers log in?', 'Yes. Channel partners get their own portal for KYC, lead registration and payouts, with their agents inside the same account. Buyers get a customer portal for bookings, schedule, documents and construction updates.'],
       ['Do we have to give up our pricing rules?', 'No. The pricing engine takes your PLC, floor rise, facing premiums, offers and GST, and approval chains handle any deviation. Once issued, a cost sheet is frozen.'],
-      ['What is included in the free trial?', 'A 14-day trial with 3 users so your team can explore the CRM before choosing a plan.']
+      ['What is included in the free trial?', 'A 14-day trial with 3 users so your team can explore the CRM before choosing a plan.'],
+      ['What does "consent recorded per purpose" mean?', 'When a buyer agrees to be called, recorded or messaged, DeedFlow stores that consent against the lead with its purpose and time. Calls are recorded only where consent exists, and a withdrawal is recorded the same way.'],
+      ['How are leads assigned to my sales team?', 'By rules you set: by project, by source or round-robin across a team. Every lead has a named owner from the moment it is captured, and leads that are not called within your SLA are flagged to the sales head.'],
+      ['What is the AI score based on?', 'Buyer behaviour, such as repeat project views, how quickly they respond and when they are reachable. It is shown next to your own rule-based score as a second opinion and does not override it.'],
+      ['How are user roles and permissions handled?', 'Each user has a role, for example presales, sales, accounts or management, that controls what they can see and do. Discounts and deviations go through the approval chain you define, and every change is recorded in the audit trail.'],
+      ['Where is our data hosted and who can see it?', 'DeedFlow is hosted in India. Access is role-based, consent is recorded for calls and messages, and an append-only audit trail shows who changed what and when.']
     ];
     const faqs = faqDefs.map((f, i) => ({ q: f[0], a: f[1], open: s.faq === i, on: s.faq === i ? '1' : '0', exp: s.faq === i ? 'true' : 'false', toggle: () => this.setState({ faq: s.faq === i ? -1 : i }) }));
 
@@ -227,20 +239,20 @@ class Component extends DCLogic {
     };
 
     const wkScript = [
-      { t: 'Lead lands & gets assigned', d: 'Portal enquiry → deduped → scored → assigned', path: 'leads', nav: 1, clicks: [4, 6, 9], zoom: [1, 1.12, 1.12, 1.18, 1.1, 1, 1.15, 1.15, 1.15, 1.15, 1.1, 1],
+      { t: 'Lead lands & gets assigned', d: 'Portal enquiry → deduped → scored → assigned', o: 'A deduplicated, scored lead with a named owner and a call timer running.', path: 'leads', nav: 1, clicks: [4, 6, 9], zoom: [1, 1.12, 1.12, 1.18, 1.1, 1, 1.15, 1.15, 1.15, 1.15, 1.1, 1],
         subs: ['Every portal and ad lead lands in one inbox.', 'A new 99acres enquiry arrives — captured automatically.', 'Same mobile number? Duplicates are merged at capture.', 'Rule score and AI score rank the lead: HOT.', 'Open the lead…', '…and the full buyer profile is one click away.', 'Assign it — or let round-robin do it for you.', 'Neha K. owns the lead. The 15-minute SLA starts.', 'A WhatsApp acknowledgement goes out instantly.', 'Update the status as you go.', 'Status: Contacting.', 'Enquiry to assigned lead in under a minute.'] },
-      { t: 'Call, follow-up, site visit', d: 'Browser dialer → AI summary → visit booked', path: 'leads/priya-sharma', nav: 1, clicks: [0, 4, 6, 7, 8], zoom: [1.1, 1.15, 1.15, 1.15, 1.15, 1.1, 1.1, 1.12, 1.12, 1.1, 1.1, 1],
+      { t: 'Call, follow-up, site visit', d: 'Browser dialer → AI summary → visit booked', o: 'Call logged and summarised, site visit booked, reminders queued.', path: 'leads/priya-sharma', nav: 1, clicks: [0, 4, 6, 7, 8], zoom: [1.1, 1.15, 1.15, 1.15, 1.15, 1.1, 1.1, 1.12, 1.12, 1.1, 1.1, 1],
         subs: ['Neha opens the lead she was just assigned and calls.', 'The browser dialer connects — no phone needed.', 'The call is recorded, with consent captured.', 'Notes are saved against the lead as you talk.', 'One tap to log the outcome: Interested.', 'AI summarises the call and suggests the next step.', 'Schedule the site visit right here.', 'Pick the day…', '…pick the slot, and confirm.', 'The visit lands on the timeline, confirmed.', 'WhatsApp reminders are scheduled automatically.', 'First call to confirmed site visit, on one screen.'] },
-      { t: 'Cost sheet to booking', d: 'Live inventory → hold → cost sheet → EOI', path: 'inventory/skyline/tower-b', nav: 4, clicks: [0, 2, 3, 6, 8, 9], zoom: [1.12, 1.1, 1.15, 1.15, 1.15, 1.15, 1.18, 1.15, 1.15, 1.15, 1.05, 1],
+      { t: 'Cost sheet to booking', d: 'Live inventory → hold → cost sheet → EOI', o: 'Unit held, cost sheet frozen, EOI received and the unit booked.', path: 'inventory/skyline/tower-b', nav: 4, clicks: [0, 2, 3, 6, 8, 9], zoom: [1.12, 1.1, 1.15, 1.15, 1.15, 1.15, 1.18, 1.15, 1.15, 1.15, 1.05, 1],
         subs: ['Saturday, at the site: Priya liked Tower B.', 'Select B-1204 to see price and status.', 'Hold the unit for the buyer — the timer starts.', 'Generate the cost sheet from the pricing engine.', 'Base price and PLC are pulled automatically.', 'GST is applied and the total is computed.', 'At the visit the buyer asked for 2% off — enter it.', 'It is above the exec limit, so it routes for approval.', 'Approved by the Sales head. Freeze and share.', 'Sheet frozen as v3. Now book the unit.', 'EOI of ₹2,00,000 collected by UPI at the site.', 'B-1204 is booked. The agreement is generated.'] },
-      { t: 'Receipt posts, RERA-checked', d: 'Demand → receipt → 4 checks → ledger', path: 'collections/b-1204', nav: 6, clicks: [0, 2, 3], zoom: [1.12, 1.12, 1.12, 1.15, 1.18, 1.18, 1.18, 1.18, 1.1, 1.1, 1, 1],
-        subs: ['B-1204 is booked. Here is its payment schedule.', 'Raise the booking demand: 10% of ₹97.9 L, less the EOI.', 'The buyer pays. Record the receipt.', 'Validate before it posts…', 'RERA §13: total received is exactly 10% — allowed.', 'Escrow: 70% routed to the designated account.', 'GST e-invoice: IRN generated.', 'TDS 194-IA: 1% tracked with Form 26QB.', 'All checks pass. The receipt posts to the ledger.', 'The receipt PDF is emailed to the buyer.', 'The buyer portal updates on its own.', 'And every step is written to the audit trail.'] }
+      { t: 'Receipt posts, RERA-checked', d: 'Demand → receipt → 4 checks → ledger', o: 'Receipt checked, posted to the ledger and visible to the buyer.', path: 'collections/b-1204', nav: 6, clicks: [0, 2, 3], zoom: [1.12, 1.12, 1.12, 1.15, 1.18, 1.18, 1.18, 1.18, 1.1, 1.1, 1, 1],
+        subs: ['B-1204 is booked. Here is its payment schedule.', 'Raise the booking demand: 10% of ₹97.9 L, less the EOI.', 'The buyer pays. Record the receipt.', 'Validate before it posts…', 'RERA §13: total received is exactly 10% — allowed.', 'Escrow: 70% routed to the designated account.', 'GST e-invoice: IRN generated.', 'TDS on purchase: 1% tracked against the receipt.', 'All checks pass. The receipt posts to the ledger.', 'The receipt PDF is emailed to the buyer.', 'The buyer portal updates on its own.', 'And every step is written to the audit trail.'] }
     ];
     const wkBeat = Math.min(11, Math.floor(s.vprog / (100 / 12)));
     const wkCur = wkScript[s.chapter];
     const curBeat = Math.min(11, Math.floor((s.vprog + 4.33) / (100 / 12)) - 1);
     const beats = {}; for (let k = 0; k < 12; k++) { beats['b' + k] = wkBeat >= k; beats['n' + k] = wkBeat < k; }
-    const chapters = wkScript.map((c, i) => ({ t: c.t, d: c.d, n: String(i + 1), ic: ['M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75', 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z', 'M3 21h18M5 21V7l8-4v18M19 21V11l-6-4M9 9v.01M9 12v.01M9 15v.01', 'M6 4h12M6 8h12M8 8c6 0 6 8 0 8H6l6 7'][i], thumb: ['assets/logos/walk-1.jpg', 'assets/logos/walk-2.jpg', 'assets/logos/walk-3.jpg', 'assets/logos/walk-4.jpg'][i], meta: i === s.chapter ? (s.video ? 'Playing' : 'Paused') : '30 sec', on: i === s.chapter ? '1' : '0', k0: i === 0, k1: i === 1, k2: i === 2, k3: i === 3, pick: () => this.setState({ chapter: i, video: true, vprog: 0 }) }));
+    const chapters = wkScript.map((c, i) => ({ t: c.t, d: c.d, o: c.o, n: String(i + 1), ic: ['M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75', 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z', 'M3 21h18M5 21V7l8-4v18M19 21V11l-6-4M9 9v.01M9 12v.01M9 15v.01', 'M6 4h12M6 8h12M8 8c6 0 6 8 0 8H6l6 7'][i], thumb: ['assets/logos/walk-1.jpg', 'assets/logos/walk-2.jpg', 'assets/logos/walk-3.jpg', 'assets/logos/walk-4.jpg'][i], meta: i === s.chapter ? (s.video ? 'Playing' : 'Paused') : '30 sec', on: i === s.chapter ? '1' : '0', k0: i === 0, k1: i === 1, k2: i === 2, k3: i === 3, pick: () => this.setState({ chapter: i, video: true, vprog: 0 }) }));
     const screens = ['Lead inbox', 'Dialer', 'Site-visit calendar', 'Inventory grid', 'Cost sheet', 'Receipt & ledger'];
     const apZ = wkCur.zoom[wkBeat];
     const clampT = (v) => Math.max(1 - apZ, Math.min(0, v));
@@ -254,7 +266,11 @@ class Component extends DCLogic {
       dispOn: wkBeat >= 5 ? '1' : '0', dayOn: wkBeat >= 8 ? '1' : '0', mVisit: s.chapter === 1 && wkBeat >= 7 && wkBeat < 9, mEoi: ch3 && wkBeat === 10,
       u1204: wkBeat >= 11 ? 'booked' : wkBeat >= 3 ? 'hold' : wkBeat >= 1 ? 'sel' : 'a', availN: wkBeat >= 3 ? '12' : '13', holdN: wkBeat >= 3 && wkBeat < 11 ? '2' : '1', soldN: wkBeat >= 11 ? '11' : '10',
       dStatus: wkBeat >= 8 ? 'Paid' : wkBeat >= 1 ? 'Demand sent' : 'Due', dTone: wkBeat >= 8 ? 'ok' : wkBeat >= 1 ? 'blue' : 'warn', paidN: wkBeat >= 8 ? '2' : '1', paidW: wkBeat >= 8 ? '20%' : '10%',
-      toggleVideo: () => this.setState({ video: !s.video }) };
+      toggleVideo: () => this.setState({ video: !s.video }),
+      wkPlaying: s.video, wkPaused: !s.video, wkPlayLabel: s.video ? 'Pause' : 'Play',
+      wkReplay: () => this.setState({ vprog: 0, video: true }),
+      wkPrev: () => this.setState({ chapter: (s.chapter + 3) % 4, vprog: 0, video: true }),
+      wkNext: () => this.setState({ chapter: (s.chapter + 1) % 4, vprog: 0, video: true }) };
 
     return {
       ...forms, ...tsBlock, ...walk,
@@ -275,7 +291,7 @@ class Component extends DCLogic {
       monthOn: s.annual ? '0' : '1', yearOn: s.annual ? '1' : '0',
       setMonthly: () => this.setState({ annual: false }), setAnnual: () => this.setState({ annual: true }),
       plans, faqs, approval, board,
-      proofStats, bf, bfTabs, testimonials, posts,
+      proofStats, bf, bfTabs, testimonials, posts, journey,
       holdLeft: mmss(s.hold), holdOffset: String(119.4 * (1 - s.hold / 1800))
     };
   }

@@ -6,7 +6,7 @@ class Component extends DCLogic {
     const inr = (n) => '₹' + n.toLocaleString('en-IN');
     const defs = [
       { n: 'Free trial', m: 0, a: 0, u: 3, p: 0, l: 0, for: 'Explore the CRM with your team for 14 days.', cta: 'Start free trial' },
-      { n: 'Base', m: 1000, a: 10000, u: 5, p: 5, l: 10, for: 'For a small team getting set up.', cta: 'Choose Base' },
+      { n: 'Base', m: 1000, a: 10000, u: 5, p: 5, l: 1000, for: 'For a small team getting set up.', cta: 'Choose Base' },
       { n: 'Growth', m: 4999, a: 49990, u: 20, p: 10, l: 10000, for: 'For a developer with a few live projects.', cta: 'Choose Growth' },
       { n: 'Professional', m: 9999, a: 99990, u: 50, p: 25, l: 50000, for: 'For multi-project sales teams with partners.', cta: 'Choose Professional', pop: true },
       { n: 'Enterprise', m: 24999, a: 249990, u: 200, p: 100, l: 200000, for: 'For groups running large launches.', cta: 'Choose Enterprise' }
@@ -15,7 +15,7 @@ class Component extends DCLogic {
       const pop = !!d.pop;
       const free = d.m === 0;
       return {
-        n: d.n, pop, u: String(d.u), pr: d.p.toLocaleString('en-IN'), l: d.l.toLocaleString('en-IN'), for: d.for, cta: d.cta,
+        n: d.n, pop, u: String(d.u), pr: d.m === 0 ? 'Sample' : d.p.toLocaleString('en-IN'), l: d.m === 0 ? 'Sample' : d.l.toLocaleString('en-IN'), for: d.for, cta: d.cta,
         price: free ? '₹0' : inr(s.annual ? d.a : d.m), per: free ? '14 days' : (s.annual ? '/ year' : '/ month'),
         sub: free ? 'No plan needed to start' : (s.annual ? inr(Math.round(d.a / 12)) + ' / month, billed yearly' : inr(d.a) + ' if billed yearly'),
         hasTag: pop || free, tag: pop ? 'Most chosen' : 'Start here',
@@ -41,14 +41,20 @@ class Component extends DCLogic {
       { l: 'Monthly price', v: defs.map((d) => d.m === 0 ? '₹0' : inr(d.m)) },
       { l: 'Annual price', v: defs.map((d) => d.a === 0 ? '₹0' : inr(d.a)) },
       { l: 'Users', v: defs.map((d) => String(d.u)) },
-      { l: 'Projects', v: defs.map((d) => String(d.p)) },
-      { l: 'Leads', v: defs.map((d) => d.l.toLocaleString('en-IN')) }
+      { l: 'Projects', v: defs.map((d) => d.m === 0 ? 'Sample project' : String(d.p)) },
+      { l: 'Leads', v: defs.map((d) => d.m === 0 ? 'Sample leads' : d.l.toLocaleString('en-IN')) },
+      { l: 'All CRM modules', v: defs.map(() => 'Included') },
+      { l: 'Lead-source connections', v: defs.map(() => 'Included') },
+      { l: 'Partner and buyer portals', v: defs.map(() => 'Included') },
+      { l: 'Compliance checks', v: defs.map(() => 'Included') }
     ];
     const faqDefs = [
-      ['How does annual billing work?', 'Annual plans are priced at ten times the monthly price, so you get two months free compared with paying monthly.'],
+      ['How does annual billing work?', 'Annual plans are billed once for the year at ten times the monthly price, so you pay for ten months and get twelve.'],
+      ['Are prices inclusive of GST?', 'No. Prices shown are in INR and exclude GST, which is added to the invoice at the applicable rate.'],
+      ['Do all plans include the same modules?', 'Yes. Every plan includes leads, pre-sales, inventory and pricing, bookings, collections, compliance checks and the partner and buyer portals. Plans differ only by the number of users, projects and leads.'],
       ['What happens after the 14-day trial?', 'Choose a plan to keep working with your data. The trial includes 3 users.'],
-      ['Can we move between plans?', 'Yes. Move up when you add users, projects or leads beyond your current limits. Downgrade and proration terms: TBD.'],
-      ['Are channel partners and buyers counted as users?', 'TBD.']
+      ['Can we move between plans?', 'Yes. Move up when you add users, projects or leads beyond your current limits.'],
+      ['What is the Base plan for?', 'Base is for a small team getting set up: up to 5 users, 5 projects and 1,000 leads at ₹1,000 a month, with the same modules as the larger plans. Move to Growth when you outgrow any of those limits.']
     ];
     const faqs = faqDefs.map((f, i) => ({ q: f[0], a: f[1], open: s.faq === i, on: s.faq === i ? '1' : '0', exp: s.faq === i ? 'true' : 'false', toggle: () => this.setState({ faq: s.faq === i ? -1 : i }) }));
     return {
